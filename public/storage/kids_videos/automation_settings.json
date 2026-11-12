@@ -1,0 +1,14 @@
+{
+  "kidsVideosPerDay": 2,
+  "generalShortsPerDay": 1,
+  "blogPostsPerDay": 3,
+  "primaryMarketingActive": true,
+  "secondaryMarketingActive": true,
+  "kidsAutoGenerationActive": true,
+  "youtubeAutoUploadActive": false,
+  "bloggerAutoPublishActive": false,
+  "randomScheduleActive": true,
+  "lastKidsVideoDate": "2026-11-11T08:49:04.079Z",
+  "lastMarketingDate": null,
+  "updatedAt": "2026-11-11T10:01:46.718Z"
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "msg-15-init",
+    "chatId": "15",
+    "sender": "ai",
+    "text": "Welcome to Google Blogger & Shorts Studio (Chat #15)! This chat is linked with AI Assistant (Chat #13) and configured for Google Drive folder \"Ai Studio - Kids Mode Data Save\" (https://drive.google.com/drive/folders/1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4?usp=drive_link). Tell me what educational topic or YouTube Short you want to synthesize into an SEO-ready Google Blogger post.",
+    "urdu": "خوش آمدید! یہ گوگل بلاگر اور شارٹس اسٹوڈیو (چیٹ نمبر 15) ہے۔ یہ چیٹ تعلیمی معاون (چیٹ 13) اور کڈز موڈ ڈرائیو کے ساتھ جڑی ہوئی ہے۔",
+    "time": "09:05 AM",
+    "timestamp": 1791449119456,
+    "workflow": "post"
+  },
+  {
+    "id": "msg-15-1791449192392-bfe",
+    "timestamp": 1791449192392,
+    "chatId": "15",
+    "sender": "ai",
+    "text": "🔗 Linked Context received from AI Assistant (Chat #13):\n\nTopic: Urdu Haroof-e-Tahajji & Iqbal Khudi\nContent: \"Khudi ko kar buland itna ke har taqdeer se pehle......\"",
+    "time": "08:46 AM",
+    "linkedFromChat": "13"
+  },
+  {
+    "id": "msg-15-service-account-sync",
+    "timestamp": 1791618950000,
+    "chatId": "15",
+    "sender": "ai",
+    "text": "📁 Google Drive & Cloud Link Verified (Solution 1 Active):\nFolder 'Ai Studio - Kids Mode Data Save' is now shared with Service Account: `drive-sync-bot@enter-the-world-web-app.iam.gserviceaccount.com`. YouTube Shorts & Blogger scripts are permanently linked and synced with Chat #13.",
+    "urdu": "گوگل ڈرائیو اور بلاگر شارٹس اب مکمل طور پر سروس اکاؤنٹ کے ذریعے محفوظ ہیں۔",
+    "time": "01:16 PM",
+    "workflow": "post"
+  }
+]

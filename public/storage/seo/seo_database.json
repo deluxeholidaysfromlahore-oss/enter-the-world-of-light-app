@@ -1,0 +1,539 @@
+[
+  {
+    "id": "kw-kids-01",
+    "keyword": "Urdu Haroof e Tahajji for kids with phonics",
+    "keywordUrdu": "بچوں کے لیے اردو حروفِ تہجی صوتیات کے ساتھ",
+    "category": "Urdu Learning",
+    "audience": "kids",
+    "priority": "primary",
+    "intent": "educational",
+    "volumeTier": "high",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 14500,
+    "impressions": 8900,
+    "clicks": 1240,
+    "ctr": 13.9,
+    "avgPosition": 2.1,
+    "targetPages": [
+      "/kids",
+      "/learn"
+    ],
+    "mappedYouTubeVideoId": "f5w_QoR0D2I",
+    "mappedBloggerSlug": "urdu-haroof-tahajji-kids-guide",
+    "hashtags": [
+      "#UrduKids",
+      "#HaroofETahajji",
+      "#UrduPhonics",
+      "#KidsLearning"
+    ],
+    "trendingScore": 94,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.047Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-kids-02",
+    "keyword": "Bilingual English Urdu ABC learning app for toddlers",
+    "keywordUrdu": "چھوٹے بچوں کے لیے انگریزی اور اردو حروفِ ابجد",
+    "category": "ABC / Alphabet",
+    "audience": "kids",
+    "priority": "primary",
+    "intent": "educational",
+    "volumeTier": "high",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 18200,
+    "impressions": 11400,
+    "clicks": 1680,
+    "ctr": 14.7,
+    "avgPosition": 1.8,
+    "targetPages": [
+      "/kids",
+      "/learn"
+    ],
+    "mappedYouTubeVideoId": "a1b2c3d4e5f",
+    "mappedBloggerSlug": "bilingual-alphabet-kids-learning",
+    "hashtags": [
+      "#ABCKids",
+      "#UrduAlphabet",
+      "#KidsEducation",
+      "#ToddlerLearning"
+    ],
+    "trendingScore": 91,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-kids-03",
+    "keyword": "Urdu moral stories for kids bedtime parables",
+    "keywordUrdu": "بچوں کے لیے اخلاقی کہانیاں اور نصیحت آموز کہانیاں",
+    "category": "Kids Stories",
+    "audience": "kids",
+    "priority": "primary",
+    "intent": "informational",
+    "volumeTier": "high",
+    "difficulty": "medium",
+    "status": "strong",
+    "monthlySearchesEstimated": 12000,
+    "impressions": 7400,
+    "clicks": 980,
+    "ctr": 13.2,
+    "avgPosition": 2.4,
+    "targetPages": [
+      "/kids",
+      "/stories"
+    ],
+    "mappedYouTubeVideoId": "video-story-01",
+    "mappedBloggerSlug": "urdu-moral-stories-kids-bedtime",
+    "hashtags": [
+      "#UrduStories",
+      "#BedtimeStories",
+      "#MoralTales",
+      "#KidsWonderland"
+    ],
+    "trendingScore": 88,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-kids-04",
+    "keyword": "Learn 1 to 20 numbers counting in Urdu and English",
+    "keywordUrdu": "اردو اور انگریزی میں ایک سے بیس تک گنتی",
+    "category": "Numbers / Counting",
+    "audience": "kids",
+    "priority": "secondary",
+    "intent": "educational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "stable",
+    "monthlySearchesEstimated": 9800,
+    "impressions": 5600,
+    "clicks": 720,
+    "ctr": 12.8,
+    "avgPosition": 3.1,
+    "targetPages": [
+      "/kids",
+      "/learn"
+    ],
+    "hashtags": [
+      "#LearnCounting",
+      "#UrduGinti",
+      "#MathForKids",
+      "#Numbers1to20"
+    ],
+    "trendingScore": 82,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-kids-05",
+    "keyword": "Animal names in Urdu with authentic sounds and pictures",
+    "keywordUrdu": "تصاویر اور آوازوں کے ساتھ جانوروں کے اردو نام",
+    "category": "Animals & Nature",
+    "audience": "kids",
+    "priority": "secondary",
+    "intent": "educational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 8400,
+    "impressions": 4900,
+    "clicks": 650,
+    "ctr": 13.3,
+    "avgPosition": 2.7,
+    "targetPages": [
+      "/kids"
+    ],
+    "hashtags": [
+      "#AnimalNamesInUrdu",
+      "#KidsFauna",
+      "#WildAnimalsKids",
+      "#UrduVocabulary"
+    ],
+    "trendingScore": 86,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-kids-06",
+    "keyword": "Ad-free child safe Islamic moral learning app",
+    "keywordUrdu": "بچوں کے لیے محفوظ اور اشتہارات سے پاک تعلیمی پلیٹ فارم",
+    "category": "App Brand / Safety",
+    "audience": "kids",
+    "priority": "long_tail",
+    "intent": "navigational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 6200,
+    "impressions": 3400,
+    "clicks": 490,
+    "ctr": 14.4,
+    "avgPosition": 2.2,
+    "targetPages": [
+      "/kids",
+      "/home"
+    ],
+    "hashtags": [
+      "#ChildSafeApp",
+      "#AdFreeKids",
+      "#ParentApproved",
+      "#SafeLearning"
+    ],
+    "trendingScore": 94,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-main-01",
+    "keyword": "Mirza Ghalib classical Urdu ghazals with English translation",
+    "keywordUrdu": "انگریزی ترجمہ اور تشریح کے ساتھ مرزا غالب کی غزلیں",
+    "category": "Poetry / Shayari",
+    "audience": "main_app",
+    "priority": "primary",
+    "intent": "informational",
+    "volumeTier": "high",
+    "difficulty": "medium",
+    "status": "strong",
+    "monthlySearchesEstimated": 24000,
+    "impressions": 14800,
+    "clicks": 1950,
+    "ctr": 13.1,
+    "avgPosition": 2.5,
+    "targetPages": [
+      "/poetry"
+    ],
+    "mappedYouTubeVideoId": "video-poetry-01",
+    "mappedBloggerSlug": "mirza-ghalib-ghazals-with-translation",
+    "hashtags": [
+      "#MirzaGhalib",
+      "#UrduPoetry",
+      "#UrduGhazal",
+      "#ClassicalShayari"
+    ],
+    "trendingScore": 92,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-main-02",
+    "keyword": "Allama Iqbal motivational nazm Khudi shikwa jawab e shikwa",
+    "keywordUrdu": "علامہ اقبال کی خودی پر مبنی نظمیں شکوہ و جوابِ شکوہ",
+    "category": "Poetry / Shayari",
+    "audience": "main_app",
+    "priority": "primary",
+    "intent": "educational",
+    "volumeTier": "high",
+    "difficulty": "medium",
+    "status": "strong",
+    "monthlySearchesEstimated": 31000,
+    "impressions": 19200,
+    "clicks": 2840,
+    "ctr": 14.8,
+    "avgPosition": 1.9,
+    "targetPages": [
+      "/poetry"
+    ],
+    "mappedYouTubeVideoId": "video-poetry-02",
+    "mappedBloggerSlug": "allama-iqbal-khudi-and-nazms",
+    "hashtags": [
+      "#AllamaIqbal",
+      "#IqbalPoetry",
+      "#Khudi",
+      "#UrduNazm"
+    ],
+    "trendingScore": 95,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-main-03",
+    "keyword": "Faiz Ahmad Faiz revolutionary poetry Bol ke lab azaad hain tere",
+    "keywordUrdu": "فیض احمد فیض کی انقلابی شاعری بول کہ لب آزاد ہیں تیرے",
+    "category": "Poetry / Shayari",
+    "audience": "main_app",
+    "priority": "secondary",
+    "intent": "informational",
+    "volumeTier": "high",
+    "difficulty": "medium",
+    "status": "stable",
+    "monthlySearchesEstimated": 16500,
+    "impressions": 9800,
+    "clicks": 1250,
+    "ctr": 12.7,
+    "avgPosition": 2.8,
+    "targetPages": [
+      "/poetry"
+    ],
+    "hashtags": [
+      "#FaizAhmadFaiz",
+      "#UrduLiterature",
+      "#ProgressivePoetry"
+    ],
+    "trendingScore": 84,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-main-04",
+    "keyword": "Interactive speed math mental arithmetic exercises online",
+    "keywordUrdu": "آن لائن ذہنی حساب اور ریاضی کی مشقیں",
+    "category": "Games / Puzzles",
+    "audience": "main_app",
+    "priority": "primary",
+    "intent": "educational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 11200,
+    "impressions": 6800,
+    "clicks": 940,
+    "ctr": 13.8,
+    "avgPosition": 2.3,
+    "targetPages": [
+      "/play",
+      "/practice"
+    ],
+    "hashtags": [
+      "#SpeedMath",
+      "#MentalMath",
+      "#BrainGames",
+      "#MathChallenge"
+    ],
+    "trendingScore": 87,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-main-05",
+    "keyword": "Urdu vocabulary word match game memory puzzle",
+    "keywordUrdu": "اردو الفاظ کی یادداشت اور تصویری کوئز گیم",
+    "category": "Games / Puzzles",
+    "audience": "main_app",
+    "priority": "secondary",
+    "intent": "educational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 7400,
+    "impressions": 4200,
+    "clicks": 580,
+    "ctr": 13.8,
+    "avgPosition": 2.6,
+    "targetPages": [
+      "/play"
+    ],
+    "hashtags": [
+      "#UrduPuzzles",
+      "#WordMatch",
+      "#VocabularyGame",
+      "#MemoryPlay"
+    ],
+    "trendingScore": 94,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-main-06",
+    "keyword": "Classic moral stories and wisdom fables with reflection",
+    "keywordUrdu": "حکمت اور دانائی کی کلاسیکی سبق آموز کہانیاں",
+    "category": "Stories & Fables",
+    "audience": "main_app",
+    "priority": "primary",
+    "intent": "informational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 13400,
+    "impressions": 8100,
+    "clicks": 1120,
+    "ctr": 13.8,
+    "avgPosition": 2.2,
+    "targetPages": [
+      "/stories"
+    ],
+    "hashtags": [
+      "#WisdomTales",
+      "#MoralFables",
+      "#LiteratureStories",
+      "#LifeLessons"
+    ],
+    "trendingScore": 85,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-global-01",
+    "keyword": "Enter the World of Light and Laughter educational portal",
+    "keywordUrdu": "روشنی اور مسکراہٹوں کی دنیا کا جامع تعلیمی پورٹل",
+    "category": "Brand / Portal",
+    "audience": "global",
+    "priority": "primary",
+    "intent": "navigational",
+    "volumeTier": "high",
+    "difficulty": "easy",
+    "status": "strong",
+    "monthlySearchesEstimated": 22000,
+    "impressions": 16500,
+    "clicks": 2950,
+    "ctr": 17.8,
+    "avgPosition": 1.2,
+    "targetPages": [
+      "/home",
+      "/explore"
+    ],
+    "hashtags": [
+      "#WorldOfLight",
+      "#EnterTheWorldOfLight",
+      "#DigitalEcosystem"
+    ],
+    "trendingScore": 98,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-global-02",
+    "keyword": "Bilingual Urdu English learning platform with audio and games",
+    "keywordUrdu": "آواز اور گیمز کے ساتھ اردو اور انگریزی سیکھنے کا ویب پلیٹ فارم",
+    "category": "Education Platform",
+    "audience": "global",
+    "priority": "primary",
+    "intent": "educational",
+    "volumeTier": "high",
+    "difficulty": "medium",
+    "status": "strong",
+    "monthlySearchesEstimated": 19500,
+    "impressions": 12100,
+    "clicks": 1820,
+    "ctr": 15,
+    "avgPosition": 2,
+    "targetPages": [
+      "/learn",
+      "/home"
+    ],
+    "hashtags": [
+      "#BilingualEducation",
+      "#UrduEnglish",
+      "#AudioLearning"
+    ],
+    "trendingScore": 93,
+    "lastEvaluatedAt": "2026-10-07T09:20:13.048Z",
+    "createdAt": "2026-09-01T00:00:00Z"
+  },
+  {
+    "id": "kw-auto-1791364886709-xix",
+    "keyword": "Urdu alphabet for kids with English phonics",
+    "keywordUrdu": "بچوں کے لیے اردو حروف تہجی اور انگلش صوتیات",
+    "category": "Early Childhood Education",
+    "audience": "kids",
+    "priority": "primary",
+    "intent": "educational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "emerging",
+    "monthlySearchesEstimated": 2400,
+    "impressions": 1200,
+    "clicks": 160,
+    "ctr": 13.3,
+    "avgPosition": 2.9,
+    "targetPages": [
+      "/kids"
+    ],
+    "hashtags": [
+      "#UrduForKids",
+      "#BilingualLearning",
+      "#UrduHaroof"
+    ],
+    "trendingScore": 88,
+    "aiRecommendedAction": "Recently discovered via Gemini Search intent synthesis. Monitor click-through rate.",
+    "lastEvaluatedAt": "2026-10-07T09:21:26.709Z",
+    "createdAt": "2026-10-07T09:21:26.709Z"
+  },
+  {
+    "id": "kw-auto-1791364886709-pqm",
+    "keyword": "Allama Iqbal poetry meaning in simple Urdu",
+    "keywordUrdu": "علامہ اقبال کی شاعری کا سادہ اردو میں مطلب",
+    "category": "Literature Appreciation",
+    "audience": "main_app",
+    "priority": "primary",
+    "intent": "informational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "emerging",
+    "monthlySearchesEstimated": 5400,
+    "impressions": 1200,
+    "clicks": 160,
+    "ctr": 13.3,
+    "avgPosition": 2.9,
+    "targetPages": [
+      "/poetry"
+    ],
+    "hashtags": [
+      "#AllamaIqbal",
+      "#UrduShayari",
+      "#LearnUrdu"
+    ],
+    "trendingScore": 88,
+    "aiRecommendedAction": "Recently discovered via Gemini Search intent synthesis. Monitor click-through rate.",
+    "lastEvaluatedAt": "2026-10-07T09:21:26.709Z",
+    "createdAt": "2026-10-07T09:21:26.709Z"
+  },
+  {
+    "id": "kw-auto-1791364886709-xaq",
+    "keyword": "Moral stories for kids in Urdu and English",
+    "keywordUrdu": "بچوں کے لیے اردو اور انگریزی میں اخلاقی کہانیاں",
+    "category": "Character Building",
+    "audience": "kids",
+    "priority": "secondary",
+    "intent": "educational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "emerging",
+    "monthlySearchesEstimated": 1900,
+    "impressions": 1200,
+    "clicks": 160,
+    "ctr": 13.3,
+    "avgPosition": 2.9,
+    "targetPages": [
+      "/kids"
+    ],
+    "hashtags": [
+      "#UrduStories",
+      "#MoralLessons",
+      "#KidsEducation"
+    ],
+    "trendingScore": 88,
+    "aiRecommendedAction": "Recently discovered via Gemini Search intent synthesis. Monitor click-through rate.",
+    "lastEvaluatedAt": "2026-10-07T09:21:26.709Z",
+    "createdAt": "2026-10-07T09:21:26.709Z"
+  },
+  {
+    "id": "kw-auto-1791364886709-v7p",
+    "keyword": "Best Faiz Ahmad Faiz ghazals for beginners",
+    "keywordUrdu": "نئے سیکھنے والوں کے لیے فیض احمد فیض کی بہترین غزلیں",
+    "category": "Classical Poetry",
+    "audience": "main_app",
+    "priority": "long_tail",
+    "intent": "informational",
+    "volumeTier": "medium",
+    "difficulty": "easy",
+    "status": "emerging",
+    "monthlySearchesEstimated": 850,
+    "impressions": 1200,
+    "clicks": 160,
+    "ctr": 13.3,
+    "avgPosition": 2.9,
+    "targetPages": [
+      "/poetry"
+    ],
+    "hashtags": [
+      "#FaizAhmadFaiz",
+      "#UrduPoetry",
+      "#ClassicLiterature"
+    ],
+    "trendingScore": 88,
+    "aiRecommendedAction": "Recently discovered via Gemini Search intent synthesis. Monitor click-through rate.",
+    "lastEvaluatedAt": "2026-10-07T09:21:26.709Z",
+    "createdAt": "2026-10-07T09:21:26.709Z"
+  }
+]

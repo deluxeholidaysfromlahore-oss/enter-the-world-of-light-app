@@ -1,0 +1,80 @@
+[
+  {
+    "id": "log-1791364886710-kh4g",
+    "timestamp": "2026-10-07T09:21:26.710Z",
+    "keyword": "Urdu vocabulary word match game memory puzzle",
+    "targetPage": "/play",
+    "changeType": "upgrade",
+    "oldValue": "emerging (CTR: 13.8%)",
+    "newValue": "strong (High CTR + Top 3 Position Confirmed)",
+    "reason": "Consistently sustained >12% CTR and top 3 organic ranking",
+    "source": "gsc_data",
+    "trigger": "automated_cycle",
+    "appliedBy": "Performance Evaluator"
+  },
+  {
+    "id": "log-1791364886710-ruc4",
+    "timestamp": "2026-10-07T09:21:26.710Z",
+    "keyword": "Ad-free child safe Islamic moral learning app",
+    "targetPage": "/kids",
+    "changeType": "upgrade",
+    "oldValue": "emerging (CTR: 14.4%)",
+    "newValue": "strong (High CTR + Top 3 Position Confirmed)",
+    "reason": "Consistently sustained >12% CTR and top 3 organic ranking",
+    "source": "gsc_data",
+    "trigger": "automated_cycle",
+    "appliedBy": "Performance Evaluator"
+  },
+  {
+    "id": "log-1791364886710-fc4e",
+    "timestamp": "2026-10-07T09:21:26.710Z",
+    "keyword": "Best Faiz Ahmad Faiz ghazals for beginners",
+    "targetPage": "/poetry",
+    "changeType": "addition",
+    "oldValue": "None (Unindexed query)",
+    "newValue": "Added to MAIN_APP keyword database",
+    "reason": "Discovered high-intent user search query through Gemini AI intent synthesis",
+    "source": "gemini_ai",
+    "trigger": "automated_cycle",
+    "appliedBy": "Auto-Discovery Engine (Gemini 3.1 Flash Lite)"
+  },
+  {
+    "id": "log-1791364886709-57d6",
+    "timestamp": "2026-10-07T09:21:26.709Z",
+    "keyword": "Moral stories for kids in Urdu and English",
+    "targetPage": "/kids",
+    "changeType": "addition",
+    "oldValue": "None (Unindexed query)",
+    "newValue": "Added to KIDS keyword database",
+    "reason": "Discovered high-intent user search query through Gemini AI intent synthesis",
+    "source": "gemini_ai",
+    "trigger": "automated_cycle",
+    "appliedBy": "Auto-Discovery Engine (Gemini 3.1 Flash Lite)"
+  },
+  {
+    "id": "log-1791364886709-gdao",
+    "timestamp": "2026-10-07T09:21:26.709Z",
+    "keyword": "Allama Iqbal poetry meaning in simple Urdu",
+    "targetPage": "/poetry",
+    "changeType": "addition",
+    "oldValue": "None (Unindexed query)",
+    "newValue": "Added to MAIN_APP keyword database",
+    "reason": "Discovered high-intent user search query through Gemini AI intent synthesis",
+    "source": "gemini_ai",
+    "trigger": "automated_cycle",
+    "appliedBy": "Auto-Discovery Engine (Gemini 3.1 Flash Lite)"
+  },
+  {
+    "id": "log-1791364886709-kip6",
+    "timestamp": "2026-10-07T09:21:26.709Z",
+    "keyword": "Urdu alphabet for kids with English phonics",
+    "targetPage": "/kids",
+    "changeType": "addition",
+    "oldValue": "None (Unindexed query)",
+    "newValue": "Added to KIDS keyword database",
+    "reason": "Discovered high-intent user search query through Gemini AI intent synthesis",
+    "source": "gemini_ai",
+    "trigger": "automated_cycle",
+    "appliedBy": "Auto-Discovery Engine (Gemini 3.1 Flash Lite)"
+  }
+]

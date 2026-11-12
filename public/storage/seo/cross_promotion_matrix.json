@@ -1,0 +1,94 @@
+[
+  {
+    "id": "triad-kids-01",
+    "topic": "Urdu Haroof-e-Tahajji Phonics Wonderland",
+    "topicUrdu": "اردو حروفِ تہجی صوتیات",
+    "audience": "kids",
+    "category": "Kids Urdu",
+    "appRoute": "/kids?tab=learn",
+    "appTitle": "Kids Light World - Haroof-e-Tahajji Phonics Interactive Board",
+    "youtubeVideoId": "f5w_QoR0D2I",
+    "youtubeTitle": "Urdu Haroof-e-Tahajji Phonics for Little Stars | Enter the World of Light",
+    "youtubeUrl": "https://www.youtube.com/watch?v=f5w_QoR0D2I",
+    "bloggerUrl": "https://worldoflightofficial.blogspot.com/2026/09/urdu-haroof-tahajji-kids-guide.html",
+    "bloggerTitle": "Comprehensive Guide to Teaching Urdu Alphabet & Phonics to Early Learners",
+    "focusKeywords": [
+      "Urdu Haroof",
+      "Haroof e Tahajji",
+      "Urdu Phonics for Kids",
+      "Bilingual Learning"
+    ],
+    "backlinkStatus": "verified",
+    "utmAppUrl": "https://ais-dev-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app/kids?utm_source=youtube&utm_medium=video_description&utm_campaign=haroof_tahajji",
+    "lastSyncedAt": "2026-10-07T09:20:13.048Z"
+  },
+  {
+    "id": "triad-main-01",
+    "topic": "Mirza Ghalib: Ghazals, Philosophy & Universal Meaning",
+    "topicUrdu": "مرزا اسد اللہ خان غالب: کلام اور فلسفہ",
+    "audience": "main_app",
+    "category": "Classical Poetry",
+    "appRoute": "/poetry",
+    "appTitle": "Classical Urdu Poetry Studio - Mirza Ghalib Ghazal Reader & Lexicon",
+    "youtubeVideoId": "video-poetry-01",
+    "youtubeTitle": "The Soul of Mirza Ghalib: Timeless Couplets & Reflections | Enter the World of Light",
+    "youtubeUrl": "https://www.youtube.com/@EntertheWorldofLight",
+    "bloggerUrl": "https://worldoflightofficial.blogspot.com/2026/09/mirza-ghalib-ghazals-with-translation.html",
+    "bloggerTitle": "Understanding Mirza Ghalib: Philosophical Dimensions of Classical Urdu Poetry",
+    "focusKeywords": [
+      "Mirza Ghalib",
+      "Urdu Ghazal",
+      "Ghalib Shayari",
+      "Rekhta Poetry Reader"
+    ],
+    "backlinkStatus": "verified",
+    "utmAppUrl": "https://ais-dev-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app/poetry?utm_source=blogger&utm_medium=article_backlink&utm_campaign=ghalib_collection",
+    "lastSyncedAt": "2026-10-07T09:20:13.048Z"
+  },
+  {
+    "id": "triad-main-02",
+    "topic": "Mental Arithmetic & Speed Math Hacks",
+    "topicUrdu": "ذہنی ریاضی اور برق رفتار حسابی کلیے",
+    "audience": "main_app",
+    "category": "Brain Arcade",
+    "appRoute": "/play",
+    "appTitle": "Interactive Play Arcade - Speed Math Drills & Mental Math Timer",
+    "youtubeVideoId": "video-math-01",
+    "youtubeTitle": "Multiply Any 2-Digit Number in 3 Seconds! Mental Math Tricks | World of Light",
+    "youtubeUrl": "https://www.youtube.com/@EntertheWorldofLight",
+    "bloggerUrl": "https://worldoflightofficial.blogspot.com/2026/09/mental-math-hacks-speed-calculation.html",
+    "bloggerTitle": "Mastering Mental Arithmetic: Practical Speed Math Methods for Daily Life",
+    "focusKeywords": [
+      "Speed Math",
+      "Mental Calculation",
+      "Math Puzzles Online",
+      "Brain Training"
+    ],
+    "backlinkStatus": "verified",
+    "utmAppUrl": "https://ais-dev-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app/play?utm_source=youtube&utm_medium=shorts_pinned_comment&utm_campaign=speed_math",
+    "lastSyncedAt": "2026-10-07T09:20:13.048Z"
+  },
+  {
+    "id": "triad-kids-02",
+    "topic": "Moral Parables: The Kind Deer & River of Gratitude",
+    "topicUrdu": "نصیحت آموز کہانی: مہربان ہرن",
+    "audience": "kids",
+    "category": "Kids Stories",
+    "appRoute": "/kids?tab=stories",
+    "appTitle": "Kids Light World - Interactive Illustrated Story Reader",
+    "youtubeVideoId": "video-story-01",
+    "youtubeTitle": "The Kind Deer in the Forest of Wonder | Animated Urdu Bedtime Story for Children",
+    "youtubeUrl": "https://www.youtube.com/@EntertheWorldofLight",
+    "bloggerUrl": "https://worldoflightofficial.blogspot.com/2026/09/urdu-moral-stories-kids-bedtime.html",
+    "bloggerTitle": "Cultivating Kindness Through Storytelling: Urdu Moral Stories for Young Minds",
+    "focusKeywords": [
+      "Kids Urdu Story",
+      "Moral Parables",
+      "Bedtime Tales",
+      "Kindness for Kids"
+    ],
+    "backlinkStatus": "verified",
+    "utmAppUrl": "https://ais-dev-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app/kids?utm_source=blogger&utm_medium=editorial_embed&utm_campaign=kind_deer_story",
+    "lastSyncedAt": "2026-10-07T09:20:13.048Z"
+  }
+]

@@ -1,0 +1,25 @@
+# Robots.txt for Enter the World of Light & Laughter
+# Official 2026 Search Engine Spider Directives (Googlebot, Bingbot, Applebot)
+
+User-agent: *
+Allow: /
+Allow: /kids
+Allow: /learn
+Allow: /play
+Allow: /practice
+Allow: /poetry
+Allow: /stories
+Allow: /videos
+Allow: /shorts
+Allow: /daily
+Allow: /explore
+Allow: /storage/kids_videos/
+Allow: /storage/promo_videos/
+
+# Restrict sensitive admin routes from search indexation
+Disallow: /admin
+Disallow: /blogger
+Disallow: /api/
+
+# XML Sitemap Location
+Sitemap: https://ais-pre-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app/sitemap.xml

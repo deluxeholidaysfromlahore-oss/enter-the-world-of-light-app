@@ -1,0 +1,92 @@
+[
+  {
+    "contentId": "PROMO-2026-10-07-SLOT1-KIDS-TIPS-01",
+    "category": "Kids Learning Tips",
+    "topic": "3 Golden Rules for Stress-Free Early Reading",
+    "topicSlug": "promo_2026_10_07_slot1_kids_tips_01",
+    "targetAudience": "Parents & Early Educators",
+    "durationSeconds": 5.5,
+    "script": {
+      "hook": "Does your child resist reading? Try this 60-second gentle technique!",
+      "body": "Praise curiosity over accuracy, read in 5-minute playful bursts, and pair sounds with finger gestures.",
+      "callToAction": "Visit our Channel Profile link to launch Enter the World of Light & Laughter!"
+    },
+    "voiceText": "Does your child resist reading? Try this 60-second gentle technique! Praise curiosity over accuracy, read in 5-minute playful bursts, and pair sounds with finger gestures.",
+    "status": "completed",
+    "videoUrl": "/storage/promo_videos/promo_kids_mode_launch.mp4",
+    "audioUrl": "/storage/promo_videos/promo_kids_mode_launch.mp3",
+    "thumbnailUrl": "/storage/promo_videos/promo_kids_mode_launch_thumb.jpg",
+    "copyrightAudit": {
+      "status": "passed_100_percent",
+      "checkedAt": "2026-10-07T10:23:20.364Z",
+      "visualOriginality": "100% Proprietary AI CGI & Web Components",
+      "audioOriginality": "Original Synthesized Narration (Zero Copyrighted Music)",
+      "coppaCompliant": true,
+      "youtube2026Ready": true
+    },
+    "creationDate": "2026-10-07T10:23:20.364Z",
+    "youtubeUrl": "https://www.youtube.com/@EntertheWorldofLight",
+    "bloggerUrl": "https://entertheworldoflightandlaughter.blogspot.com/2026/10/07/promo-2026-10-07-slot1-kids-tips-01.html",
+    "appUrl": "http://localhost:3000/kids?tab=learn"
+  },
+  {
+    "contentId": "PROMO-2026-10-07-SLOT2-EASY-ENG-01",
+    "category": "Easy English for Kids",
+    "topic": "5 Everyday English Words Kids Can Master in 60 Seconds",
+    "topicSlug": "promo_2026_10_07_slot2_easy_eng_01",
+    "targetAudience": "Children ages 3-8 & Parents",
+    "durationSeconds": 5.5,
+    "script": {
+      "hook": "Say goodbye to boring flashcards! Learn 5 magic words with playful sounds.",
+      "body": "Breeze, Flutter, Curious, Sparkle, and Giggle with fun actions.",
+      "callToAction": "Visit our Channel Profile link to launch Enter the World of Light & Laughter!"
+    },
+    "voiceText": "Say goodbye to boring flashcards! Learn 5 magic words with playful sounds. Breeze, Flutter, Curious, Sparkle, and Giggle with fun actions.",
+    "status": "completed",
+    "videoUrl": "/storage/promo_videos/promo_poetry_literature.mp4",
+    "audioUrl": "/storage/promo_videos/promo_poetry_literature.mp3",
+    "thumbnailUrl": "/storage/promo_videos/promo_poetry_literature_thumb.jpg",
+    "copyrightAudit": {
+      "status": "passed_100_percent",
+      "checkedAt": "2026-10-07T10:23:20.364Z",
+      "visualOriginality": "100% Proprietary AI CGI & Web Components",
+      "audioOriginality": "Original Synthesized Narration (Zero Copyrighted Music)",
+      "coppaCompliant": true,
+      "youtube2026Ready": true
+    },
+    "creationDate": "2026-10-07T10:23:20.364Z",
+    "youtubeUrl": "https://www.youtube.com/@EntertheWorldofLight",
+    "bloggerUrl": "https://entertheworldoflightandlaughter.blogspot.com/2026/10/07/promo-2026-10-07-slot2-easy-eng-01.html",
+    "appUrl": "http://localhost:3000/kids?tab=learn"
+  },
+  {
+    "contentId": "PROMO-2026-10-07-SLOT3-URDU-LEARN-01",
+    "category": "Urdu Learning",
+    "topic": "Secrets of Beautiful Nastaliq: Tracing Alif, Bay, Pay with Joy",
+    "topicSlug": "promo_2026_10_07_slot3_urdu_learn_01",
+    "targetAudience": "Students & Urdu Learners",
+    "durationSeconds": 5.5,
+    "script": {
+      "hook": "Ever wondered why Urdu script looks like flowing poetry? Let's trace it together!",
+      "body": "Urdu letters follow natural curves. Practice tracing on the interactive board with zero mistakes.",
+      "callToAction": "Visit our Channel Profile link to launch Enter the World of Light & Laughter!"
+    },
+    "voiceText": "Ever wondered why Urdu script looks like flowing poetry? Let's trace it together! Urdu letters follow natural curves. Practice tracing on the interactive board with zero mistakes.",
+    "status": "completed",
+    "videoUrl": "/storage/promo_videos/promo_poetry_literature.mp4",
+    "audioUrl": "/storage/promo_videos/promo_poetry_literature.mp3",
+    "thumbnailUrl": "/storage/promo_videos/promo_poetry_literature_thumb.jpg",
+    "copyrightAudit": {
+      "status": "passed_100_percent",
+      "checkedAt": "2026-10-07T10:23:20.364Z",
+      "visualOriginality": "100% Proprietary AI CGI & Web Components",
+      "audioOriginality": "Original Synthesized Narration (Zero Copyrighted Music)",
+      "coppaCompliant": true,
+      "youtube2026Ready": true
+    },
+    "creationDate": "2026-10-07T10:23:20.364Z",
+    "youtubeUrl": "https://www.youtube.com/@EntertheWorldofLight",
+    "bloggerUrl": "https://entertheworldoflightandlaughter.blogspot.com/2026/10/07/promo-2026-10-07-slot3-urdu-learn-01.html",
+    "appUrl": "http://localhost:3000/kids?tab=learn"
+  }
+]

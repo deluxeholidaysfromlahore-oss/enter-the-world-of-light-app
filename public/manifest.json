@@ -1,0 +1,29 @@
+{
+  "name": "Enter the World of Light & Laughter",
+  "short_name": "World of Light",
+  "description": "Multi-purpose educational and cultural platform: Learn • Play • Practice and Read • Listen • Explore with kids learning, poetry, stories, games, and videos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0284c7",
+  "orientation": "portrait-primary",
+  "categories": ["education", "entertainment", "kids", "books"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

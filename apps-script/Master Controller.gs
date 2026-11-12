@@ -1,0 +1,1544 @@
+/**
+ * ============================================================================
+ * ENTER THE WORLD OF LIGHT & LAUGHTER – GOOGLE APPS SCRIPT MASTER CONTROLLER
+ * File: Master Controller.gs
+ * ============================================================================
+ * Production Edition: Autonomous Dual Blogger Network & YouTube Shorts Suite
+ *
+ * DAILY CONTENT ARCHITECTURE:
+ * 1. Primary Blog (entertheworldoflightandlaughter.blogspot.com | ID: 5550406854147347257)
+ *    - 3 Daily POSTS:
+ *      • Slot 1 (Subah / Morning): Web App Feature Deep Dive (Urdu Tracing, Phonics)
+ *      • Slot 2 (Dopahar / Afternoon): Distinct App Pillar (Classical Rekhta, Literature, Mind Gym)
+ *      • Slot 3 (Shaam / Evening): Mandatory YouTube Short Deep-Dive (Chronological Oldest to Newest)
+ *
+ * 2. Secondary Kids Blog (lightlaughterkids.blogspot.com | ID: 3870971020533851761)
+ *    - 3 Daily PERMANENT STATIC PAGES (via /pages resource):
+ *      • Slot 4 (Subah / Morning): Value-First Guide for Parents/Learners (~1-2h after Slot 1)
+ *      • Slot 5 (Dopahar / Afternoon): Value-First Curriculum/Worksheet Guide (~1-2h after Slot 2)
+ *      • Slot 6 (Shaam / Evening): Value-First Life Lessons/Moral Discussion (~1-2h after Slot 3)
+ *
+ * BRANDING & QUALITY STANDARDS:
+ * - Hosted Google CDN Brand Logo (900x900 avatar: yt3.googleusercontent.com)
+ * - User-Provided App Showcase Tablet Hero Image (/app_showcase_hero.png)
+ * - YouTube 9:16 Responsive Player & HQ Thumbnails
+ * - Official WhatsApp Channel Join Card & Universal Share Buttons
+ * - Compulsory Reciprocal Links (Primary -> Secondary Kids; Secondary -> Primary)
+ * - 0% Personal Phone Numbers
+ * - Dual Deduplication (Live Blogger Posts/Pages API + ScriptProperties Ledger)
+ * ============================================================================
+ */
+
+var MASTER_CONFIG = {
+  // 1. Google Blogger Production Networks
+  PRIMARY_BLOG_ID: "5550406854147347257",
+  PRIMARY_BLOG_DOMAIN: "https://entertheworldoflightandlaughter.blogspot.com",
+  SECONDARY_BLOG_ID: "3870971020533851761",
+  SECONDARY_BLOG_DOMAIN: "https://lightlaughterkids.blogspot.com",
+
+  // 2. Official Social & Community Endpoints
+  WHATSAPP_CHANNEL_URL: "https://whatsapp.com/channel/0029VasZV4a60eBd8TwfTg1f",
+  YOUTUBE_CHANNEL_ID: "UCvCzFP5EPsV4Vp6l6GGuvyg",
+  YOUTUBE_HANDLE: "@EntertheWorldofLight",
+  YOUTUBE_URL: "https://www.youtube.com/@EntertheWorldofLight",
+  YOUTUBE_FEED_URL: "https://www.youtube.com/feeds/videos.xml?channel_id=UCvCzFP5EPsV4Vp6l6GGuvyg",
+
+  // 3. Official Brand Assets (Hosted on Google/YouTube CDN - 100% Reliable & Permanent)
+  BRAND_LOGO_URL: "https://yt3.googleusercontent.com/yVGmLgoCPpJUTFfUEU1pBLiRcPabd1aoJb5xuO71qI1E7F_MX8ykyrIKLOF5Pv4BVR8v3yC-4Gk=s900-c-k-c0x00ffffff-no-rj",
+  APP_SHOWCASE_TABLET_URL: "https://entertheworldoflightandlaughter.blogspot.com/favicon.ico",
+  API_BASE_URL: "https://ais-dev-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app",
+
+  // 4. Web App Core Features & Educational Pillars (Rotational Catalog for Slots 1 & 2)
+  APP_FEATURES_CATALOG: [
+    {
+      id: "URDU_TRACING_CANVAS",
+      name: "Urdu Haroof-e-Tahajji & Tracing Canvas",
+      urduTitle: "اردو حروفِ تہجی ٹریسنگ کینوس اور صوتیات",
+      summary: "Interactive digital stroke tracing exercises for all 38 Urdu alphabets. Includes guided stroke animations, live audio stroke correction, phonics pronunciation, and rewarding visual feedback.",
+      actionUrl: "/learn/urdu-tracing",
+      category: "Urdu Literacy & Digital Qaida",
+      badgeText: "INTERACTIVE STROKE MECHANICS",
+      secondaryGuideTitle: "Parent's Practical Manual: Teaching Urdu Alphabet Strokes at Home Without Stress",
+      secondaryGuideTakeaway: "Break practice into 5-minute playful bursts, celebrate stroke confidence before perfection, and connect letter shapes with sensory finger tracing."
+    },
+    {
+      id: "CLASSICAL_REKHTA_HERITAGE",
+      name: "Classical Urdu Literature & Rekhta Heritage",
+      urduTitle: "کلاسیکی اردو شاعری اور ریختہ ادب کا روشن جہان",
+      summary: "Curated poetic anthology of Allama Iqbal, Mirza Ghalib, and Mir Taqi Mir. Features line-by-line poetic recitations, high-contrast Nastaliq layout, bilingual contextual explanations, and moral reflection prompts.",
+      actionUrl: "/literature/classical-poetry",
+      category: "Classical Literature & Culture",
+      badgeText: "POETRY RECITATION & ANALYSIS",
+      secondaryGuideTitle: "Family Anthology Guide: Introducing Classical Urdu Poetry & Moral Wisdom to Young Readers",
+      secondaryGuideTakeaway: "Read poems aloud for rhythm, discuss the central ethical question of each stanza, and explore the timeless lessons of character and humility."
+    },
+    {
+      id: "KIDS_LIGHT_WORLD_FABLES",
+      name: "Kids Light World & 2D Animated Moral Stories",
+      urduTitle: "بچوں کی پیاری کہانیاں اور اخلاقی تربیت کا روشن سرچشمہ",
+      summary: "Wholesome 2D animated bedtime fables, animal adventures, interactive Urdu read-alouds, and child-safe moral lessons with single-click parent gate controls and zero commercial ads.",
+      actionUrl: "/kids/animated-stories",
+      category: "Child-Safe Stories & Ethics",
+      badgeText: "2D ANIMATED MORAL FABLES",
+      secondaryGuideTitle: "Bedtime Storytelling Handbook: Character Building & Empathy Through Meaningful Fables",
+      secondaryGuideTakeaway: "Ask your child open-ended reflection questions after every fable, encourage them to imagine alternative endings, and celebrate kind actions in daily life."
+    },
+    {
+      id: "COGNITIVE_MIND_GYM",
+      name: "Interactive Mind Gym & Bilingual Quizzes",
+      urduTitle: "ذہنی آزمائش، علمی معمہ اور دو لسانی کوئز",
+      summary: "Gamified cognitive exercises, root-language word pairing, memory match games, daily challenge streaks, and unlockable achievement badges in Urdu and English.",
+      actionUrl: "/quizzes/mind-gym",
+      category: "Cognitive Skills & Brain Games",
+      badgeText: "COGNITIVE MEMORY & LOGIC",
+      secondaryGuideTitle: "15-Minute Daily Brain Gym: Engaging Word-Matching & Memory Activities for Early Learners",
+      secondaryGuideTakeaway: "Stimulate dual-language cognitive recall with 10-minute daily memory challenges, pairing words with mental pictures and playful speed rounds."
+    }
+  ],
+
+  // 5. Complete Chronological YouTube Inventory from @EntertheWorldofLight (412 Uploads)
+  // START_FROM_2026_SERIES: true starts from 2026 Educational Series (#365: tBchpfjzUog).
+  // Set to false to start from the channel's absolute first upload in 2024 (#1: i-J3tY-DQgk).
+  START_FROM_2026_SERIES: true,
+  CHRONOLOGICAL_SHORTS_CATALOG: [
+    { id: "i-J3tY-DQgk", title: "Best Colorful Fireworks || S-1 @EntertheWorldofLight", publishedAt: "2024-09-02T08:48:49Z" },
+    { id: "9pZrbMre6lc", title: "Sparklers Fireworks Colorful and Attractions  || @EntertheWorldofLight", publishedAt: "2024-09-04T12:35:55Z" },
+    { id: "66DFd9ALz70", title: "Fireworks vs. Nature: The Ultimate Showdown || S-3  #fireworksfestival #shorts #tranding #trend", publishedAt: "2024-09-06T14:43:59Z" },
+    { id: "OpgCMtrw8hA", title: "#Fireworks #Shorts || S-1 || #fireworksforyou || #reels  #short #shortsvideo #reel #viralvideo", publishedAt: "2024-09-14T07:26:57Z" },
+    { id: "sJDrA5K7ckA", title: "Explosive Fireworks Compilation Best of the Year || S-2 || #fireworksforyou || #reels #short #reels", publishedAt: "2024-09-16T07:06:50Z" },
+    { id: "I0VvXCcvLwI", title: "Stunning Fireworks Show Prepare to Be Amazed || S-3 || #fireworksforyou || #reels #short #viralvideo", publishedAt: "2024-09-18T07:36:53Z" },
+    { id: "7EIpMxe4Hfc", title: "The Japanese Firework Shorts || S-5 || #fireworksforyou || #reels #short #shortsvideo #reel", publishedAt: "2024-09-20T10:15:18Z" },
+    { id: "M1-iUmytfFY", title: "The Japan Firework Festival Entertainment 2021 #shorts || S6 || #fireworksforyou #short #shortsvideo", publishedAt: "2024-09-23T07:40:48Z" },
+    { id: "wvkW_3zU3VM", title: "Jaw-Dropping Fireworks Time lapse From Setup to Spectacle! || S-8 || #fireworksforyou #reels #shorts", publishedAt: "2024-09-25T07:53:58Z" },
+    { id: "2ZYKk5D9k10", title: "Fireworks Gone Wild: Unbelievable Moments Caught on Camera! | S-9 | #fireworksforyou || #shorts #4k", publishedAt: "2024-09-26T10:32:55Z" },
+    { id: "NRSvvqxUcjo", title: "Epic Fireworks Display A Night of Explosions! || S-10 || #fireworksforyou #reels #short #shortsvideo", publishedAt: "2024-09-28T07:51:29Z" },
+    { id: "3SuY_UYJlao", title: "The Most Incredible Fireworks Show You'll Ever See! || S-11 || #reels #short #shortsvideo #reel", publishedAt: "2024-09-30T07:39:45Z" },
+    { id: "omGV1_qBKB4", title: "Explosive Beauty: The Ultimate Fireworks Show 2024 || S-12 || #reels #short #shortsvideo #reel", publishedAt: "2024-10-03T07:14:34Z" },
+    { id: "xQrpOy9MHvE", title: "Colorful firework with Relaxing Piano Music || Live V-1 || #FireworksForYou #colors #enjoy", publishedAt: "2024-10-04T15:47:13Z" },
+    { id: "aCOej0f2zl0", title: "New Year Firework with Relaxing Music Enjoy || Live V-1 || #FireworksForYou #colors #enjoy #2023", publishedAt: "2024-10-05T15:07:09Z" },
+    { id: "mewm36kxYuI", title: "Fireworks vs Nature Stunning Displays at Night || S-13 || #fireworksforyou #reels #short #viralvideo", publishedAt: "2024-10-07T07:51:33Z" },
+    { id: "9xfBe4hRb5M", title: "#Fireworks #Shorts || S-14 || #fireworksforyou || #reels  #short #shortsvideo #reel #viralvideo", publishedAt: "2024-10-08T08:59:45Z" },
+    { id: "51z-9EVPEks", title: "HAPPINESS Daylight Firework Colorful Smoke #fireworks || S-15 | #fireworksforyou #reels #short #reel", publishedAt: "2024-10-09T10:45:56Z" },
+    { id: "hn9DEZ_U6d8", title: "This Happens Once In Million Years || S-16 || #fireworksforyou #reels #song #reel #happy #new", publishedAt: "2024-10-11T10:45:50Z" },
+    { id: "8JJdhgk6BBs", title: "A Spectacle of Light: Celebrating the New Year Together - JUSTIN || #fireworks #shorts #reels #4k", publishedAt: "2024-10-13T10:45:45Z" },
+    { id: "PpcHlDFu_ko", title: "Aa Gaya Tha Woh Khush Khasal Pasand Muhammad Ahmed Ghazal with Music & Fireworks #shorts #reels S-17", publishedAt: "2024-10-15T08:50:13Z" },
+    { id: "nDe6h_QL4iQ", title: "Gulon Mein Rang Bhare - #Poet Faiz Ahmad Faiz With #Music & Firework | S-18 | #reels #shorts #poetry", publishedAt: "2024-10-16T10:48:44Z" },
+    { id: "vJwb5skFdP0", title: "Aaye Kuch abr - #Poet Faiz Ahmad Faiz With #Music & Firework | #Short 19 |  #reels #shorts #poetry", publishedAt: "2024-10-17T09:51:34Z" },
+    { id: "7upK1Hx9cK8", title: "Raaz-e-Ulfat Chupa Ke Dekh Liya - #Poet Faiz Ahmad Faiz With #Music & Firework - #S20 #reels #shorts", publishedAt: "2024-10-19T11:50:00Z" },
+    { id: "vwtQTZdem5k", title: "New Year Firework with Relaxing Music Enjoy Poetry with #Music & #Fireworks #shorts #reels #live #4k", publishedAt: "2024-10-22T13:01:08Z" },
+    { id: "w_LQUDfcKM0", title: "New Year Firework with Relaxing Music Enjoy Poetry || #Live 1 #Fireworks #shorts #reels #livestream", publishedAt: "2024-10-24T22:39:26Z" },
+    { id: "a48NkTnrBfg", title: "Peaceful #Mountain Retreat #Relaxing Music with #Nature #Sounds || #Music & #Firework #reels #shorts", publishedAt: "2024-10-25T10:39:57Z" },
+    { id: "MazYtUk5inU", title: "Mile bina hi bicharne ke dar se lot aaye - S21 #Viral #Trending #shorts #poetry #fireworks #trending", publishedAt: "2024-10-27T12:48:22Z" },
+    { id: "CldvseZ89Ys", title: "Skardu Valley A Breathtaking Gem in Gilgit Baltistan #pakistan || #Music & #Firework #reels #shorts", publishedAt: "2024-10-28T13:57:31Z" },
+    { id: "f-WkB1wUCzo", title: "Wellness and Nature The Beauty Of Bali Garden | Indonesia | Short Reels Music #Short #Reels #Music", publishedAt: "2024-10-29T13:43:39Z" },
+    { id: "4yk8aBjIqi4", title: "Flying over Norway's spectacular mountains || Nature Sounds || Music & Firework reels shorts", publishedAt: "2024-10-31T13:33:48Z" },
+    { id: "T2OUkqFjd14", title: "Beautiful Lake between mountains | Summer Enjoy | Relaxing Music | Shorts Reels and Video", publishedAt: "2024-11-05T08:41:47Z" },
+    { id: "LZ0SWz1fnrg", title: "Allama Iqbal Poetry : Tare Sufe Hen Afringi Tare | Fireworks and Relaxing Music #reels #shorts 22", publishedAt: "2024-11-14T04:53:13Z" },
+    { id: "ZcYRPcTi4hY", title: "Best Iqbal Poet | Urdu Shayari Sad Poetry Pakistan Fireworks with Relaxing Background Music Short 23", publishedAt: "2024-11-17T11:41:48Z" },
+    { id: "xmZTSxDL75Y", title: "Iqbal Night Poet | Urdu Shayari Sad Love Poetry Firework with Relaxing Music Short 24 Pakistan India", publishedAt: "2024-11-20T18:34:56Z" },
+    { id: "Wjm8IVZfUhU", title: "May your life shine as bright as these fireworks Video Sounds Effect and Music #trending #enjoy #rap", publishedAt: "2024-11-26T18:00:19Z" },
+    { id: "HceP2g3htng", title: "A thousand stars in one sky | Firework with Night Background Relaxing Music | #Shorts #song #india", publishedAt: "2024-12-01T15:23:15Z" },
+    { id: "A2eZI29yOFA", title: "All wishes come with a catch | Fireworks with Background Relaxing Music | #shorts #music #relaxing", publishedAt: "2024-12-04T18:40:17Z" },
+    { id: "zujsHe-hLsQ", title: "Exploding into a night full of memories with Fireworks and Background Relaxing Soft Music #trending", publishedAt: "2024-12-12T18:38:40Z" },
+    { id: "ZfaoRicEgT0", title: "Boom! Here's to lighting up the night | Fireworks and Relaxing Music | #poetry #shorts #2024 #music", publishedAt: "2024-12-15T18:26:46Z" },
+    { id: "Ds-64g7xJ68", title: "Fireworks Safety trips for new year's | #fireworks #fireworksnight Peppa pig pewdiepie BTS Song 2025", publishedAt: "2024-12-20T14:48:21Z" },
+    { id: "D4G0jWq3hT8", title: "Colorful Fireworks Festival #shorts #festival #viralvideo #video #newyear 2025 Taylor swift karaoke", publishedAt: "2024-12-22T15:58:18Z" },
+    { id: "tXbM6XhPFBQ", title: "Fireworks Background Relaxing Music #fireworksnight #youtube #tiktok ASMR pewdiepie BTS WWE t series", publishedAt: "2024-12-30T14:03:31Z" },
+    { id: "VJq2bPVw0Cg", title: "Colorful Fireworks with Music 2025 HD Enjoy Subscribe Channel #shorts #trending baby shark Minecraft", publishedAt: "2025-01-02T09:45:39Z" },
+    { id: "POWF8dWEBHY", title: "Willow Fireworks Night Show Background Relaxing Chill Music #night #shorts #viralvideo BTS pewdiepie", publishedAt: "2025-01-06T08:01:26Z" },
+    { id: "p3EVdVJ0u2Y", title: "Colorful Fireworks Theater Channel with Background Relaxing Chill Music 2025 pewdiepie ASMR BTS CNN", publishedAt: "2025-01-08T07:16:17Z" },
+    { id: "n0E9-CO8RMo", title: "Colorful Roman Candles Fireworks with Background Relaxing Chill Music 2025 BTS ASMR PUBG GTA USA uae", publishedAt: "2025-01-13T07:39:43Z" },
+    { id: "8sH3_Nc5VCg", title: "Japanese Korean Enjoy Colorful Fireworks with Background Music in 2025 BTS PewDiePie ASMR #shorts Hd", publishedAt: "2025-01-21T08:02:01Z" },
+    { id: "HN59vO3za4M", title: "how to make a bottle rocket - Colorful Fireworks with Background Music Short Viral Video Mr Beast hd", publishedAt: "2025-01-25T11:00:52Z" },
+    { id: "SKUT2Ph_vK8", title: "How To Make Paper Rocket Fireworks That Fly - Colorful Fireworks with Background Music Short Viral", publishedAt: "2025-01-27T10:36:29Z" },
+    { id: "6aUaFI0_PLc", title: "biggest Aerial shell fireworks in the world - Fireworks For You  #shorts #viralvideo #trending TBT", publishedAt: "2025-01-29T06:27:43Z" },
+    { id: "fxgv7XgCAxo", title: "Flying Fish Firework Show Nature and Pyrotechnics Collide ! Fireworks for you loud sound effects HD", publishedAt: "2025-01-31T12:00:24Z" },
+    { id: "qdGWYgeulLo", title: "largest firework shell in the world - Top Colorful Fireworks Entertainment with Music Enjoy and Fun", publishedAt: "2025-02-01T13:51:55Z" },
+    { id: "SHRkTDtkVvk", title: "world biggest fireworks in the Sky | #Live #Fireworks #shorts #viralvideo #youtube #trending #tiktok", publishedAt: "2025-02-03T20:56:42Z" },
+    { id: "qpNMn-M75hU", title: "Cake Fireworks sound effects - Entertainment with Music Enjoy and Fun Short #trending #shorts #viral", publishedAt: "2025-02-04T11:52:27Z" },
+    { id: "fspgmye1BRA", title: "fourth of july fireworks | #Live #Fireworks #shorts #viralvideo #youtube #trending #tiktok TBT Funny", publishedAt: "2025-02-06T11:10:50Z" },
+    { id: "31glxUol5fE", title: "Comet Fireworks Saturday Night Special Colorful Firework Enjoy with Background Music Sound #shorts", publishedAt: "2025-02-07T12:41:38Z" },
+    { id: "VI0-knEfAWk", title: "Peony flower like burst Fireworks with Background relaxing music #shorts #funny #music #trending #4k", publishedAt: "2025-02-11T07:19:43Z" },
+    { id: "3Jj1g9EXUV4", title: "How Fireworks Explode - Fireworksforyou - Check Description Link - #shorts #trending #viralvideo 4k", publishedAt: "2025-02-14T11:19:52Z" },
+    { id: "9Ae9ixya4dU", title: "High Quality Video Template Use For Free Any Social Media #shorts #beautiful #life Check Link Amazon", publishedAt: "2025-02-18T14:20:03Z" },
+    { id: "Mthhga8z-jk", title: "Beautiful White Stork Bird Visit Garden trend short growth | Tbt Mr beast pubg game play online song", publishedAt: "2025-02-21T12:52:45Z" },
+    { id: "bMRSig52jYk", title: "Golden Hour Railway Sunset | Railroad Tracks at Sunset with Relaxing Music #shorts #railway #music", publishedAt: "2025-02-24T10:55:43Z" },
+    { id: "ajlLQ7gn_TI", title: "Scenic Railway Tracks at Sunset with Background Relaxing Music | Check Link #shorts #railway #trend", publishedAt: "2025-02-26T10:42:42Z" },
+    { id: "UxH1U4EhsNk", title: "Textile in the Trees Weaver Bird Nests with Background Rock Music Enjoy #shorts #music | Link Check", publishedAt: "2025-02-27T12:28:25Z" },
+    { id: "R2jnDJSJfF8", title: "Toucans Perched Majestically in Lush Jungle 4K with Background Music #shorts #birds #love #couple", publishedAt: "2025-03-04T08:17:07Z" },
+    { id: "Nri-KWV3B2g", title: "Do You Love Chocolate ? Delicious Chocolates Mousse with Berries Morning Enjoy Relaxing with Music", publishedAt: "2025-03-07T09:04:13Z" },
+    { id: "RpZMg6j0khY", title: "I've never seen anywhere in the world as beautiful as Kashmir Valley Sunset Mountain Love Winter 4k", publishedAt: "2025-03-10T11:13:23Z" },
+    { id: "QZFAGv_kqtI", title: "Lion Uprising First Blood in the Fight for Territory #shorts #lion #video #4k", publishedAt: "2025-03-12T14:26:08Z" },
+    { id: "Q7ZURuKKCjU", title: "Piazza del Colosseo Metropolitan City of Rome Capital Italy Top 10 Places #shorts #video #reels 4k", publishedAt: "2025-03-14T18:47:26Z" },
+    { id: "yZEU-J8FAWI", title: "Greatest Fights in the Animals Of All Time Lion Tiger Gorilla Bear elephant Rhino #shorts #video 4k", publishedAt: "2025-03-17T09:17:29Z" },
+    { id: "AfKnL2BIEIk", title: "Why is Singapore city so rich? Best Places to Visit in Singapore 4k #singapore #shorts #trending fun", publishedAt: "2025-03-21T11:46:19Z" },
+    { id: "vRoyDH6mujE", title: "Puppy and Baby Having the Best Time Ever #shorts #trending Dog Mr beast pubg game funny enjoy Hd kid", publishedAt: "2025-03-23T09:24:18Z" },
+    { id: "b0i-OmHa22Y", title: "Baby Twins Videos - Funniest Cute Twins Playing Happy Kids #shorts #trending #funny #love #tiktok 4k", publishedAt: "2025-03-26T11:04:24Z" },
+    { id: "XdwE6-rrR54", title: "Jurassic Park at Universal Orlando | Dinosaur In A Park #dinosaur #trexchase #jurassicworld #shorts", publishedAt: "2025-03-29T13:13:16Z" },
+    { id: "xOC5dqEraYE", title: "Angry Bulls Fight #shorts #ytshorts #viralshorts #trendingshorts #bullwar #bullfight #bull #trending", publishedAt: "2025-04-01T07:47:38Z" },
+    { id: "xxMDsDMugSk", title: "A Minecraft Movie Final Trailer 2025 | Live Fireworks Poetry #movie #funny #cartoon #shorts #youtube", publishedAt: "2025-04-17T01:37:56Z" },
+    { id: "rYi_88GurAw", title: "China Wedding Ceremony Fireworks Display People Enjoy and Fun #shorts #trending #india Trending 4k", publishedAt: "2025-04-21T13:36:55Z" },
+    { id: "OiOuCpp3qTs", title: "Big Buffalo Class Room Videos our cute #buffalo #sound #cute #village #buffalo #shortvideos #shorts", publishedAt: "2025-05-17T12:39:56Z" },
+    { id: "vPnHlWMXr54", title: "Saturday Night Dinner Plan with Family at Alvigah Restaurant #shorts #trending #family #youtube hd", publishedAt: "2025-05-26T10:23:42Z" },
+    { id: "bQR9lrPS8ms", title: "Usa English with Pakistan Translation Funny video memes #shorts #trending #funny #india", publishedAt: "2025-06-05T11:50:08Z" },
+    { id: "wgfXH4r6aLw", title: "Sounds of birds chirping | bird eating seeds | Beautiful amazing place #shorts #love #trending Hd 4k", publishedAt: "2025-06-09T10:31:16Z" },
+    { id: "OKwNmSKey0U", title: "Bird Eat The Food | Cute Chipmunks Birds Squirrels | Shorts Movie Song | #shorts #trending #youtube", publishedAt: "2025-06-11T09:32:42Z" },
+    { id: "3yDSmJ80DHo", title: "Blue Tit Eats from UFO Feeder – Cutest Thing You’ll See Today | Must Watch #birds #shorts #trending", publishedAt: "2025-06-13T11:09:34Z" },
+    { id: "WkC-huVs5Hg", title: "Happy Father's Day Papa Right Now - Dhamal Movie - Funny Memes Video #shorts #trending #love #funny", publishedAt: "2025-06-15T10:38:22Z" },
+    { id: "dSIZBCnVMsw", title: "donald trump shocked and Bhutto Rocket | memes 2025 | Funny #shorts #trending #funny israel usa pak", publishedAt: "2025-06-16T08:21:46Z" },
+    { id: "hvHW7zIi6Vg", title: "Filter Face and without Filter image | Funny video for TikTok memes #shorts #funny #trending #4k HD", publishedAt: "2025-06-17T12:56:54Z" },
+    { id: "RJCExpWX85Q", title: "old skeleton of a married couple The wife still arguing #meme #funny #memes #Love #shorts #trending", publishedAt: "2025-06-18T08:48:14Z" },
+    { id: "P_LV-fheZyc", title: "Cristiano Ronaldo and Lionel Messi in Goat Market Funny Memes #ronaldo #messi #shorts Usa Iran news", publishedAt: "2025-06-20T08:43:46Z" },
+    { id: "tis_G0EtMcw", title: "Don't Trust Whatsapp Number and Facebook Female I'd 😁 Funny Memes Sana #funny #shorts #trending usa", publishedAt: "2025-06-22T08:46:22Z" },
+    { id: "udRSe2LpMcY", title: "Messi and Ronaldo on a Crazy Bike Ride - Funny AI Tool - Memes #shorts #funny #bike #trending", publishedAt: "2025-06-23T06:29:20Z" },
+    { id: "pLFGBOTR_9U", title: "New Stylish Look For Yo Yo Gandhi Singh - Funny Memes #shorts #funny #trending - Join YouTube & Blog", publishedAt: "2025-06-26T08:08:03Z" },
+    { id: "cyfVetlilss", title: "Public Enjoying Colorful Fireworks At Sea Side Garden with Relaxing Music #shorts #love #trending Hd", publishedAt: "2025-06-30T09:52:45Z" },
+    { id: "CKlgEysyduE", title: "Diwali Entertainment Firewrok #diwali rocket #trending #shorts #kurta #trend #fireworks HD fun", publishedAt: "2025-07-01T08:38:56Z" },
+    { id: "uhhieEv7ZOM", title: "Cristiano Ronaldo and Lionel Messi Goat Market Funny Video #football #messi #ronaldo #shorts #trend", publishedAt: "2025-07-03T08:17:00Z" },
+    { id: "0om5Av8cbVc", title: "Tropical Beach & Palm Trees on a Island, Ocean Sounds, Ocean Waves White Noise for Sleeping Relaxing", publishedAt: "2025-07-03T23:30:41Z" },
+    { id: "9Kpv_LJk_fc", title: "Magical Fireworks Show Over Water | Breathtaking Night Spectacle! | Love Romantic Night | Sub me", publishedAt: "2025-07-07T08:05:36Z" },
+    { id: "71Ak90PkHSI", title: "A dog, a cat and a hamster who gets the last treat? Funny Meme Short #cat #dog #funny #shorts #video", publishedAt: "2025-07-08T12:43:58Z" },
+    { id: "PB6nkCufER0", title: "Hilarious Cat & Dog Fun Time – Try Not to Laugh! - Subscribe me #funny #shorts #memes #cat #dog", publishedAt: "2025-07-10T12:37:26Z" },
+    { id: "lkJJjKUhApE", title: "Funniest animals Pets - cats and Dogs Live Video | Try to not Laugh | Subs My Channel #funny #shorts", publishedAt: "2025-07-12T11:41:38Z" },
+    { id: "MorWCaZ9kpM", title: "When AI Agrees With Your Wife 😂 | ChatGPT Funny Moment #shorts #funny #shorts #memes #trending", publishedAt: "2025-07-14T13:01:25Z" },
+    { id: "Be1As1IJzVA", title: "How to become a Rich Person - Poor People Be Crying 😭 #money #shorts #trending #tiktok #funny #viral", publishedAt: "2025-07-16T10:38:28Z" },
+    { id: "vhe4wTsi69k", title: "THIS MAKES ME CRY 😭😭💔💔l CAT IS SAD 🥺 🥀🥀#cat #catlover #poor#sad #kitten", publishedAt: "2025-07-17T11:57:34Z" },
+    { id: "6jk4CebiBdE", title: "Pets and Dog funny video - #humor #pets #animals #fy #cat #dog #viral #love #funny #shorts #tiktok", publishedAt: "2025-07-19T14:16:47Z" },
+    { id: "NmAGRlaRJEM", title: "Sunset painting for beginners - Beautiful Stone like a Gems Beach ⛱️ #shorts #beach #trending #love", publishedAt: "2025-07-21T09:01:10Z" },
+    { id: "203_ynalK6k", title: "Shopkeeper asking me and I am confused yeh kese hogia Bhai Funny Memes Shorts #tiktok #funny #viral", publishedAt: "2025-07-22T06:15:35Z" },
+    { id: "bDqSyeteJVc", title: "I Used Indian Army As Password - Website Said Too Weak | Funniest Internet Joke Today #funny #shorts", publishedAt: "2025-07-25T07:09:28Z" },
+    { id: "y6BjXLNVjrg", title: "Lion's Emotional Damage | Come Inside Nobody Talks to You Anyway 😭🦁 Funny Memes #shorts #funny #love", publishedAt: "2025-07-26T10:14:54Z" },
+    { id: "6LAzIPBCEp4", title: "She Uses an iPhone... And You're Still Stuck with USB 🤣 | Bat to bilkul shi ki hai", publishedAt: "2025-07-28T09:58:53Z" },
+    { id: "_kFykqe60aY", title: "Dad's Emotional Damage Moment! 😂 Everyone’s a Thief, Damn It! Funny Memes #funny #shorts #tiktok 4k", publishedAt: "2025-07-29T13:49:55Z" },
+    { id: "9pkccbBnbL8", title: "Flexed My First Card... Now I'm Getting Flooded with OTPs! 😭💳 | Funny Memes #funny #shorts #tiktok", publishedAt: "2025-07-31T11:26:23Z" },
+    { id: "9cbwgpA_7Gs", title: "He Quit His Job Over One Meeting 😂 | Hilarious Resignation Letter! Funny Memes #shorts #trending", publishedAt: "2025-08-01T13:43:50Z" },
+    { id: "54cAgJXM_hc", title: "Old Student’s Mistake Got Him Punished! 😳 Spelling Error Totally Exposed Him! - Funny Teacher #viral", publishedAt: "2025-08-04T07:09:31Z" },
+    { id: "Jqnva36Udlc", title: "Wherever You Go, Create Your Own Path | Funny Cartoon Inspiration | humorous message #viral #shorts", publishedAt: "2025-08-05T12:28:48Z" },
+    { id: "41_ldZPF3mE", title: "Tiny Trump Energy! 💥 Hilarious Memes That Broke the Internet Live | Try to not Laugh #funny #shorts", publishedAt: "2025-08-06T11:37:41Z" },
+    { id: "75ecIK7api4", title: "Karachi Vs Mohenjo-Daro don't miss end funny stories #shorts #trending #memes #viralvideo #funny hd", publishedAt: "2025-08-07T11:46:25Z" },
+    { id: "vFGMpuIsTK0", title: "Mesmerizing Fireworks Show on the Beach | Stunning Night Sky Display #shorts #funny #music #trending", publishedAt: "2025-08-08T11:06:24Z" },
+    { id: "FcsrngioglE", title: "Pakistan KFC try to Hidden Code 😜 Same Energy Scene - Funny Memes #funny #shorts Ishq foodie food 4k", publishedAt: "2025-08-11T08:30:06Z" },
+    { id: "ZZx9yaWiKdo", title: "The Most Dangerous Dialogue at Office Reception 😜 | Funny Urdu Meme | Office Board asmr mr beast 4k", publishedAt: "2025-08-13T10:23:39Z" },
+    { id: "afJilkSGd08", title: "14 August 2025 Independence Day Gift for Karachi Welcome to Pakistan 🇵🇰 Mr beast #shorts #trending", publishedAt: "2025-08-14T13:52:35Z" },
+    { id: "25hDLTAdC5c", title: "People Enjoy August Fireworks 2025 Enter The World Of Light and Laughter - #funny #summer #shorts HD", publishedAt: "2025-08-16T07:50:08Z" },
+    { id: "EbfSkP7WjLQ", title: "Healthy vs. Unhealthy Foods - Why 🤔 Subscribe YouTube Channel #trending #viral #reels #food #funny", publishedAt: "2025-08-18T08:16:14Z" },
+    { id: "sc9HK9n5wBc", title: "The entire car was destroyed but nothing happened to Ajrak. Welcome to Rain in Karachi Lahore Punjab", publishedAt: "2025-08-20T11:47:50Z" },
+    { id: "4RsIQ1aN6nU", title: "𝗕𝗿𝗲𝗮𝗸𝗶𝗻𝗴 𝗡𝗲𝘄𝘀 🚨 Indian submarine has entered Korangi Karachi after heavy rainfall Funny kenny clark", publishedAt: "2025-08-22T07:14:18Z" },
+    { id: "BpnX6AdtBE0", title: "This is the pepper that my relatives get when I succeed 🙄Subscribe My Channel Funny Pak vs Afg live", publishedAt: "2025-08-25T08:39:11Z" },
+    { id: "_5tfWL7rmSA", title: "Mission Rainfall: Karachi Version | Hollywood or Bollywood Se Bhi Zyada Dramatic! 🤯☔ kenny clark Usa", publishedAt: "2025-08-27T09:05:49Z" },
+    { id: "mV9jcSzJ_Ho", title: "More Rain, More Water 🌧️😂 After Bilawal, Maryam Nawaz’s New Dialogue | Funny Politics Meme Lahore 4k", publishedAt: "2025-08-30T11:16:36Z" },
+    { id: "H_k5hmXSm18", title: "Maryam Nawaz Explains Torrential Rain in 2025 🌧️😅 Bilawal Journey from Rain to Flood! Funny Politics", publishedAt: "2025-09-01T06:37:17Z" },
+    { id: "69ENQABVdn8", title: "World leaders joined China’s military But Pakistan Ka PM Kahan Hai? 🤔 | Funny Political Meme 2025 😂", publishedAt: "2025-09-04T08:59:00Z" },
+    { id: "U6gtj78LVNY", title: "September 5 it is. So many memories 3 idiots #shorts #funny | Boman Irani | R Madhavan | Aamir Khan", publishedAt: "2025-09-05T08:05:10Z" },
+    { id: "3EZZBPgFvR0", title: "Pain of Pakistani Generation 😭 Funny but Painful | Load Shedding Inflation War & Floods - Relatable", publishedAt: "2025-09-08T06:34:09Z" },
+    { id: "kUhs78q0GrI", title: "Red Blood Moon Stunning Night video of Lunar Eclipse 2025 From Around the World Subscribe My Channel", publishedAt: "2025-09-09T13:18:45Z" },
+    { id: "sq9_wc3MN0U", title: "Tabahi Squad in China 😂 Putin Xi Kim & Shahbaz Funny Meme Roast | Viral Political Leaders Viral 2025", publishedAt: "2025-09-11T10:14:23Z" },
+    { id: "59IVXKM4sUM", title: "When People Save Time Writing ‘ty’ 😂| Hilarious Amitabh Bachchan Meme Funny #shorts #trending Caror", publishedAt: "2025-09-12T11:36:23Z" },
+    { id: "dxM9PC47dXg", title: "5 Bouquets, 5 Addresses And Just One Note from Sir! 💔😂 | Was It True Love or Just a Game? Meme Funny", publishedAt: "2025-09-14T14:05:21Z" },
+    { id: "ywpYGKCUTLI", title: "Tabish Hashmi Reacts to Pakistan’s Loss vs India | Jang Thori Hai Match Tha! Asia Cup Reaction Viral", publishedAt: "2025-09-15T09:51:39Z" },
+    { id: "AO0wEqQyfCk", title: "People React When They're Late? Kids Rushing Men Relaxing Legends Still Sleeping Funny Shorts Sleep", publishedAt: "2025-09-17T07:54:41Z" },
+    { id: "3SmWEOHw-wE", title: "Asia Cup Mein Pakistan vs UAE Match Se Pehle Desi Shaadiyon Jaisa Mahol - Subscribe Youtube Channel", publishedAt: "2025-09-18T12:32:18Z" },
+    { id: "P1-MNiJUl_I", title: "Afg vs Sl Asia Cup 2025 Pakistan Afghanistan Hilarious Phone Call Moments Rashid Khan Cricket #bts", publishedAt: "2025-09-19T12:46:24Z" },
+    { id: "jr0C4xYutbg", title: "Rashid Khan Didn't Even Realize He Got Clean Bowled 😂 | Umpire's Savage Reaction Peachy To Dekho #4k", publishedAt: "2025-09-20T14:21:36Z" },
+    { id: "Z-m5eKljq78", title: "Farhan Gun Gesture Ignites Outrage Amid Pahalgam Attack Memories in Pak vs Ind Asia Cup 2025 #viral", publishedAt: "2025-09-22T10:26:33Z" },
+    { id: "qfi8l3XDuzU", title: "Ronaldo Copied Haris Rauf? 😂 Sufiyan Moqim Roasting CR7 🔥 Funny Sports Meme Pak vs Ind Asia Cup 2025", publishedAt: "2025-09-23T10:48:00Z" },
+    { id: "gN_twH-bb24", title: "Tum Apne Shikve Ki Baatein | Mirza Ghalib Ghazal in Urdu | Timeless Shayari Poetry 2025 #shorts #4k", publishedAt: "2025-09-25T13:56:44Z" },
+    { id: "-tkknsZVWck", title: "India vs Pakistan Asia Cup Final 2025 | Who Will Win Today’s Epic Clash - After a long time #viral", publishedAt: "2025-09-28T08:28:34Z" },
+    { id: "b2Hr2z0RpiU", title: "Ohde Se Madh-e-Naaz Ghazal - Ek khoobsurat ghazal Mirza Ghalib ki kalam se Urdu Shayari Poetry 2025", publishedAt: "2025-09-29T09:12:02Z" },
+    { id: "3JejLtZEbWk", title: "Caught on Camera: You Won’t Believe What This Butterfly Did Before Flying Away 🦋 Subscribe YouTube", publishedAt: "2025-10-01T08:52:32Z" },
+    { id: "XMz-Kui1FkU", title: "Yellow Flamingo - Sarah | No Copyright Background Music YouTube Free Download & Use Subscribe Shorts", publishedAt: "2025-10-02T14:33:31Z" },
+    { id: "csThIrkJiCs", title: "Ladybirds Mate - Rachel K Collier | NoCopyright Funky Background Music Free Download Subscribe Viral", publishedAt: "2025-10-04T11:14:20Z" },
+    { id: "wfGtCnZ8_P8", title: "Times Square Night life New York Street Walk Vlog Hindi English Travel in USA Winter 2025 #shorts 8K", publishedAt: "2025-10-06T10:23:57Z" },
+    { id: "aQllo-q_zBQ", title: "Street Scenes: New York City Streets Filled with Yellow Taxis | Subscribe Youtube", publishedAt: "2025-10-07T10:49:22Z" },
+    { id: "e4mB_mLZRQM", title: "Cute Kid Girl Smelling Red Poppy Flower in a Flower Field 🌺 | Peaceful Nature Moments Vibes #viral", publishedAt: "2025-10-08T10:48:05Z" },
+    { id: "lohOOGKpEGU", title: "Mysterious Figure Spotted on Skyscraper Roof at Twilight Caught on Camera | Subscribe Viral Shorts", publishedAt: "2025-10-09T13:42:12Z" },
+    { id: "qxBCkBKq-Lk", title: "Downtown Traffic at Night | Motor Vehicles in Motion on Main Road | Alexandr Nikulin Visuals - Viral", publishedAt: "2025-10-12T11:29:10Z" },
+    { id: "L5oTMAeBVqg", title: "People Enjoying Live Concert | Music Vibes, Dancing Crowd & Real Reactions | Viral Shorts 2025", publishedAt: "2025-10-15T10:17:19Z" },
+    { id: "vKgmtnONmFQ", title: "Don’t Quit Now 💪 | One Day It’ll All Make Sense | Motivation Shorts | Subscribe", publishedAt: "2025-10-16T11:43:18Z" },
+    { id: "9rjhTR--5o0", title: "Best Arm Day Routine for Bigger Biceps & Triceps | Full Gym Music | Motivation | Subscribe Channel", publishedAt: "2025-10-18T08:53:32Z" },
+    { id: "3ShY3llEfYc", title: "Train in Silence Win in Public | Best Motivational Video 2025 | Full Gym Workout | Subscribe YouTube", publishedAt: "2025-10-21T09:28:50Z" },
+    { id: "updZDTzSYW0", title: "Champion in the making. Subscribe YouTube Channel - Gym Motivation Music for Relaxing #inspiration", publishedAt: "2025-10-25T22:10:57Z" },
+    { id: "xKkjyBknA9o", title: "Man deadLifts - No Shortcuts Only Discipline Pain is Temporary Strength is Forever | Gym Motivation", publishedAt: "2025-10-28T07:57:23Z" },
+    { id: "Dwh1LCELHhk", title: "Would You Ride This at Sunrise? 🌅 | Hot Air Balloon in Cappadocia Turkey #Shorts", publishedAt: "2025-10-30T13:56:03Z" },
+    { id: "7hfcmn2OLFQ", title: "Colorful Hot Air Balloon Festival at Sunrise in Cappadocia Turkey - best background music for video", publishedAt: "2025-11-01T11:22:29Z" },
+    { id: "UYJC5MPQ4RE", title: "1 November 2025 | Happy Best Friendship Day | True Friendship Status | Shorts #shorts #november", publishedAt: "2025-11-01T17:13:27Z" },
+    { id: "2urULn48Syg", title: "2 November 2025 | Take a deep breath You Deserve Peace Today | Motivation Shorts #viral #life", publishedAt: "2025-11-03T07:10:08Z" },
+    { id: "5FbhjnJRnE0", title: "Relaxing Ocean Waves and Seagulls | Soothing Sounds for Deep Sleep & Meditation #music #night", publishedAt: "2025-11-04T14:02:23Z" },
+    { id: "j_8vO1DJVpE", title: "Dogs Background Music to Make Them Happy with Ocean Waves | Enter The World Of Light and Laughter 4K", publishedAt: "2025-11-05T14:11:25Z" },
+    { id: "q8GyJv3hvck", title: "A serene Saturday sunset by the beach feeling calm, refreshed, and renewed | #sunset #beach #music", publishedAt: "2025-11-08T12:57:12Z" },
+    { id: "jehlFgHMSyY", title: "Sunrise Drive - South London HiFi | Hip Hop and Rap | Funky Music | No Copyright | Use for Free live", publishedAt: "2025-11-12T00:02:54Z" },
+    { id: "KtSO4jyJies", title: "Winter Survival Life Hacks You Need to Know! Man in Snow Shows Genius Tricks | EntertheWorldofLight", publishedAt: "2025-11-12T11:29:40Z" },
+    { id: "huErJ56TruE", title: "Hilarious Story Gone Wrong! 😂 | Enter the World of Light | Funny Shorts #memes #viral", publishedAt: "2025-11-14T11:18:47Z" },
+    { id: "ZJiTdjwB1Vs", title: "Kid Art Fail Compilation 😂 | Funny Artist Story | Viral Meme Painting Workshop #funny #shorts", publishedAt: "2025-11-18T11:38:15Z" },
+    { id: "GX3yTEzctZc", title: "Stitching LOVE by Hand | Relaxing Cross Stitch ASMR & Soft Fast Music | Enter the World of Light", publishedAt: "2025-11-19T13:04:30Z" },
+    { id: "t8LF10DwYtA", title: "The Biggest Risk in Life | Taking No Risk Is the Real Risk | Motivation for Success Real Story", publishedAt: "2025-11-21T11:52:50Z" },
+    { id: "dQJ3TvHnpRg", title: "Sunday Sunset at the Beach | Relaxing Nature Sounds & Peaceful Evening Vibes #shorts", publishedAt: "2025-11-23T15:32:10Z" },
+    { id: "J8ce1vdR_Lw", title: "Sunset Lovers: Must Watch & Feel Relaxed | Peaceful Music + Epic Golden View #music #shorts", publishedAt: "2025-11-25T10:17:01Z" },
+    { id: "1j9rfEIzUx4", title: "Why Do Men Wear Rings? Psychology & Style Guide | EntertheWorldofLight | Viral Shorts", publishedAt: "2025-11-27T10:34:12Z" },
+    { id: "5oLKXLzDvOc", title: "Master The Art of Weaving | Beginner to Advanced Weaving Guide | Handloom Craft | Viral Shorts #art", publishedAt: "2025-11-28T14:34:07Z" },
+    { id: "5aaZDeH7eSo", title: "Art in Every Line: DIY Crafting Begins Here | Easy Handmade Design Tutorial for Beginners | Viral 4K", publishedAt: "2025-12-03T12:30:41Z" },
+    { id: "CE55eKRCwUQ", title: "Best Winter Aesthetic Video | Savor the Season | Relaxing Snowfalls Atmosphere 2025 | Viral Shorts", publishedAt: "2025-12-06T11:50:54Z" },
+    { id: "W_dRggPMLB8", title: "Deer Foraging in Snowy Forest - Lekin Achanak Kuch Aisa Hua Jisne Sabko Shock Kar Diya Viral Winter", publishedAt: "2025-12-09T12:26:18Z" },
+    { id: "McnC8G4tMxY", title: "Barf Mein Guzarti Yeh Train! ❄️ Switzerland Alpine Snow Train Journey | Most Scenic Train Route | 4K", publishedAt: "2025-12-10T13:46:43Z" },
+    { id: "Pt4iOA-OMY0", title: "Barf Aur Pahadon Ka Raaz - Kya Aap Tayyar Hain? ❄️🚂 | Winter Train Ride Vlog | Winter Travel 2025", publishedAt: "2025-12-12T11:36:05Z" },
+    { id: "d4LoH4GzN2c", title: "Judge Ne Kaha Order… Accused Ne Court Ko Restaurant Bana Diya 😂 Funny Viral Memes Shorts | Subscribe", publishedAt: "2025-12-16T08:17:56Z" },
+    { id: "KOj9G_t9imo", title: "Teacher Student Comedy | Sir Paper Leak Ho Gaya Tha 😂 | funny videos try not to laugh challenge", publishedAt: "2025-12-17T13:12:58Z" },
+    { id: "gP-MqhqwpZg", title: "Student vs Teacher 😂 Internet Style Joke | Funny Fake Post | Laugh Challenge #short Viral", publishedAt: "2025-12-18T14:23:02Z" },
+    { id: "2yzWRcJgEeU", title: "Shadi Mein Achanak Kya Hua? 🤣 | Funny Joke | Viral Comedy Viral Shorts | Subscribe Channel", publishedAt: "2025-12-19T14:27:38Z" },
+    { id: "gPi02Oq9et0", title: "10 Pathan Aur Kashti Ka Scene 🤣 | Pathan Comedy | Viral Funny Video | Shorts trending", publishedAt: "2025-12-21T17:16:45Z" },
+    { id: "rC5MVYeO0T4", title: "Main ne darwaaza khola.. lekin awaaz peeche se aayi | Winter Horror Story | Viral Shorts", publishedAt: "2025-12-22T13:07:48Z" },
+    { id: "-UZ0H8vcOIk", title: "Kitni Der Se Mobile? 😆 | Every Desi Mom Vs Kid Ever | #shorts #faketweet #funnytweets #funny #reels", publishedAt: "2025-12-22T15:15:00Z" },
+    { id: "9tPJKpaob48", title: "Dil Aur Dimagh Ka Rishta | Funny Fake Tweet Reels | Viral Joke Video | Shorts trending", publishedAt: "2025-12-23T11:20:20Z" },
+    { id: "x91Kh2zY5gA", title: "Gajar Ka Halwa Funny Joke 😂 | The Sweetest Way to Lose Weight | Urdu Hindi Comedy | Winter Special", publishedAt: "2025-12-24T08:40:32Z" },
+    { id: "9Ipi1wNn2pE", title: "Questions in Pakistan 😂 | Why Every Question Gets Another Question? | Pakistani Reality | Joke Viral", publishedAt: "2025-12-26T10:37:11Z" },
+    { id: "i_Du8LoV-5s", title: "Tum Pagal Ho 😂 | Pyare Ache Great Anmol Lovely | Funny Urdu Joke | Subscribe Channel", publishedAt: "2025-12-29T08:06:05Z" },
+    { id: "cLnStxq8JbU", title: "Punjabi Funny Comedy | Punjabi vs Teacher | Desi Jokes That Will Make You Laugh | Joke 2026", publishedAt: "2025-12-30T09:15:02Z" },
+    { id: "2gd553sCdSA", title: "Punjabi Aur Pathan Ki Dosti | Full Desi Comedy | Desi Jokes That Will Make You Laugh | Joke 2026", publishedAt: "2025-12-30T14:26:33Z" },
+    { id: "H1emwDbB4Qc", title: "India Pakistan Match Aur Pathan Ka Gussa 😂🔥 | Asia Cup Comedy | Joke 2026 | Viral", publishedAt: "2025-12-31T13:28:19Z" },
+    { id: "rveSlXScht0", title: "New Year 2026 Mein Ek Raaz: “ Kal Se ” Kab Aayega? 😱 | Funny Urdu Joke | Subscribe Channel #viral", publishedAt: "2026-01-01T09:07:42Z" },
+    { id: "U_403t5FGfo", title: "2025 Ke Sapne Ab 2026 Mein Yaad Dilaye Ja Rahe Hain 💔 | Reality Check | Viral Funny Joke | Subscribe", publishedAt: "2026-01-01T14:14:27Z" },
+    { id: "e3uuq0Mwy8k", title: "2025 se 2026 Mein Ek Jhut: “ Kal Se ” Kab Tk? 😱 | Funny Urdu Joke | Subscribe Channel #viral", publishedAt: "2026-01-02T11:41:15Z" },
+    { id: "PpF-7xT3jh4", title: "New Year 2026 Joke | Funny Urdu  Hindi Jokes | Subscribe Channel | Shorts Viral #viral #jokes", publishedAt: "2026-01-03T10:32:54Z" },
+    { id: "9NDjGN7ELFo", title: "Teacher Ki Advice Aur Student Ka Jawab 😆 | Exam Funny Moments | Student Life | Viral Joke 2026", publishedAt: "2026-01-04T04:30:06Z" },
+    { id: "6ZpRgAlYZD8", title: "Corporate Life Joke 😅 | Manager Ki Reality | Relatable Office Life | Funny Viral Shorts Memes", publishedAt: "2026-01-05T10:13:43Z" },
+    { id: "W1jWSANKoVo", title: "Office Life Reality 😂 | Manager Ka Sawal Aur Employee Ka Jawab | Hindi Urdu Meme | Funny Shorts", publishedAt: "2026-01-06T10:02:56Z" },
+    { id: "CtWfnka4vbA", title: "Corporate Life Funny Meme 🤣 | Gopi Babu | Funny with Laptop | Hindi Urdu Memes Viral", publishedAt: "2026-01-06T14:12:44Z" },
+    { id: "TOnMlzu0Tt8", title: "Corporate Life Funny Meme 🤣 | Office Jao Kam Karo | Jokes Hindi Urdu | Memes Viral Shorts", publishedAt: "2026-01-07T11:21:59Z" },
+    { id: "Qorxg5ppXSI", title: "Corporate Life Funny😅 | Job Sirf Paisa Deti Hai, Sukoon Nahi | HR Truth | Jokes Hindi Urdu | Memes", publishedAt: "2026-01-08T11:26:25Z" },
+    { id: "wXzKkQ_c2TQ", title: "Corporate Life Funny😅 | Job Se Kabi Time Py Ghar Nahi Gia | Reality Bitter Truth | Hindi Urdu Memes", publishedAt: "2026-01-09T12:23:49Z" },
+    { id: "d6_jBsV7lHw", title: "Corporate Life Ka Sach 😭 | Bas 5 Minute Ka Kaam 😡 | Every Employee Pain | Reality Joke Hindi Urdu", publishedAt: "2026-01-10T04:05:00Z" },
+    { id: "OLyEhzJX3XY", title: "Agar tum bhi thand me naha ke office jaate ho, toh ye reel tumhare liye hi hai Corporate Office Life", publishedAt: "2026-01-10T10:54:37Z" },
+    { id: "apbC31-Vi14", title: "Middle Class Corporate Life 😭 | Salary Aane Se Pehle Khatam | Reality Jokes Hindi Urdu Memes", publishedAt: "2026-01-11T04:15:01Z" },
+    { id: "3lBs-XxaDVM", title: "Corporate Life Funny 😅 Weekend Plan and Cancel | Every Employee Pain | Reality Joke Hindi Urdu Memes", publishedAt: "2026-01-11T14:57:39Z" },
+    { id: "THQ-_ghVXEk", title: "Kya aapka dil bhi office me roz resign karta hai? | Corporate Life Funny 😂 | Reality Joke Hindi Urdu", publishedAt: "2026-01-12T09:15:05Z" },
+    { id: "kTFGA3VHJZo", title: "Corporate Life Funny 😅 Kya Aap Bhi Monday Se Pehle Hi Thak Jate Ho? | Every Employee Pain | Reality", publishedAt: "2026-01-12T14:37:27Z" },
+    { id: "36Y3TJvF_vk", title: "Corporate Life Funny 😅 Office life ke Yeh dukh sirf job wale hi samajh sakte hain  Reality Joke Urdu", publishedAt: "2026-01-13T11:03:49Z" },
+    { id: "UoyM-mRNwfI", title: "Corporate Life Funny 😅 Office life ke Yeh dukh sirf job wale hi samajh sakte hain  Reality Joke Urdu", publishedAt: "2026-01-14T10:09:26Z" },
+    { id: "B2vqcWj3p70", title: "Urdu Hindi Love and Romantic Poetry ❤️ | Whatsapp Status | Viral Shorts 💯 #love #hindi", publishedAt: "2026-01-14T13:56:16Z" },
+    { id: "0_wDa8vlxSU", title: "Romantic Shayari For Someone Special ❤️| Urdu Hindi Love Poetry Whatsapp Status | Viral Shorts 💯", publishedAt: "2026-01-15T09:40:52Z" },
+    { id: "ftWFresR1u0", title: "Urdu Hindi Love and Romantic Poetry ❤️ | Whatsapp Status | Viral Shorts 💯 #love #hindi", publishedAt: "2026-01-16T10:30:13Z" },
+    { id: "VQfnKnFctKc", title: "Romantic night Shayari Someone Special ❤️| Urdu Hindi Love Poetry Whatsapp Status | Viral Shorts 💯", publishedAt: "2026-01-17T09:53:11Z" },
+    { id: "KCbGp_tcLLc", title: "Romantic night Shayari Someone Special ❤️| Urdu Hindi Love Poetry Whatsapp Status | Viral Shorts 💯", publishedAt: "2026-01-18T12:05:58Z" },
+    { id: "F0p9pia8Sdg", title: "Urdu Hindi Love and Romantic Poetry ❤️ | Whatsapp Status | Viral Shorts 💯 #love #hindi", publishedAt: "2026-01-19T09:34:18Z" },
+    { id: "1ZsaC_y6SBY", title: "Pyaari Si Shayari | Khoobsurat Andaz | Romantic Love Poetry Whatsapp Status ❤️ Viral Shorts #love", publishedAt: "2026-01-20T10:23:52Z" },
+    { id: "JvfUNS6B9TY", title: "Heart Touching Lines For Boys | Khamoshi | Emotional Life | Sad Poetry | Daily Status #viral #poetry", publishedAt: "2026-01-21T09:38:33Z" },
+    { id: "RCTu8NX53PE", title: "Hum Chup Is Liye Nahi 💔 | Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines | Day 1 #poetry", publishedAt: "2026-01-21T13:15:04Z" },
+    { id: "14W7b2mbCZs", title: "Day 2 | Sirf Yaadon me | Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines | Night Life #poetry", publishedAt: "2026-01-22T09:26:59Z" },
+    { id: "bwLLEM6mtU8", title: "💔 Heart Touching Poetry | Shayari That Feels Real 🥀 | #shorts", publishedAt: "2026-01-22T13:41:24Z" },
+    { id: "VgCUgrDoAR0", title: "Day 3 Muskurahat ka Matlab | Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines Night #ytshorts", publishedAt: "2026-01-23T10:45:03Z" },
+    { id: "3_0komaE2lk", title: "💔 Heart Touching Poetry | Shayari That Feels Real 🥀 | #shorts", publishedAt: "2026-01-23T12:30:05Z" },
+    { id: "Mgjtc1Sdbdg", title: "Day 4 Hum Ne Khud ko Strong | Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines Night #ytshorts", publishedAt: "2026-01-24T09:02:19Z" },
+    { id: "TJN_v5cD5tA", title: "💔 Heart Touching Poetry | Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-01-24T14:30:20Z" },
+    { id: "kK8uc64W-b8", title: "Day 5 Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines Night #ytshorts", publishedAt: "2026-01-25T02:45:07Z" },
+    { id: "hkw3m9PaVxg", title: "Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines Night #ytshorts", publishedAt: "2026-01-26T08:51:07Z" },
+    { id: "v4iz46TV9c8", title: "💔 Heart Touching Poetry | Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-01-26T14:34:49Z" },
+    { id: "j6cv26IDyL4", title: "Dard Bhari Urdu Poetry | Sad Emotional Shayari Lines Night #ytshorts", publishedAt: "2026-01-27T09:54:35Z" },
+    { id: "e8CMn_G3luI", title: "💔 Heart Touching Poetry | Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-01-27T13:54:36Z" },
+    { id: "QQLZb3mduUU", title: "Sad Emotional Shayari Urdu Lines Night Poetry Soft Background Music #ytshorts", publishedAt: "2026-01-28T09:05:04Z" },
+    { id: "9wzwH3lc3z4", title: "Sad Emotional Shayari Urdu Lines Night Poetry Soft Background Music #ytshorts", publishedAt: "2026-01-29T10:27:17Z" },
+    { id: "_KUHlHmxqR0", title: "Faiz Ahmed Faiz Sad Heart Touching Poetry Shorts Viral Soft Background Music #ytshorts", publishedAt: "2026-01-30T11:01:07Z" },
+    { id: "fsr-6QcSVEY", title: "Sad Emotional Shayari Urdu Lines Night Poetry Soft Background Music #ytshorts", publishedAt: "2026-01-31T09:15:03Z" },
+    { id: "PdthKZcPYx0", title: "Faiz Ahmed Faiz Sad Heart Touching Poetry Shorts Viral #ytshorts", publishedAt: "2026-02-01T09:49:42Z" },
+    { id: "67Nzz92Za1A", title: "Sad Emotional Shayari Urdu Lines Night Poetry Soft Background Music #ytshorts", publishedAt: "2026-02-02T10:15:49Z" },
+    { id: "CWifuBjFo6Q", title: "Sad Emotional Shayari Urdu Lines Night Poetry Soft Background Music #ytshorts", publishedAt: "2026-02-03T09:49:57Z" },
+    { id: "wxLRg6NHj-w", title: "💔 Heart Touching Poetry | Shayari That Feels Real 🥀 | #ytshorts #viralshorts", publishedAt: "2026-02-04T10:58:30Z" },
+    { id: "H59O9OyrdQk", title: "Faiz Ahmed Faiz Sad Heart Touching Poetry Shorts Viral 🥀 | #ytshorts #viralshorts", publishedAt: "2026-02-05T10:33:44Z" },
+    { id: "vIEtHQXtQ68", title: "Heart Touching Sad Poetry | Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-02-06T11:15:07Z" },
+    { id: "OOr0u9ifGM0", title: "Heart Touching Poetry | Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-02-07T11:22:58Z" },
+    { id: "X8GZUdhuo7E", title: "Heart Touching Poetry | Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-02-08T04:15:02Z" },
+    { id: "nGfaK1v4-no", title: "Faiz Ahmad Faiz Emotional Poetry in Roman Urdu Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-02-09T09:36:10Z" },
+    { id: "5U-0PohL9jM", title: "🔥Enter the World of Light & Laughter – Your daily source of good vibes! 🔥#live", publishedAt: "2026-02-10T09:02:22Z" },
+    { id: "7K9S3BbnMNs", title: "🔥Enter the World of Light & Laughter – Your daily source of good vibes! 🔥#live", publishedAt: "2026-02-10T21:39:11Z" },
+    { id: "aLTYnyIP_NA", title: "Faiz Ahmad Faiz Emotional Poetry in Roman Urdu Shayari That Feels Real 🥀 | #ytshorts", publishedAt: "2026-02-12T08:14:53Z" },
+    { id: "PeosdM2c_O8", title: "Faiz Ahmad Faiz Emotional Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-13T11:00:24Z" },
+    { id: "SgUrpJhYJ6c", title: "Faiz Ahmad Faiz Emotional Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-14T10:18:54Z" },
+    { id: "zAvGTIrTwu8", title: "Faiz Ahmad Faiz Emotional Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-16T07:20:59Z" },
+    { id: "SrK6PMJ0rHQ", title: "Faiz Ahmad Faiz Emotional Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-16T14:18:59Z" },
+    { id: "swmKPisU2g8", title: "Faiz Ahmad Faiz Sad Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-17T10:44:16Z" },
+    { id: "4f37wVf2l9Q", title: "Faiz Ahmad Faiz Sad Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-18T11:21:00Z" },
+    { id: "UoSUI3GMhhc", title: "1 Ramzan Mubarak Sehri & Iftar Timing for Karachi Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-18T13:06:25Z" },
+    { id: "yaxlaqfYLow", title: "Faiz Ahmad Faiz Sad Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-19T07:02:30Z" },
+    { id: "lhr8il5y1Yo", title: "2 Ramzan Mubarak | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-19T12:01:22Z" },
+    { id: "cKKw3551gd8", title: "Faiz Ahmad Faiz Sad Poetry in Roman Urdu Shayari That Feels Real Love 🥀 | #ytshorts", publishedAt: "2026-02-20T05:59:45Z" },
+    { id: "HkprcN5z178", title: "3 Ramzan Mubarak | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-20T13:14:23Z" },
+    { id: "Bh8y5PRR4Lo", title: "Faiz Ahmad Faiz Emotional Poetry | That Feels Real Pain 🥀 #ytshorts", publishedAt: "2026-02-21T07:50:43Z" },
+    { id: "wtw80a8OMxo", title: "4 Ramzan Mubarak | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-21T13:45:07Z" },
+    { id: "Tr5CXTEBEe4", title: "5 Ramzan Mubarak | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-22T12:56:00Z" },
+    { id: "6XrPTO17VxQ", title: "Faiz Ahmad Faiz Emotional Poetry | That Feels Real Pain 🥀 #ytshorts", publishedAt: "2026-02-23T05:48:10Z" },
+    { id: "02Q1KSRYKaQ", title: "6 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-23T09:15:00Z" },
+    { id: "N1MSr_fvaZc", title: "Ramzan 2026: 10 Scientific Faide | Roza Aapke Jism Ko Andar Se Kaise Repair Karta Hai?", publishedAt: "2026-02-23T13:45:02Z" },
+    { id: "DrQXzczXa9s", title: "Kya Ramzan Mubarak main her Ibadat ka Sawab Dugna ho jata ha ? 2026 #ytshorts #ramadan", publishedAt: "2026-02-24T06:40:56Z" },
+    { id: "v3kltFNE38o", title: "7 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-24T09:15:12Z" },
+    { id: "wKoYJz9oCfA", title: "8 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-25T07:02:42Z" },
+    { id: "RlarFw2pHzg", title: "Chhotay Amaal Bari Jaza | 10 Day Rehmat Challenge | 2026 1447H #ytshorts #ramadan", publishedAt: "2026-02-25T14:00:46Z" },
+    { id: "DxenGpxWaFs", title: "9 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-26T06:58:00Z" },
+    { id: "aHbJRXKt5w4", title: "Faiz Ahmad Faiz Emotional Sad Love Poetry | That Feels Real Pain 🥀 #ytshorts", publishedAt: "2026-02-26T12:25:00Z" },
+    { id: "iELXGhoycLE", title: "10 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-27T10:45:06Z" },
+    { id: "S0RG7HG84Us", title: "Faiz Ahmad Faiz Emotional Sad Love Poetry | That Feels Real Pain 🥀 #ytshorts", publishedAt: "2026-02-27T17:15:03Z" },
+    { id: "VwSzX8FEQ_8", title: "11 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-02-28T07:46:47Z" },
+    { id: "BNKjKwAyZpA", title: "12 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-01T11:01:24Z" },
+    { id: "qq5HY7rsUss", title: "Faiz Ahmad Faiz Emotional Sad Love Poetry | That Feels Real Pain 🥀 #ytshorts", publishedAt: "2026-03-01T16:05:02Z" },
+    { id: "3QGCYmn29r8", title: "13 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-02T05:51:38Z" },
+    { id: "tgOXHLFpvbM", title: "14 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-03T06:07:37Z" },
+    { id: "Mo-_NGYGjCk", title: "Iftar Party with Friends in Do Darya Sunset Karachi Live 2026", publishedAt: "2026-03-03T15:44:54Z" },
+    { id: "xRrrTdTnQVA", title: "Tumhari Kami ...! Faiz Ahmad Faiz Emotional Sad Love Poetry | That Feels Real Pain 🥀 #ytshorts", publishedAt: "2026-03-03T17:45:04Z" },
+    { id: "nNAsOsU98hA", title: "15 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-04T06:47:33Z" },
+    { id: "seNZy0YvF_E", title: "16 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-05T09:15:11Z" },
+    { id: "N-N-pFSY_ZE", title: "Nikkah Sunnat hai Magar | Aurat Ki Haya Aur Mard Ki Ghairat | Nikah Ka Asal Matlab | #ytshorts", publishedAt: "2026-03-05T16:15:02Z" },
+    { id: "hUckirGJWGc", title: "17 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-06T11:05:02Z" },
+    { id: "ziDZevt6Xx8", title: "Who Is Ali Khamenei ? The Supreme Leader of Iran Explained | #ytshorts #iran", publishedAt: "2026-03-06T16:15:08Z" },
+    { id: "QZXNVOMOZH0", title: "18 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-07T06:47:24Z" },
+    { id: "DRDQh9hUcDI", title: "19 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-08T11:16:33Z" },
+    { id: "S_Rd3m2A0Jk", title: "20 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-09T07:26:54Z" },
+    { id: "GRmNsGNPAjc", title: "Petrol 321 ! Sarhad Par Nahi… Mehngai Ka Pehla Missile Kitchen Par #ytshorts", publishedAt: "2026-03-09T14:15:01Z" },
+    { id: "olVTtxelS_0", title: "Woh Din Jab Iran Hamesha Ke Liye Badal Gaya: Supreme Command Ka Zawal #shorts", publishedAt: "2026-03-09T17:34:42Z" },
+    { id: "w_zTSYpfK5Y", title: "21 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-10T07:34:39Z" },
+    { id: "xbWRkGDHWrE", title: "Laylatul Qadr ( Shab e Qadr ) ki Special Powerful Dua | 21 Ramadan Mubarak 2026 #ytshorts", publishedAt: "2026-03-10T13:15:17Z" },
+    { id: "g0PffpNLtSU", title: "22 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-11T08:00:34Z" },
+    { id: "pRHxAQ6pprs", title: "Petrol 321 in Pakistan? Log Ehtijaj Ke Bajaye Tankiyan Full Karwane Nikal Aaye #ytshorts", publishedAt: "2026-03-11T14:15:17Z" },
+    { id: "gUjDn0tZV7E", title: "23 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-12T09:13:44Z" },
+    { id: "TibHT4Bf7-U", title: "Laylatul Qadr ( Shab e Qadr ) ki Special Powerful Dua | 23 Ramadan Mubarak 2026 #ytshorts", publishedAt: "2026-03-12T12:20:00Z" },
+    { id: "K57SfN8OPHs", title: "Beautiful Words #beshak​ #islamicvideo​ #islamic​ #muslim #viral #shorts​", publishedAt: "2026-03-12T16:07:13Z" },
+    { id: "go-LOizUKkQ", title: "Kya Ye Khaas Hai? Alvida Mah-e-Ramzan: Jumma Tul Wida Ki Bargah-e-Ilahi Mein Dua #viral #ytshorts", publishedAt: "2026-03-13T07:20:38Z" },
+    { id: "5v7aLjhpMu0", title: "24 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-13T13:15:01Z" },
+    { id: "pFU4cG2lGQo", title: "25 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-14T06:39:45Z" },
+    { id: "_ohX-n8JuNQ", title: "Laylatul Qadr ( Shab e Qadr ) ki Special Powerful Dua | 25 Ramadan Mubarak 2026 #ytshorts", publishedAt: "2026-03-14T13:51:00Z" },
+    { id: "OOUCkaEVkvU", title: "26 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-15T08:45:01Z" },
+    { id: "ircSaRiDvmg", title: "27 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-15T14:33:41Z" },
+    { id: "7KAVjeSVOV4", title: "Laylatul Qadr ( Shab e Qadr ) ki Special Powerful Dua | 27 Ramadan Mubarak 2026 #ytshorts #ramzan", publishedAt: "2026-03-16T12:55:00Z" },
+    { id: "z-_1esgNXKE", title: "28 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-17T06:51:37Z" },
+    { id: "cn5VAgmcTmI", title: "29 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-18T07:13:15Z" },
+    { id: "FFBFa1u9DXA", title: "Laylatul Qadr ( Shab e Qadr ) ki Special Powerful Dua | 29 Ramadan Mubarak 2026 #ytshorts #ramzan", publishedAt: "2026-03-18T14:20:00Z" },
+    { id: "iPvXuJPHnC0", title: "30 Ramzan Mubarak 2026 | Sehri & Iftar Timing for Karachi | Ramadan Kareem #ytshorts #ramadan", publishedAt: "2026-03-19T06:51:54Z" },
+    { id: "1t_8q4Y440k", title: "Takbeer-e-Tashreeq Allahu Akbar, Allahu Akbar | Eid Ul Adha Fitr 2026 #ytshorts #viral", publishedAt: "2026-03-19T11:16:00Z" },
+    { id: "5aqwUAebPkg", title: "Jumma tul Wida | Ramadan ka aakhri Juma 🤲✨ Last Friday in Ramzan Mubarak #ramzan #viral #shorts", publishedAt: "2026-03-20T06:40:13Z" },
+    { id: "w3Y6BbgKogE", title: "Eid Chand Raat Message for all | Eid Mubarak 2026 #eid #eidmubarak #shorts #viral", publishedAt: "2026-03-21T04:25:33Z" },
+    { id: "FLm78BIHIVA", title: "Special Gift For All Eid Ki Dua ❣️ Eid Mubarak 💫 Enjoy & Celebration #eid #trending #viral #gift", publishedAt: "2026-03-21T09:10:00Z" },
+    { id: "oNGDkSLdxp4", title: "Eid Mubarak Special Dua & Gift for all friends #eid #eidmubarak #shorts #viral", publishedAt: "2026-03-23T09:55:08Z" },
+    { id: "jzsochLsQ-0", title: "Eid Poetry Eid Ul Fitr 2026 | Urdu Poet #poetry #eid #viral #trending #shorts", publishedAt: "2026-03-24T18:10:30Z" },
+    { id: "Cq7OydzkCHw", title: "Kya Aap Jaante Hain? | Amazing Facts & Knowledge For All | Don’t Miss – Subscribe Now #viral #short", publishedAt: "2026-03-26T11:08:14Z" },
+    { id: "wiA3MxaaQfY", title: "Kya Aap Jaante Hain? | Amazing Facts & Knowledge For All | Don’t Miss – Subscribe Now #viral #short", publishedAt: "2026-03-28T07:37:46Z" },
+    { id: "EbsSv0APi1A", title: "Kya Aap Jaante Hain? | Amazing Facts & Knowledge For All | Don’t Miss – Subscribe Me #viral #short", publishedAt: "2026-03-29T09:41:41Z" },
+    { id: "yWqlWWpLDJs", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-03-30T06:43:02Z" },
+    { id: "1vQknjqYy8w", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-03-31T11:41:21Z" },
+    { id: "2vCNRh7FjXE", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-01T13:32:28Z" },
+    { id: "2LHNVz1uhnw", title: "April Fool ki tareekh history | Kya Aap Jaante Hain? Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-02T09:42:01Z" },
+    { id: "K36fB9DfddQ", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-03T11:06:30Z" },
+    { id: "MeGizSG00rI", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-04T12:14:16Z" },
+    { id: "g5g--6HBdjQ", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-06T07:35:12Z" },
+    { id: "s6mMTSi7Mrg", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-08T07:40:17Z" },
+    { id: "Q88S3xHIMoU", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-10T12:14:38Z" },
+    { id: "WIf1qVefs1Q", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-11T11:30:37Z" },
+    { id: "7DSeS9cwTlY", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-13T11:36:37Z" },
+    { id: "fj6yWThWDfU", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-14T13:07:32Z" },
+    { id: "gIgobGSSX5Q", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-15T11:25:55Z" },
+    { id: "Gs8jdosgm94", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-16T11:44:21Z" },
+    { id: "2AjA8j1kYLU", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-17T11:48:11Z" },
+    { id: "KofWLmg_2ZQ", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-19T13:38:18Z" },
+    { id: "XZ6m1GIBf38", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-20T19:09:39Z" },
+    { id: "GyxfJveMrkU", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-21T18:24:04Z" },
+    { id: "f8FFHq4ERic", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-23T19:02:53Z" },
+    { id: "Wfbj8Y9_264", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-25T07:12:07Z" },
+    { id: "6XVeZQ392aQ", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-04-28T18:59:50Z" },
+    { id: "G_x_ib0-oY8", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-01T11:20:52Z" },
+    { id: "U5qGTr6AKSY", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-03T09:57:39Z" },
+    { id: "Y_aqLH7W_Oc", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-05T08:29:33Z" },
+    { id: "TL12Ok0Gm9k", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-06T12:25:14Z" },
+    { id: "DSw2vq0JQRY", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-08T12:41:27Z" },
+    { id: "UMR68y8Ppg0", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-09T14:56:09Z" },
+    { id: "-de9uFEd4ek", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-12T14:03:41Z" },
+    { id: "h9EWTkHtBWc", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe Me #viral #short", publishedAt: "2026-05-13T13:00:43Z" },
+    { id: "Ktqg3qPDzkE", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-15T11:27:35Z" },
+    { id: "YkPhwcynLAg", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-17T12:25:17Z" },
+    { id: "AVZ4uvVkDCw", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-18T10:30:18Z" },
+    { id: "OB_3WG3oCdc", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-19T11:25:32Z" },
+    { id: "2bpYvBLpt-Y", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-20T11:31:44Z" },
+    { id: "Tp_L2z4BMJ4", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-21T11:34:14Z" },
+    { id: "7Drix7KkDlg", title: "Kya Aap Jaante Hain? Amazing Facts & Knowledge For All | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-22T12:55:35Z" },
+    { id: "rv-KyxNqOks", title: "Kya Aap Jaante Hain? General Islamic Knowledge History | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-24T09:51:36Z" },
+    { id: "ThLeHwqO7Gs", title: "Kya Aap Jaante Hain? General Islamic Knowledge History | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-25T14:43:21Z" },
+    { id: "HCxEJOkqobw", title: "Kya Aap Jaante Hain? General Islamic Knowledge History | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-28T10:50:52Z" },
+    { id: "4E62etKPFPk", title: "Kya Aap Jaante Hain? General Islamic Knowledge History | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-29T17:07:45Z" },
+    { id: "rhLp4g1IYks", title: "Kya Aap Jaante Hain? General Islamic Knowledge History | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-30T16:11:35Z" },
+    { id: "ix8SaEsyy-A", title: "Kya Aap Jaante Hain? General Islamic Knowledge History | Don’t Miss Out Subscribe #viral #short #4k", publishedAt: "2026-05-31T13:03:24Z" },
+    { id: "gAoY1o2moxA", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-01T10:20:51Z" },
+    { id: "zLrsioZiY04", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-02T10:23:59Z" },
+    { id: "Fze4yu9knPw", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-03T11:51:32Z" },
+    { id: "gnBEdF4LIfI", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-05T10:57:28Z" },
+    { id: "tBchpfjzUog", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-06T11:18:58Z" },
+    { id: "gwQsELAmLRU", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-08T13:47:19Z" },
+    { id: "RQyPZ0qOz1o", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-09T14:21:45Z" },
+    { id: "YVx1j2YNP08", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-10T12:25:06Z" },
+    { id: "LjmQ6keuFww", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-11T15:28:31Z" },
+    { id: "BUaGqUfcr2I", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-12T13:42:59Z" },
+    { id: "NLRlbpwAENw", title: "Kya Aap Jaante Hain? Allah Ki Qudrat Or Mojzat | Don’t Miss Out YouTube Subscribe #viral #short #4k", publishedAt: "2026-06-14T11:23:05Z" },
+    { id: "cTDF2ZgAWVE", title: "Kya Aap Jaante Hain? Muharram Ka Roza | Islamic Post All Muslim #fyp #shorts #trending #viral", publishedAt: "2026-06-18T08:15:19Z" },
+    { id: "qyTG3G4jmsM", title: "Kya Aap Jaante Hain? Muharram Ka Roza 2026 Islamic Post All Muslim #fyp #shorts #trending #viral", publishedAt: "2026-06-20T11:50:09Z" },
+    { id: "NkgT9E7esY0", title: "Kya Aap Jaante Hain? Muskurana Kesa hai - Islamic Post All Muslim #fyp #shorts #trending #viral", publishedAt: "2026-06-21T07:10:22Z" },
+    { id: "RtqNy9CehKc", title: "Kya Aap Jaante Hain? Sach Bolna Kesa hai - Islamic Post For All Muslim #fyp #shorts #trending #viral", publishedAt: "2026-06-23T08:06:48Z" },
+    { id: "6DzZlLD72kI", title: "Kya Aap Jaante Hain? Gussa Krna Kesa hai - Islamic Post For All Muslim #fyp #shorts #trending #viral", publishedAt: "2026-06-24T08:24:41Z" },
+    { id: "3e8ZUZNSTno", title: "Kya Aap Jaante Hain? Safe Rehna Kesa hai - Islamic Post For All Muslim #fyp #shorts #trending #viral", publishedAt: "2026-06-25T19:00:16Z" },
+    { id: "RDXCSwV8QhM", title: "Kya Aap Jaante Hain? Ksi Py Reham Krna Kesa hai - Islamic Post For All Muslim #muharram #fyp #shorts", publishedAt: "2026-06-26T09:18:49Z" },
+    { id: "CvpQebuXA2s", title: "Kya Aap Jaante Hain? Dua Mangne Se Kya hota hai - Islamic Post For All Muslim #muharram #fyp #shorts", publishedAt: "2026-06-27T07:57:35Z" },
+    { id: "SBe1RG5M_9M", title: "Kya Aap Jaante Hai ? Maa Ka Maqam Ktna hai - Islamic Post For All Muslim #muharram #fyp #shorts", publishedAt: "2026-06-28T14:07:31Z" },
+    { id: "BNFMpH897k4", title: "Kya Aap Jaante Hai? Logo Ko Faida Dena Kesa Hai - Islamic Post For All Muslim #muharram #fyp #shorts", publishedAt: "2026-06-29T14:54:35Z" },
+    { id: "cEChCHFQ6Ds", title: "Kya Aap Jaante Hai? Niyyat Krna Kia Hai - Islamic Post For All Muslim #muharram #fyp #shorts", publishedAt: "2026-07-02T06:55:37Z" },
+    { id: "UmR02t0UvVQ", title: "Kya Aap Jaante Hai? Dua Krna Kesa Hai - Islamic Post For All Muslim #muharram #fyp #shorts #islam", publishedAt: "2026-07-03T12:47:24Z" },
+    { id: "zdhdQmXAAVc", title: "Kya Aap Jaante Hai Walidain ki Khidmat Krna Kesa Hai Islamic Post For All Muslim #fyp #shorts #islam", publishedAt: "2026-07-08T08:25:37Z" },
+    { id: "7GXTKviS1j8", title: "Kya Aap Jaante Hai Achi Bat Krna Ya Phir Khamosh E Rehna Islamic Post For All Muslim #shorts #islam", publishedAt: "2026-07-10T13:23:22Z" },
+    { id: "89TF-eCZB8Y", title: "Kya Aap Jaante Hai Salam Krne Ka Ajr Ktna Bara Hai - Islamic Post For All Muslim #shorts #islam", publishedAt: "2026-07-11T16:04:33Z" },
+    { id: "W0RG98y9Aqw", title: "Kya Aap Jaante Hai Quran ki Tilawat Krne Ka Sawab - Islamic Post For All Muslim #shorts #islam", publishedAt: "2026-07-17T18:36:13Z" },
+    { id: "tq57E7RnZ64", title: "Kya Aap Jaante Hai Allah ki Rah Me Sadaqah Dena Kesa Hai Islamic Post For All Muslim #shorts #islam", publishedAt: "2026-07-26T11:40:28Z" },
+    { id: "zQh_Z9A-dD8", title: "Kya Aap Jaante Hai Allah ko Takabbur Wale log Pasand Nahi Islamic Post For All Muslim #shorts #islam", publishedAt: "2026-07-27T12:28:56Z" },
+    { id: "NDKCNFl93Yo", title: "Kya Aap Jaante Hai Allah ko Halal Rizq Kamane Wala Pasand Hai Islamic Post For All Muslim #islam", publishedAt: "2026-07-30T13:07:15Z" },
+    { id: "z30WQFQz6S4", title: "Kya Aap Jaante Hai - Tawakkul Ka Matlab Kia hai - Islamic Post For All Muslim #islam #Allah", publishedAt: "2026-08-03T07:13:15Z" },
+    { id: "ggH4tsW_abg", title: "Spider Man Brand New Day 2026 Clip 1", publishedAt: "2026-08-04T16:35:27Z" },
+    { id: "zEUCjACLpJ8", title: "Spider Man Brand New Day 2026 Clip 2 | Subscribe Me #spiderman", publishedAt: "2026-08-04T20:02:58Z" },
+    { id: "OH2V-PG2KKk", title: "Spider Man Brand New Day 2026 | Clip 3", publishedAt: "2026-08-06T08:59:10Z" },
+    { id: "Aqw69FoUi_k", title: "Spider Man Brand New Day 2026 | Clip 4", publishedAt: "2026-08-06T14:33:10Z" },
+    { id: "L1oAcOss8pQ", title: "Ilm Ki Fazilat | Hazrat Ali (RA) Ka Qoul | Ilm Maal Se Behtar Hai | Islamic Quotes", publishedAt: "2026-08-10T18:54:18Z" },
+    { id: "r5dHQPMhdmM", title: "Hazrat Ali RA Ne Farmaya: Sabr har mushkil ka behtareen sahara hai Islamic Knowledge For All Muslims", publishedAt: "2026-08-14T09:38:44Z" },
+    { id: "Uf1YRUxAyGk", title: "Hazrat Ali RA Ne Farmaya: Sach insaan ko izzat deta hai aur jhoot zaleel kar deta hai #islam #shorts", publishedAt: "2026-08-19T09:27:54Z" },
+    { id: "ew1mWQxy9K4", title: "Hazrat Ali RA Ne Farmaya - Sab se behtareen zeenat achha akhlaq hai #islam #shorts", publishedAt: "2026-08-21T16:06:48Z" },
+    { id: "N-0zIrSvh9U", title: "Hazrat Ali Quotes | Hazrat Ali Ke Aqwal | Khamoshi Par Aik Zabardast Qoul | Islamic Quotes #shorts", publishedAt: "2026-08-24T07:21:12Z" },
+    { id: "7AKjhQXbEb4", title: "Gussa Aqal Ka Sab Se Bara Dushman Hai | Hazrat Ali (RA) Ka Qoul | Islamic Quotes | Urdu Quotes", publishedAt: "2026-08-26T11:26:26Z" },
+    { id: "Bf--UwoZfYI", title: "Hazrat Ali RA Ne Farmaya | Allah Ke Liye Jhuk Jao Allah Buland Kar Dega Heart Touching Islamic Bayan", publishedAt: "2026-08-30T09:14:03Z" },
+    { id: "nTH3sWICvic", title: "Hazrat Ali RA Ka Qoul | Sacha Dost Wohi Hai Jo Mushkil Waqt Mein Saath De | Islamic Quotes #shorts", publishedAt: "2026-09-05T10:13:06Z" },
+    { id: "LYw8PJpvmsE", title: "Waqt Ki Qadar Karo | Hazrat Ali RA Ka Qaul | Islamic Quotes in Urdu | Waqt Ki Ahmiyat", publishedAt: "2026-09-08T19:18:37Z" },
+    { id: "9TpCUfrVZYs", title: "Dua Momin Ka Mazboot Sahara Hai | Hazrat Ali (RA) Ka Qoul ❤️ | Islamic Reminder #shorts", publishedAt: "2026-09-11T05:02:28Z" },
+    { id: "LP0RwYKVqzE", title: "Hazrat Ali (RA) Farmate Hain: Shukr Karo, Nematein Barhti Jayengi | Islamic Reminder", publishedAt: "2026-09-17T14:20:06Z" },
+    { id: "GSsRt56n8C4", title: "Hazrat Ali (RA) Ka Qoul | Har Amal Ki Khoobsurti Ikhlas Mein Hai | Islamic Hazrat Ali Quotes", publishedAt: "2026-09-21T11:38:22Z" },
+    { id: "CZLC_RvQYVU", title: "Hazrat Ali (RA) Ka Qoul | Apni Zuban Ki Hifazat Karo | Islamic Quotes | Aqwal-e-Zareen", publishedAt: "2026-09-26T07:26:52Z" },
+    { id: "W_YPLdeY9cQ", title: "Hazrat Ali (RA) Ka Qoul | Paak Dil Har Neki Ki Bunyad Hai | Islamic Quotes | Hazrat Ali Quotes", publishedAt: "2026-10-01T17:32:30Z" },
+    { id: "WRZHGeT3Vvw", title: "Hazrat Ali (RA) Ka Qoul | Insaf Har Hukumat Ki Bunyad Hai | Islamic Quotes in Urdu", publishedAt: "2026-10-07T12:49:48Z" },
+    { id: "Y3chQfrAAxM", title: "Hazrat Ali (RA) Ka Farman ❤️ | Sakhawat Rizq Kam Nahi Karti, Barkat Deti Hai | Islamic Quotes Urdu", publishedAt: "2026-10-13T12:01:21Z" },
+    { id: "-jDY3iPtUD0", title: "A for Apple 3D Drawing Short 🍎 | Learn ABC Phonics for Kids #Shorts #Phonics #LearnABC", publishedAt: "2026-10-18T18:59:38Z" }
+  ]
+};
+
+var CONFIG = MASTER_CONFIG;
+
+/**
+ * ============================================================================
+ * 1. PERSISTENT SCRIPTPROPERTIES LEDGER (CROSS-RUN PERSISTENCE & AUDIT)
+ * ============================================================================
+ */
+function getPersistentLedger() {
+  var props = PropertiesService.getScriptProperties();
+  var raw = props.getProperty("POSTED_ITEMS_LEDGER");
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    Logger.log("⚠️ Failed to parse ledger JSON, resetting: " + e.message);
+    return [];
+  }
+}
+
+function recordPublicationInLedger(record) {
+  var props = PropertiesService.getScriptProperties();
+  var ledger = getPersistentLedger();
+  record.recordedAt = new Date().toISOString();
+  ledger.push(record);
+  // Keep last 300 records
+  if (ledger.length > 300) {
+    ledger = ledger.slice(ledger.length - 300);
+  }
+  props.setProperty("POSTED_ITEMS_LEDGER", JSON.stringify(ledger));
+  Logger.log("💾 [LEDGER SAVED] Stored record: " + record.title + " | ID: " + record.id + " | Resource: " + record.resourceType);
+}
+
+/**
+ * ============================================================================
+ * 2. LIVE BLOGGER API FETCHER (READ-ONLY INSPECTION FOR DEDUPLICATION)
+ * ============================================================================
+ */
+function fetchRecentBloggerPosts(blogId) {
+  var token = ScriptApp.getOAuthToken();
+  if (!token) {
+    return { success: false, error: "OAuth Token not available", items: [] };
+  }
+  var url = "https://www.googleapis.com/blogger/v3/blogs/" + blogId + "/posts?maxResults=50&fetchBodies=true";
+  try {
+    var response = UrlFetchApp.fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+      muteHttpExceptions: true
+    });
+    var code = response.getResponseCode();
+    if (code === 200) {
+      var data = JSON.parse(response.getContentText());
+      var items = data.items || [];
+      Logger.log("📚 [BLOGGER SYNC] Retrieved " + items.length + " existing POSTS from Blog ID: " + blogId);
+      return { success: true, items: items };
+    } else {
+      var err = "Blogger API returned HTTP " + code + ": " + response.getContentText();
+      Logger.log("⚠️ [BLOGGER FETCH ERROR] " + err);
+      return { success: false, error: err, items: [] };
+    }
+  } catch (err) {
+    Logger.log("❌ [BLOGGER FETCH EXCEPTION] Failed to fetch posts: " + err.message);
+    return { success: false, error: err.message, items: [] };
+  }
+}
+
+function fetchRecentBloggerPages(blogId) {
+  var token = ScriptApp.getOAuthToken();
+  if (!token) {
+    return { success: false, error: "OAuth Token not available", items: [] };
+  }
+  var url = "https://www.googleapis.com/blogger/v3/blogs/" + blogId + "/pages?maxResults=50&fetchBodies=true";
+  try {
+    var response = UrlFetchApp.fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+      muteHttpExceptions: true
+    });
+    var code = response.getResponseCode();
+    if (code === 200) {
+      var data = JSON.parse(response.getContentText());
+      var items = data.items || [];
+      Logger.log("📄 [BLOGGER SYNC] Retrieved " + items.length + " existing STATIC PAGES from Blog ID: " + blogId);
+      return { success: true, items: items };
+    } else {
+      var err = "Blogger API returned HTTP " + code + ": " + response.getContentText();
+      Logger.log("⚠️ [BLOGGER FETCH ERROR] " + err);
+      return { success: false, error: err, items: [] };
+    }
+  } catch (err) {
+    Logger.log("❌ [BLOGGER FETCH EXCEPTION] Failed to fetch pages: " + err.message);
+    return { success: false, error: err.message, items: [] };
+  }
+}
+
+/**
+ * ============================================================================
+ * 3. FAIL-SAFE DEDUPLICATION MATCHER (LIVE BLOGGER + LEDGER)
+ * ============================================================================
+ */
+function isItemAlreadyPublished(itemMeta, isPage, targetBlogId) {
+  if (!itemMeta) return false;
+
+  var vId = (itemMeta.videoId || itemMeta.id || "").trim();
+  var vTitle = (itemMeta.title || "").toLowerCase().trim();
+  var featureId = (itemMeta.featureId || "").trim();
+
+  // 1. Check persistent script ledger (Layer 1)
+  var ledger = getPersistentLedger();
+  var todayStr = new Date().toISOString().slice(0, 10);
+  for (var k = 0; k < ledger.length; k++) {
+    var rec = ledger[k];
+    if (rec.blogId === targetBlogId && rec.resourceType === (isPage ? "PAGE" : "POST")) {
+      if (vId && rec.videoId === vId) {
+        Logger.log("⚠️ [LEDGER DUPLICATE] Video ID '" + vId + "' recorded on " + rec.recordedAt);
+        return true;
+      }
+      if (featureId && rec.featureId === featureId && rec.slotDate === todayStr) {
+        Logger.log("⚠️ [LEDGER DUPLICATE] Feature '" + featureId + "' already published today.");
+        return true;
+      }
+    }
+  }
+
+  // 2. Check live Blogger published items (Layer 2 - Fail-Closed: throws if unreachable)
+  var fetchResult = isPage ? fetchRecentBloggerPages(targetBlogId) : fetchRecentBloggerPosts(targetBlogId);
+  if (!fetchResult.success) {
+    throw new Error("Deduplication check failed (Blogger API unreachable): " + fetchResult.error + ". Aborting publication to prevent duplicate posts.");
+  }
+
+  var existingItems = fetchResult.items || [];
+  for (var i = 0; i < existingItems.length; i++) {
+    var liveItem = existingItems[i];
+    var postTitle = (liveItem.title || "").toLowerCase();
+    var postContent = (liveItem.content || "").toLowerCase();
+
+    // Check exact video ID in content or title
+    if (vId && (postContent.indexOf(vId.toLowerCase()) !== -1 || postTitle.indexOf(vId.toLowerCase()) !== -1)) {
+      Logger.log("⚠️ [BLOGGER DUPLICATE] Video ID '" + vId + "' found in live item: \"" + liveItem.title + "\"");
+      return true;
+    }
+
+    // Check exact title match
+    if (vTitle.length > 10 && postTitle.indexOf(vTitle) !== -1) {
+      Logger.log("⚠️ [BLOGGER DUPLICATE] Title match in live item: \"" + liveItem.title + "\"");
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Dynamic dependent scheduler: schedules paired Secondary Static Page 60-120 mins
+ * after the actual successful publication of the Primary Post.
+ */
+function schedulePairedSecondarySlot(handlerFunction, delayMinutes) {
+  delayMinutes = delayMinutes || (70 + Math.floor(Math.random() * 40));
+  var targetTime = new Date(Date.now() + delayMinutes * 60 * 1000);
+  
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction() === handlerFunction) {
+      ScriptApp.deleteTrigger(triggers[i]);
+    }
+  }
+
+  ScriptApp.newTrigger(handlerFunction)
+    .timeBased()
+    .at(targetTime)
+    .inTimezone("Asia/Karachi")
+    .create();
+
+  Logger.log("⏰ [DYNAMIC PAIRED TRIGGER] " + handlerFunction + " armed for " + targetTime.toISOString() + " (" + delayMinutes + " minutes from actual Primary publication).");
+}
+
+/**
+ * ============================================================================
+ * 4. SEQUENTIAL CHRONOLOGICAL SHORT SELECTOR (OLDEST -> NEWEST)
+ * ============================================================================
+ */
+function selectNextChronologicalShort() {
+  var catalog = MASTER_CONFIG.CHRONOLOGICAL_SHORTS_CATALOG || [];
+  if (!catalog || catalog.length === 0) {
+    Logger.log("❌ [CATALOG EMPTY] No shorts found in catalog.");
+    return null;
+  }
+
+  var targetBlogId = MASTER_CONFIG.PRIMARY_BLOG_ID;
+  var startIdx = (MASTER_CONFIG.START_FROM_2026_SERIES && catalog.length >= 365) ? 364 : 0;
+
+  Logger.log("🔍 [CHRONOLOGICAL SEARCH] Scanning " + catalog.length + " channel uploads starting from index " + startIdx + " (Oldest-to-Newest)...");
+
+  for (var i = startIdx; i < catalog.length; i++) {
+    var shortItem = catalog[i];
+    var videoMeta = {
+      id: shortItem.id,
+      videoId: shortItem.id,
+      title: shortItem.title,
+      publishedAt: shortItem.publishedAt,
+      thumbnailUrl: "https://i.ytimg.com/vi/" + shortItem.id + "/hqdefault.jpg",
+      shortsUrl: "https://www.youtube.com/shorts/" + shortItem.id
+    };
+
+    if (!isItemAlreadyPublished(videoMeta, false, targetBlogId)) {
+      Logger.log("🎬 [CHRONOLOGICAL SHORT SELECTED] Upload #" + (i + 1) + " of " + catalog.length);
+      Logger.log("   Title: \"" + videoMeta.title + "\"");
+      Logger.log("   ID: " + videoMeta.id + " | Date: " + videoMeta.publishedAt);
+      videoMeta.sequenceIndex = i;
+      return videoMeta;
+    } else {
+      Logger.log("   ✓ Upload #" + (i + 1) + " already published: \"" + shortItem.title + "\" (Checking next...)");
+    }
+  }
+
+  Logger.log("🛑 [ALL SHORTS PUBLISHED] All channel uploads from index " + startIdx + " have been posted!");
+  return null;
+}
+
+/**
+ * ============================================================================
+ * 5. ROTATIONAL WEB APP FEATURE SELECTOR (FOR SLOTS 1 & 2)
+ * ============================================================================
+ */
+function selectAppFeatureForSlot(slotName) {
+  var features = MASTER_CONFIG.APP_FEATURES_CATALOG || [];
+  var targetBlogId = MASTER_CONFIG.PRIMARY_BLOG_ID;
+  var ledger = getPersistentLedger();
+  var todayStr = new Date().toISOString().slice(0, 10);
+
+  // Index based on slot and day to provide natural variation
+  var dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+  var offset = slotName === "morning" ? 0 : 2; // Morning gets feature 0 or 1, afternoon gets 2 or 3
+
+  for (var i = 0; i < features.length; i++) {
+    var idx = (dayOfYear + offset + i) % features.length;
+    var candidate = features[idx];
+
+    // Check if this feature was already published today in another slot
+    var alreadyUsedToday = false;
+    for (var k = 0; k < ledger.length; k++) {
+      if (ledger[k].featureId === candidate.id && ledger[k].slotDate === todayStr) {
+        alreadyUsedToday = true;
+        break;
+      }
+    }
+
+    if (!alreadyUsedToday) {
+      Logger.log("🎯 [FEATURE SELECTED] Slot: " + slotName + " | Selected: " + candidate.name + " (" + candidate.id + ")");
+      return candidate;
+    }
+  }
+
+  // Default to first feature if all used
+  return features[0];
+}
+
+/**
+ * ============================================================================
+ * 6. HTML BUILDERS (PRIMARY POSTS & SECONDARY STATIC PAGES)
+ * ============================================================================
+ */
+function buildLuxuryArticleHtml(options) {
+  options = options || {};
+  var isKidsTheme = options.isKidsTheme || false;
+  var videoId = options.videoId || "";
+  var videoTitle = options.videoTitle || "Enter the World of Light Feature";
+  var heroThumbUrl = options.heroThumbUrl || (videoId ? ("https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg") : "");
+  var trackTitle = options.title || videoTitle;
+  var trackSubtitle = options.subtitle || "Master Urdu Haroof-e-Tahajji tracing, classical poetry recitations, child-safe moral stories and bilingual memory games.";
+  var crossLinkUrl = options.crossLinkUrl || MASTER_CONFIG.SECONDARY_BLOG_DOMAIN;
+  var crossLinkLabel = options.crossLinkLabel || "Visit Kids Light World – Educational Nursery & Phonics Directory";
+  var slotLabel = (options.slotName || "DAILY").toUpperCase();
+  var webAppUrl = MASTER_CONFIG.API_BASE_URL;
+  var brandLogoUrl = MASTER_CONFIG.BRAND_LOGO_URL;
+  var whatsappUrl = MASTER_CONFIG.WHATSAPP_CHANNEL_URL;
+  var youtubeChannelUrl = MASTER_CONFIG.YOUTUBE_URL;
+
+  var headerBg = isKidsTheme
+    ? "linear-gradient(135deg, #f59e0b 0%, #d97706 40%, #ea580c 100%)"
+    : "linear-gradient(135deg, #0284c7 0%, #0369a1 40%, #1e3a8a 100%)";
+
+  var themePillText = isKidsTheme ? "KIDS LIGHT WORLD 🦄" : "OFFICIAL APP HUB 🌟";
+  var taglineUrdu = isKidsTheme
+    ? "بچوں کی پیاری دنیا، اخلاقی کہانیاں اور ہنستی مسکراتی تعلیم"
+    : "تعلیم، تفریح، کلاسیکی ادب اور اخلاقی تربیت کا روشن جہان";
+
+  var encTitle = encodeURIComponent(trackTitle);
+  var encUrl = encodeURIComponent(crossLinkUrl);
+
+  var html = 
+    '<div style="background-color:#ffffff !important;color:#0f172a !important;font-family:Arial,sans-serif !important;line-height:1.8;max-width:820px;margin:0 auto;padding:28px 24px;border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,0.08);border:1px solid #e2e8f0;text-align:left;">' +
+
+    '<!-- 🌟 1. NATIVE BRAND BANNER WITH OFFICIAL CHANNEL LOGO -->' +
+    '<div style="background:' + headerBg + ';border-radius:22px;padding:28px 22px;margin-bottom:26px;text-align:center;color:#ffffff;box-shadow:0 12px 30px rgba(2,132,199,0.25);border:1px solid rgba(255,255,255,0.2);">' +
+      '<div style="display:inline-block;background:rgba(255,255,255,0.2);padding:5px 18px;border-radius:9999px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px;border:1px solid rgba(255,255,255,0.35);">' +
+        themePillText + ' • ' + slotLabel + ' 2026' +
+      '</div>' +
+      '<!-- OFFICIAL CHANNEL BRAND LOGO (HIGH-RES 900x900 CDN) -->' +
+      '<div style="margin-bottom:16px;text-align:center;">' +
+        '<a href="' + webAppUrl + '" target="_blank" style="display:inline-block;text-decoration:none;">' +
+          '<img src="' + brandLogoUrl + '" alt="Enter the World of Light &amp; Laughter Official Logo" style="width:115px;height:115px;border-radius:50%;box-shadow:0 10px 28px rgba(0,0,0,0.35);display:block;margin:0 auto;border:4px solid #ffffff;object-fit:cover;" />' +
+        '</a>' +
+      '</div>' +
+      '<h1 style="color:#ffffff;font-size:26px;font-weight:800;margin:0 0 8px 0;line-height:1.3;letter-spacing:-0.5px;">' +
+        'Enter the World of Light &amp; Laughter' +
+      '</h1>' +
+      '<p style="color:#f8fafc;font-size:14px;font-weight:500;margin:0 0 8px 0;opacity:0.95;">' +
+        'Interactive Bilingual Education • Classical Urdu Adab • Child-Safe Wonder' +
+      '</p>' +
+      '<div style="color:#fde047;font-size:16px;font-family:Arial,sans-serif;line-height:1.9;direction:rtl;margin-top:6px;">' +
+        taglineUrdu +
+      '</div>' +
+    '</div>';
+
+  // 🌟 2. HERO MEDIA SECTION
+  if (videoId && heroThumbUrl) {
+    html += 
+      '<!-- 🌟 2. FEATURED YOUTUBE THUMBNAIL -->' +
+      '<div style="margin-bottom:24px;text-align:center;">' +
+        '<a href="https://www.youtube.com/shorts/' + videoId + '" target="_blank" style="display:block;text-decoration:none;">' +
+          '<img src="' + heroThumbUrl + '" alt="' + trackTitle + '" style="border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,0.12);display:block;margin:0 auto;max-height:420px;width:100%;object-fit:cover;border:2px solid #f1f5f9;" />' +
+        '</a>' +
+      '</div>';
+  } else {
+    html += 
+      '<!-- 🌟 2. OFFICIAL APP SHOWCASE TABLET HERO -->' +
+      '<div style="margin-bottom:24px;text-align:center;">' +
+        '<a href="' + webAppUrl + '" target="_blank" style="display:block;text-decoration:none;">' +
+          '<img src="' + (MASTER_CONFIG.APP_SHOWCASE_TABLET_URL || MASTER_CONFIG.BRAND_LOGO_URL) + '" alt="Enter the World of Light &amp; Laughter Tablet App Showcase" style="border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,0.14);display:block;margin:0 auto;max-height:420px;width:100%;max-width:760px;object-fit:cover;border:2px solid #e2e8f0;" />' +
+        '</a>' +
+        '<div style="color:#64748b;font-size:12px;margin-top:8px;font-weight:600;">📱 Interactive Web &amp; Tablet Experience — Enter the World of Light &amp; Laughter</div>' +
+      '</div>';
+  }
+
+  // 🌟 3. ARTICLE TITLE & EXECUTIVE SUMMARY
+  html += 
+    '<!-- 🌟 3. ARTICLE TITLE & EXECUTIVE SUMMARY -->' +
+    '<div style="margin-bottom:28px;">' +
+      '<h2 style="color:#0f172a;font-size:23px;font-weight:800;line-height:1.35;margin:0 0 10px 0;">' +
+        trackTitle +
+      '</h2>' +
+      '<p style="color:#475569;font-size:15px;line-height:1.7;margin:0 0 16px 0;">' +
+        trackSubtitle +
+      '</p>' +
+      '<div style="background:#f8fafc;border-left:4px solid #0284c7;border-radius:0 14px 14px 0;padding:14px 18px;font-size:14px;color:#334155;">' +
+        '💡 <strong>Platform Overview:</strong> Enter the World of Light &amp; Laughter combines interactive browser technology with South Asian literary heritage. From guided Urdu stroke tracing and bilingual vocabulary drills to classical Allama Iqbal poetry recitations and child-safe moral fables, explore an educational ecosystem designed for young learners, students, and cultural enthusiasts.' +
+      '</div>' +
+    '</div>' +
+
+    '<!-- 🌟 4. THE 4 APP-THEMED FEATURE CARDS -->' +
+    '<div style="margin-bottom:30px;">' +
+      '<h3 style="color:#0f172a;font-size:17px;font-weight:800;margin:0 0 16px 0;display:flex;align-items:center;">' +
+        '<span style="color:#0284c7;margin-right:8px;">✦</span> Explore 4 Core Interactive Pillars' +
+      '</h3>' +
+      '<div style="display:grid;grid-template-columns:1fr;gap:14px;">' +
+
+        '<!-- CARD 1: URDU TRACING -->' +
+        '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.03);">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
+            '<span style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700;padding:3px 10px;border-radius:9999px;text-transform:uppercase;">PILLAR 1: FOUNDATION PRACTICE</span>' +
+            '<span style="font-size:18px;">✏️</span>' +
+          '</div>' +
+          '<h4 style="color:#0f172a;font-size:17px;font-weight:700;margin:0 0 6px 0;">' +
+            'Urdu Haroof-e-Tahajji &amp; Tracing Canvas <span style="color:#0284c7;font-size:14px;direction:rtl;display:inline-block;margin-left:6px;">حروفِ تہجی ٹریسنگ کینوس</span>' +
+          '</h4>' +
+          '<p style="color:#64748b;font-size:13px;line-height:1.6;margin:0 0 12px 0;">' +
+            'Full interactive HTML5 canvas tracing exercises for all 38 Urdu alphabets. Includes guided arrow animations, real-time stroke correction, native phonetics audio, and reward stars.' +
+          '</p>' +
+          '<div style="margin-bottom:12px;">' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Guided Stroke Order</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Native Audio</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-bottom:6px;">Star Rewards</span>' +
+          '</div>' +
+          '<a href="' + webAppUrl + '/learn/urdu-tracing" target="_blank" style="display:inline-block;background:#0284c7;color:#ffffff;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none;">' +
+            'Launch Tracing Engine ↗' +
+          '</a>' +
+        '</div>' +
+
+        '<!-- CARD 2: CLASSICAL POETRY -->' +
+        '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.03);">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
+            '<span style="background:#f0fdf4;color:#15803d;font-size:11px;font-weight:700;padding:3px 10px;border-radius:9999px;text-transform:uppercase;">PILLAR 2: LITERARY HERITAGE</span>' +
+            '<span style="font-size:18px;">📜</span>' +
+          '</div>' +
+          '<h4 style="color:#0f172a;font-size:17px;font-weight:700;margin:0 0 6px 0;">' +
+            'Classical Urdu Literature &amp; Rekhta Heritage <span style="color:#16a34a;font-size:14px;direction:rtl;display:inline-block;margin-left:6px;">ریختہ و ادبِ عالیہ</span>' +
+          '</h4>' +
+          '<p style="color:#64748b;font-size:13px;line-height:1.6;margin:0 0 12px 0;">' +
+            'Curated anthology of Allama Iqbal, Mirza Ghalib, and Mir Taqi Mir. Features line-by-line poetic recitations, line-by-line Urdu/English translations, useful vocabularies, and high-contrast Nastaliq layout.' +
+          '</p>' +
+          '<div style="margin-bottom:12px;">' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Line Recitation</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Audio Recitation</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-bottom:6px;">Nastaliq Heritage</span>' +
+          '</div>' +
+          '<a href="' + webAppUrl + '/literature/classical-poetry" target="_blank" style="display:inline-block;background:#16a34a;color:#ffffff;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none;">' +
+            'Explore Urdu Poetry Library ↗' +
+          '</a>' +
+        '</div>' +
+
+        '<!-- CARD 3: KIDS MORAL STORIES -->' +
+        '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.03);">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
+            '<span style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700;padding:3px 10px;border-radius:9999px;text-transform:uppercase;">PILLAR 3: KIDS SAFE HAVEN</span>' +
+            '<span style="font-size:18px;">🦄</span>' +
+          '</div>' +
+          '<h4 style="color:#0f172a;font-size:17px;font-weight:700;margin:0 0 6px 0;">' +
+            'Kids Light World &amp; 2D Animated Moral Stories <span style="color:#d97706;font-size:14px;direction:rtl;display:inline-block;margin-left:6px;">بچوں کی پیاری دنیا</span>' +
+          '</h4>' +
+          '<p style="color:#64748b;font-size:13px;line-height:1.6;margin:0 0 12px 0;">' +
+            'Wholesome 2D animated bedtime tales, animal adventures, interactive animal sounds, and a recognizable Safety First screen time lock with single-click parent gate.' +
+          '</p>' +
+          '<div style="margin-bottom:12px;">' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">2D Animated Tales</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Parent Security Lock</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-bottom:6px;">Safety-1st Audio</span>' +
+          '</div>' +
+          '<a href="' + webAppUrl + '/kids/animated-stories" target="_blank" style="display:inline-block;background:#d97706;color:#ffffff;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none;">' +
+            'Enter Kids Light World ↗' +
+          '</a>' +
+        '</div>' +
+
+        '<!-- CARD 4: COGNITIVE MIND GYM -->' +
+        '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.03);">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
+            '<span style="background:#ccfbf1;color:#0f766e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:9999px;text-transform:uppercase;">PILLAR 4: COGNITIVE SKILLS</span>' +
+            '<span style="font-size:18px;">🧠</span>' +
+          '</div>' +
+          '<h4 style="color:#0f172a;font-size:17px;font-weight:700;margin:0 0 6px 0;">' +
+            'Interactive Mind Gym &amp; Bilingual Quizzes <span style="color:#0d9488;font-size:14px;direction:rtl;display:inline-block;margin-left:6px;">ذہنی آزمائش اور کوئز</span>' +
+          '</h4>' +
+          '<p style="color:#64748b;font-size:13px;line-height:1.6;margin:0 0 12px 0;">' +
+            'Cognitive exercises, root-language word pairing, memory match games, daily challenge streaks, and unlockable achievement badges.' +
+          '</p>' +
+          '<div style="margin-bottom:12px;">' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Bilingual Memory Grids</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:6px;margin-bottom:6px;">Streak Counter &amp; XP</span>' +
+            '<span style="display:inline-block;background:#ffffff;border:1px solid #cbd5e1;color:#475569;font-size:11px;padding:3px 8px;border-radius:6px;margin-bottom:6px;">Icon Badges</span>' +
+          '</div>' +
+          '<a href="' + webAppUrl + '/quizzes/mind-gym" target="_blank" style="display:inline-block;background:#0d9488;color:#ffffff;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none;">' +
+            'Play Mind Gym Games ↗' +
+          '</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  // 🌟 5. YOUTUBE SHORTS SPOTLIGHT
+  if (videoId) {
+    html += 
+      '<!-- 🌟 5. YOUTUBE SHORTS SPOTLIGHT -->' +
+      '<div style="background:#0f172a;border-radius:20px;padding:26px 20px;margin-bottom:28px;text-align:center;color:#ffffff;box-shadow:0 12px 30px rgba(15,23,42,0.3);">' +
+        '<div style="display:inline-block;background:#dc2626;color:#ffffff;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 14px;border-radius:9999px;text-transform:uppercase;margin-bottom:12px;">' +
+          '▶ OFFICIAL YOUTUBE SHORT' +
+        '</div>' +
+        '<h3 style="color:#ffffff;font-size:17px;font-weight:700;margin:0 0 16px 0;line-height:1.4;">' +
+          videoTitle +
+        '</h3>' +
+        '<div style="max-width:320px;margin:0 auto 18px auto;border-radius:16px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.5);border:2px solid #334155;aspect-ratio:9/16;background:#000000;">' +
+          '<iframe src="https://www.youtube.com/embed/' + videoId + '?rel=0&modestbranding=1" title="' + videoTitle + '" style="width:100%;height:100%;border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' +
+        '</div>' +
+        '<div>' +
+          '<a href="' + youtubeChannelUrl + '?sub_confirmation=1" target="_blank" style="display:inline-block;background:#dc2626;color:#ffffff;font-size:13px;font-weight:800;padding:10px 22px;border-radius:9999px;text-decoration:none;box-shadow:0 4px 14px rgba(220,38,38,0.4);">' +
+            'Subscribe on YouTube @EntertheWorldofLight ↗' +
+          '</a>' +
+        '</div>' +
+      '</div>';
+  }
+
+  // 🌟 6. OFFICIAL WHATSAPP CHANNEL JOIN CARD
+  html += 
+    '<!-- 🌟 6. OFFICIAL WHATSAPP CHANNEL JOIN CARD -->' +
+    '<div style="background:linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%);border-radius:20px;padding:26px 22px;margin-bottom:28px;text-align:center;color:#ffffff;box-shadow:0 10px 25px rgba(5,150,105,0.25);border:1px solid rgba(255,255,255,0.2);">' +
+      '<div style="font-size:26px;margin-bottom:8px;">📢</div>' +
+      '<h3 style="color:#ffffff;font-size:19px;font-weight:800;margin:0 0 6px 0;">' +
+        'Join Our Official WhatsApp Channel' +
+      '</h3>' +
+      '<p style="color:#d1fae5;font-size:13px;margin:0 0 16px 0;line-height:1.6;max-width:560px;margin-left:auto;margin-right:auto;">' +
+        'Receive daily Urdu lessons, animated videos, bedtime moral stories and interactive learning challenges directly on WhatsApp.' +
+      '</p>' +
+      '<a href="' + whatsappUrl + '" target="_blank" style="display:inline-block;background:#ffffff;color:#047857;padding:11px 26px;border-radius:9999px;font-size:14px;font-weight:800;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">' +
+        'Follow Official WhatsApp Channel ↗' +
+      '</a>' +
+    '</div>' +
+
+    '<!-- 🌟 7. PERMANENT UNIVERSAL SHARE BUTTONS (SECTION 7.4 COMPLIANT) -->' +
+    '<div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:18px;padding:20px 18px;margin-bottom:24px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,0.04);">' +
+      '<div style="color:#475569;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">' +
+        '📢 SHARE THIS GUIDE WITH FRIENDS &amp; FAMILY' +
+      '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">' +
+        '<a href="https://api.whatsapp.com/send?text=' + encTitle + '%20' + encUrl + '" target="_blank" style="display:inline-block;background:#25D366;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">WhatsApp</a>' +
+        '<a href="https://www.facebook.com/sharer/sharer.php?u=' + encUrl + '" target="_blank" style="display:inline-block;background:#1877F2;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Facebook</a>' +
+        '<a href="https://www.instagram.com" target="_blank" style="display:inline-block;background:#E4405F;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Instagram</a>' +
+        '<a href="https://pinterest.com/pin/create/button/?url=' + encUrl + '&description=' + encTitle + '" target="_blank" style="display:inline-block;background:#BD081C;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Pinterest</a>' +
+        '<a href="https://www.tiktok.com" target="_blank" style="display:inline-block;background:#000000;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">TikTok</a>' +
+        '<a href="https://twitter.com/intent/tweet?text=' + encTitle + '&url=' + encUrl + '" target="_blank" style="display:inline-block;background:#000000;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Twitter</a>' +
+        '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + encUrl + '" target="_blank" style="display:inline-block;background:#0A66C2;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">LinkedIn</a>' +
+        '<a href="https://t.me/share/url?url=' + encUrl + '&text=' + encTitle + '" target="_blank" style="display:inline-block;background:#229ED9;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Telegram</a>' +
+        '<a href="https://reddit.com/submit?url=' + encUrl + '&title=' + encTitle + '" target="_blank" style="display:inline-block;background:#FF4500;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Reddit</a>' +
+      '</div>' +
+    '</div>' +
+
+    '<!-- 🌟 8. OFFICIAL JOIN US & STAY CONNECTED BUTTONS -->' +
+    '<div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:18px;padding:20px 18px;margin-bottom:24px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,0.04);">' +
+      '<div style="color:#475569;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">' +
+        '✨ JOIN US &amp; STAY CONNECTED' +
+      '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">' +
+        '<a href="' + youtubeChannelUrl + '?sub_confirmation=1" target="_blank" style="display:inline-block;background:#ea4335;color:#ffffff;padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">📺 YouTube Channel</a>' +
+        '<a href="' + whatsappUrl + '" target="_blank" style="display:inline-block;background:#059669;color:#ffffff;padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">💬 WhatsApp Channel</a>' +
+        '<a href="' + webAppUrl + '" target="_blank" style="display:inline-block;background:#0284c7;color:#ffffff;padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">🌐 Web App Portal</a>' +
+      '</div>' +
+    '</div>' +
+
+    '<!-- 🌟 9. PRIMARY APP LAUNCH CALL-TO-ACTION -->' +
+    '<div style="text-align:center;margin-bottom:26px;">' +
+      '<a href="' + webAppUrl + '" target="_blank" style="display:inline-block;background:linear-gradient(135deg, #0284c7 0%, #4338ca 100%);color:#ffffff;padding:14px 34px;border-radius:9999px;font-size:15px;font-weight:800;text-decoration:none;box-shadow:0 8px 22px rgba(2,132,199,0.35);letter-spacing:0.5px;">' +
+        '🚀 Launch Interactive Web Portal Now' +
+      '</a>' +
+    '</div>' +
+
+    '<!-- 🌟 10. COMPULSORY RECIPROCAL SISTER BLOG FOOTER (0% PHONE NUMBERS) -->' +
+    '<div style="background:#f8fafc;border-top:2px solid #e2e8f0;padding:18px 16px;border-radius:14px;text-align:center;font-size:12px;color:#64748b;line-height:1.7;">' +
+      '🌟 <strong>Explore Our Sister Portal:</strong> <a href="' + crossLinkUrl + '" target="_blank" style="color:#0284c7;font-weight:700;text-decoration:none;">' + crossLinkLabel + ' ↗</a>' +
+      '<br />' +
+      'Published by <strong>Enter the World of Light &amp; Laughter</strong> • 2026 Production Edition • All Rights Reserved.' +
+    '</div>' +
+
+    '<!-- 🌟 11. JSON-LD STRUCTURED SCHEMA -->' +
+    '<script type="application/ld+json">' +
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": videoId ? "VideoObject" : "Article",
+      "headline": trackTitle,
+      "description": trackSubtitle,
+      "thumbnailUrl": heroThumbUrl || brandLogoUrl,
+      "author": {
+        "@type": "Organization",
+        "name": "Enter the World of Light & Laughter",
+        "url": MASTER_CONFIG.PRIMARY_BLOG_DOMAIN
+      }
+    }) +
+    '</script>' +
+    '</div>';
+
+  return html;
+}
+
+/**
+ * Secondary Static Page Builder (Permanent Educational Guides for Kids Blog)
+ */
+function buildStaticPageHtml(options) {
+  options = options || {};
+  var title = options.title || "Kids Educational Guide & Practical Syllabus";
+  var takeaway = options.takeaway || "Practical parenting and student learning tips.";
+  var bodyContent = options.bodyContent || "";
+  var primaryBlogUrl = MASTER_CONFIG.PRIMARY_BLOG_DOMAIN;
+  var webAppUrl = MASTER_CONFIG.API_BASE_URL;
+  var brandLogoUrl = MASTER_CONFIG.BRAND_LOGO_URL;
+  var whatsappUrl = MASTER_CONFIG.WHATSAPP_CHANNEL_URL;
+  var encTitle = encodeURIComponent(title);
+  var encUrl = encodeURIComponent(primaryBlogUrl);
+
+  var html = 
+    '<div style="background-color:#ffffff !important;color:#0f172a !important;font-family:Arial,sans-serif !important;line-height:1.8;max-width:820px;margin:0 auto;padding:28px 24px;border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,0.08);border:1px solid #e2e8f0;text-align:left;">' +
+    '<!-- STATIC PAGE HEADER -->' +
+    '<div style="background:linear-gradient(135deg, #059669 0%, #047857 40%, #065f46 100%);border-radius:22px;padding:26px 20px;margin-bottom:26px;text-align:center;color:#ffffff;box-shadow:0 12px 30px rgba(5,150,105,0.25);">' +
+      '<div style="display:inline-block;background:rgba(255,255,255,0.2);padding:5px 18px;border-radius:9999px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;">' +
+        'PERMANENT CURRICULUM GUIDE • KIDS LIGHT WORLD' +
+      '</div>' +
+      '<div style="margin-bottom:14px;text-align:center;">' +
+        '<img src="' + brandLogoUrl + '" alt="Kids Light World" style="width:90px;height:90px;border-radius:50%;box-shadow:0 8px 22px rgba(0,0,0,0.3);display:block;margin:0 auto;border:3px solid #ffffff;object-fit:cover;" />' +
+      '</div>' +
+      '<h1 style="color:#ffffff;font-size:24px;font-weight:800;margin:0 0 8px 0;line-height:1.3;">' +
+        title +
+      '</h1>' +
+      '<p style="color:#d1fae5;font-size:14px;margin:0;">' +
+        takeaway +
+      '</p>' +
+    '</div>' +
+
+    '<!-- APP SHOWCASE TABLET HERO -->' +
+    '<div style="margin-bottom:24px;text-align:center;">' +
+      '<a href="' + primaryBlogUrl + '" target="_blank" style="display:block;text-decoration:none;">' +
+        '<img src="' + (MASTER_CONFIG.APP_SHOWCASE_TABLET_URL || MASTER_CONFIG.BRAND_LOGO_URL) + '" alt="Kids Light World Interactive App Suite" style="border-radius:18px;box-shadow:0 10px 26px rgba(0,0,0,0.1);display:block;margin:0 auto;max-height:360px;width:100%;max-width:720px;object-fit:cover;border:2px solid #e2e8f0;" />' +
+      '</a>' +
+      '<div style="color:#64748b;font-size:12px;margin-top:6px;font-weight:600;">🎨 Official Digital Learning Companion &amp; Practice Canvas</div>' +
+    '</div>' +
+
+    '<!-- VALUE-FIRST BODY CONTENT -->' +
+    '<div style="margin-bottom:30px;font-size:15px;color:#334155;line-height:1.8;">' +
+      bodyContent +
+    '</div>' +
+
+    '<!-- COMPULSORY RECIPROCAL LINK BACK TO MAIN PRIMARY HUB -->' +
+    '<div style="background:#f0f9ff;border:2px dashed #0284c7;border-radius:18px;padding:22px 20px;margin-bottom:26px;text-align:center;">' +
+      '<div style="font-size:24px;margin-bottom:6px;">🌟</div>' +
+      '<h4 style="color:#0369a1;font-size:16px;font-weight:800;margin:0 0 8px 0;">' +
+        'Access the Complete Interactive App &amp; Classical Literature Hub' +
+      '</h4>' +
+      '<p style="color:#475569;font-size:13px;line-height:1.6;margin:0 0 16px 0;">' +
+        'Practice live stroke tracing on the interactive digital canvas, explore Allama Iqbal &amp; Mirza Ghalib recitations, and test your skills in the bilingual Mind Gym.' +
+      '</p>' +
+      '<a href="' + primaryBlogUrl + '" target="_blank" style="display:inline-block;background:#0284c7;color:#ffffff;padding:11px 24px;border-radius:9999px;font-size:13px;font-weight:800;text-decoration:none;">' +
+        'Visit Main App Hub: Enter the World of Light &amp; Laughter ↗' +
+      '</a>' +
+    '</div>' +
+
+    '<!-- PERMANENT UNIVERSAL SHARE BUTTONS -->' +
+    '<div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:18px;padding:20px 18px;margin-bottom:24px;text-align:center;">' +
+      '<div style="color:#475569;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">' +
+        '📢 SHARE THIS PERMANENT GUIDE' +
+      '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">' +
+        '<a href="https://api.whatsapp.com/send?text=' + encTitle + '%20' + encUrl + '" target="_blank" style="display:inline-block;background:#25D366;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">WhatsApp</a>' +
+        '<a href="https://www.facebook.com/sharer/sharer.php?u=' + encUrl + '" target="_blank" style="display:inline-block;background:#1877F2;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Facebook</a>' +
+        '<a href="https://pinterest.com/pin/create/button/?url=' + encUrl + '&description=' + encTitle + '" target="_blank" style="display:inline-block;background:#BD081C;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Pinterest</a>' +
+        '<a href="https://twitter.com/intent/tweet?text=' + encTitle + '&url=' + encUrl + '" target="_blank" style="display:inline-block;background:#000000;color:#ffffff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;">Twitter</a>' +
+      '</div>' +
+    '</div>' +
+
+    '<!-- FOOTER COPYRIGHT -->' +
+    '<div style="border-top:1px solid #e2e8f0;padding-top:16px;text-align:center;font-size:12px;color:#94a3b8;">' +
+      'Published by <strong>Kids Light World</strong> • Permanent Static Reference • 0% Personal Phone Numbers.' +
+    '</div>' +
+    '</div>';
+
+  return html;
+}
+
+/**
+ * ============================================================================
+ * 7. CORE BLOGGER API PUBLISHER (POSTS VS PAGES SEPARATION)
+ * ============================================================================
+ */
+function publishBloggerItem(blogId, title, content, labels, isPage) {
+  var baseUrl = "https://www.googleapis.com/blogger/v3/blogs/" + blogId + (isPage ? "/pages" : "/posts");
+  var token = ScriptApp.getOAuthToken();
+
+  var payload = {
+    title: title,
+    content: content
+  };
+
+  if (!isPage && labels && labels.length) {
+    payload.labels = labels;
+  }
+
+  var response = UrlFetchApp.fetch(baseUrl, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+
+  var code = response.getResponseCode();
+  var resText = response.getContentText();
+
+  if (code >= 200 && code < 300) {
+    var json = JSON.parse(resText);
+    Logger.log("🎉 [SUCCESS] " + (isPage ? "Static Page" : "Blog Post") + " published successfully!");
+    Logger.log("🆔 ID: " + json.id);
+    Logger.log("🔗 URL: " + json.url);
+    return json;
+  } else {
+    Logger.log("❌ [BLOGGER ERROR] HTTP " + code + ": " + resText);
+    throw new Error("Blogger API Error (" + code + "): " + resText);
+  }
+}
+
+// Backward compatibility alias
+function publishItem(blogId, title, content, labels, isPage) {
+  return publishBloggerItem(blogId, title, content, labels, isPage);
+}
+
+/**
+ * ============================================================================
+ * 8. THE 6 PRIMARY & SECONDARY DAILY SLOTS
+ * ============================================================================
+ */
+
+// SLOT 1: Primary Blog 1 — Subah (Morning App Feature Post)
+function publishPrimarySlot1_MorningPost() {
+  Logger.log("▶️ [SLOT 1] Starting Primary Blog 1 Morning Post (Web App Feature Deep-Dive)...");
+  var feature = selectAppFeatureForSlot("morning");
+  var blogId = MASTER_CONFIG.PRIMARY_BLOG_ID;
+
+  var title = feature.name + " – Enter the World of Light & Laughter (MORNING 2026 Edition)";
+  var subtitle = feature.summary;
+
+  var checkMeta = {
+    featureId: feature.id,
+    title: title
+  };
+
+  if (isItemAlreadyPublished(checkMeta, false, blogId)) {
+    Logger.log("🛑 [SLOT 1 SKIPPED] Primary Morning Post already published today. Skipping duplicate.");
+    return { skipped: true, reason: "Duplicate prevented" };
+  }
+
+  var html = buildLuxuryArticleHtml({
+    slotName: "morning",
+    title: title,
+    subtitle: subtitle,
+    isKidsTheme: false,
+    crossLinkUrl: MASTER_CONFIG.SECONDARY_BLOG_DOMAIN,
+    crossLinkLabel: "Explore Kids Light World – Educational Nursery & Phonics Directory"
+  });
+
+  var res = publishBloggerItem(blogId, title, html, ["Web App Hub", "Urdu Tracing", "App Features", "Morning Edition"], false);
+
+  recordPublicationInLedger({
+    slot: "primary_morning",
+    slotDate: new Date().toISOString().slice(0, 10),
+    resourceType: "POST",
+    blogId: blogId,
+    featureId: feature.id,
+    title: title,
+    id: res.id,
+    url: res.url
+  });
+
+  return res;
+}
+
+// SLOT 2: Primary Blog 2 — Dopahar (Afternoon Distinct App Pillar Post)
+function publishPrimarySlot2_AfternoonPost() {
+  Logger.log("▶️ [SLOT 2] Starting Primary Blog 2 Afternoon Post (Distinct App Pillar)...");
+  var feature = selectAppFeatureForSlot("afternoon");
+  var blogId = MASTER_CONFIG.PRIMARY_BLOG_ID;
+
+  var title = feature.name + " & Rekhta Heritage – Master Syllabus (AFTERNOON 2026 Edition)";
+  var subtitle = feature.summary;
+
+  var checkMeta = {
+    featureId: feature.id,
+    title: title
+  };
+
+  if (isItemAlreadyPublished(checkMeta, false, blogId)) {
+    Logger.log("🛑 [SLOT 2 SKIPPED] Primary Afternoon Post already published today. Skipping duplicate.");
+    return { skipped: true, reason: "Duplicate prevented" };
+  }
+
+  var html = buildLuxuryArticleHtml({
+    slotName: "afternoon",
+    title: title,
+    subtitle: subtitle,
+    isKidsTheme: false,
+    crossLinkUrl: MASTER_CONFIG.SECONDARY_BLOG_DOMAIN,
+    crossLinkLabel: "Explore Kids Light World – Educational Nursery & Phonics Directory"
+  });
+
+  var res = publishBloggerItem(blogId, title, html, ["Classical Literature", "Bilingual Education", "App Features", "Afternoon Edition"], false);
+
+  recordPublicationInLedger({
+    slot: "primary_afternoon",
+    slotDate: new Date().toISOString().slice(0, 10),
+    resourceType: "POST",
+    blogId: blogId,
+    featureId: feature.id,
+    title: title,
+    id: res.id,
+    url: res.url
+  });
+
+  return res;
+}
+
+// SLOT 3: Primary Blog 3 — Shaam (Evening YouTube Short Deep-Dive Post)
+function publishPrimarySlot3_EveningPost() {
+  Logger.log("▶️ [SLOT 3] Starting Primary Blog 3 Evening Post (Chronological YouTube Short Deep-Dive)...");
+  var video = selectNextChronologicalShort();
+  if (!video) {
+    Logger.log("🛑 [SLOT 3 SKIPPED] No unprocessed shorts found or all shorts already published.");
+    return { skipped: true, reason: "No unprocessed shorts" };
+  }
+
+  var blogId = MASTER_CONFIG.PRIMARY_BLOG_ID;
+  var cleanHeading = video.title.replace(/#\w+/g, "").replace(/\s+/g, " ").trim();
+  var title = cleanHeading + " – Enter the World of Light & Laughter (EVENING 2026 Edition)";
+  var subtitle = "Official video deep-dive featuring authentic Urdu wisdom, moral teachings, and interactive web application resources.";
+
+  var html = buildLuxuryArticleHtml({
+    slotName: "evening",
+    title: title,
+    subtitle: subtitle,
+    isKidsTheme: false,
+    videoId: video.id,
+    videoTitle: cleanHeading,
+    heroThumbUrl: video.thumbnailUrl,
+    crossLinkUrl: MASTER_CONFIG.SECONDARY_BLOG_DOMAIN,
+    crossLinkLabel: "View Full Evergreen Kids Syllabus Guide"
+  });
+
+  var res = publishBloggerItem(blogId, title, html, ["YouTube Shorts", "Moral Guidance", "Urdu Wisdom", "Evening Edition"], false);
+
+  recordPublicationInLedger({
+    slot: "primary_evening",
+    slotDate: new Date().toISOString().slice(0, 10),
+    resourceType: "POST",
+    blogId: blogId,
+    videoId: video.id,
+    sequenceIndex: video.sequenceIndex,
+    title: title,
+    id: res.id,
+    url: res.url
+  });
+
+  return res;
+}
+
+// SLOT 4: Secondary Page 1 — Subah (Morning Permanent Static Page on Kids Blog)
+function publishSecondarySlot1_MorningPage() {
+  Logger.log("▶️ [SLOT 4] Starting Secondary Page 1 (Morning Permanent Static Guide on Kids Blog)...");
+  var blogId = MASTER_CONFIG.SECONDARY_BLOG_ID;
+  var feature = selectAppFeatureForSlot("morning");
+
+  var title = feature.secondaryGuideTitle;
+  var takeaway = feature.secondaryGuideTakeaway;
+
+  var checkMeta = {
+    featureId: feature.id + "_GUIDE",
+    title: title
+  };
+
+  if (isItemAlreadyPublished(checkMeta, true, blogId)) {
+    Logger.log("🛑 [SLOT 4 SKIPPED] Secondary Morning Page already published. Skipping duplicate.");
+    return { skipped: true, reason: "Duplicate prevented" };
+  }
+
+  var bodyContent = 
+    '<h3>1. The Golden Rule of Early Urdu Stroke Practice</h3>' +
+    '<p>When young learners begin tracing Urdu alphabets like Alif, Bay, and Pay, motor memory develops through deliberate repetition rather than speed. Practice in brief 5 to 7 minute sessions with visual arrows to avoid cognitive fatigue.</p>' +
+    '<h3>2. Phonics Sound Pairing</h3>' +
+    '<p>Never teach the letter shape in isolation. Pair each stroke with its native sound and a high-frequency everyday object (e.g. ب - بلی - Billi). This anchors visual recognition with auditory reinforcement.</p>' +
+    '<h3>3. Interactive Digital Reinforcement</h3>' +
+    '<p>Encourage children to trace the stroke on our interactive digital canvas, where instant feedback and star rewards build self-motivation without the frustration of erasing paper mistakes.</p>';
+
+  var html = buildStaticPageHtml({
+    title: title,
+    takeaway: takeaway,
+    bodyContent: bodyContent
+  });
+
+  var res = publishBloggerItem(blogId, title, html, [], true);
+
+  recordPublicationInLedger({
+    slot: "secondary_morning",
+    slotDate: new Date().toISOString().slice(0, 10),
+    resourceType: "PAGE",
+    blogId: blogId,
+    featureId: feature.id + "_GUIDE",
+    title: title,
+    id: res.id,
+    url: res.url
+  });
+
+  return res;
+}
+
+// SLOT 5: Secondary Page 2 — Dopahar (Afternoon Permanent Static Page on Kids Blog)
+function publishSecondarySlot2_AfternoonPage() {
+  Logger.log("▶️ [SLOT 5] Starting Secondary Page 2 (Afternoon Permanent Static Guide on Kids Blog)...");
+  var blogId = MASTER_CONFIG.SECONDARY_BLOG_ID;
+  var feature = selectAppFeatureForSlot("afternoon");
+
+  var title = feature.secondaryGuideTitle;
+  var takeaway = feature.secondaryGuideTakeaway;
+
+  var checkMeta = {
+    featureId: feature.id + "_GUIDE",
+    title: title
+  };
+
+  if (isItemAlreadyPublished(checkMeta, true, blogId)) {
+    Logger.log("🛑 [SLOT 5 SKIPPED] Secondary Afternoon Page already published. Skipping duplicate.");
+    return { skipped: true, reason: "Duplicate prevented" };
+  }
+
+  var bodyContent = 
+    '<h3>1. Nurturing Cultural Literacy in Modern Education</h3>' +
+    '<p>Introducing classical Urdu literature and poetry to young minds builds rich vocabulary and emotional maturity. Selected couplets from Allama Iqbal teach self-belief, courage, and perseverance in simple, musical language.</p>' +
+    '<h3>2. Daily Reflection Prompts</h3>' +
+    '<p>Spend 10 minutes at the dining table discussing one simple poetic line. Ask your children what they think the poet felt when writing it, and how they can apply that moral courage at school today.</p>' +
+    '<h3>3. Bilingual Memory Drills</h3>' +
+    '<p>Reinforce conceptual understanding by exploring bilingual English translations and cognitive root-word quizzes on our web platform.</p>';
+
+  var html = buildStaticPageHtml({
+    title: title,
+    takeaway: takeaway,
+    bodyContent: bodyContent
+  });
+
+  var res = publishBloggerItem(blogId, title, html, [], true);
+
+  recordPublicationInLedger({
+    slot: "secondary_afternoon",
+    slotDate: new Date().toISOString().slice(0, 10),
+    resourceType: "PAGE",
+    blogId: blogId,
+    featureId: feature.id + "_GUIDE",
+    title: title,
+    id: res.id,
+    url: res.url
+  });
+
+  return res;
+}
+
+// SLOT 6: Secondary Page 3 — Shaam (Evening Permanent Static Page on Kids Blog)
+function publishSecondarySlot3_EveningPage() {
+  Logger.log("▶️ [SLOT 6] Starting Secondary Page 3 (Evening Permanent Static Guide expanding YouTube Short topic)...");
+  var blogId = MASTER_CONFIG.SECONDARY_BLOG_ID;
+  var ledger = getPersistentLedger();
+
+  // Find the primary evening post published today to pair with
+  var eveningPost = null;
+  var todayStr = new Date().toISOString().slice(0, 10);
+  for (var i = ledger.length - 1; i >= 0; i--) {
+    if (ledger[i].slot === "primary_evening" && ledger[i].slotDate === todayStr) {
+      eveningPost = ledger[i];
+      break;
+    }
+  }
+
+  var topicName = eveningPost ? eveningPost.title.replace("– Enter the World of Light & Laughter (EVENING 2026 Edition)", "").trim() : "Universal Wisdom & Moral Reflection";
+  var title = "Family Reflection Guide: " + topicName;
+  var takeaway = "Practical takeaways, character discussions, and everyday ethical lessons inspired by today's educational video.";
+
+  var checkMeta = {
+    title: title,
+    videoId: eveningPost ? eveningPost.videoId : ""
+  };
+
+  if (isItemAlreadyPublished(checkMeta, true, blogId)) {
+    Logger.log("🛑 [SLOT 6 SKIPPED] Secondary Evening Page already published. Skipping duplicate.");
+    return { skipped: true, reason: "Duplicate prevented" };
+  }
+
+  var bodyContent = 
+    '<h3>1. Core Life Lesson & Character Building</h3>' +
+    '<p>Today&#39;s educational video focuses on: <strong>' + topicName + '</strong>. True education goes beyond memorization—it transforms speech, patience, and how we treat those around us in moments of difficulty.</p>' +
+    '<h3>2. Family Discussion Points</h3>' +
+    '<ul>' +
+      '<li>How can we practice patience and truthfulness in our daily conversations?</li>' +
+      '<li>What is the difference between speaking words that help others versus words that cause harm?</li>' +
+      '<li>Why is quiet reflection often more powerful than hasty reactions?</li>' +
+    '</ul>' +
+    '<h3>3. Interactive Learning Next Steps</h3>' +
+    '<p>Revisit the full video recitation on YouTube and explore the interactive bilingual activities and moral fables on the official Enter the World of Light &amp; Laughter web portal.</p>';
+
+  var html = buildStaticPageHtml({
+    title: title,
+    takeaway: takeaway,
+    bodyContent: bodyContent
+  });
+
+  var res = publishBloggerItem(blogId, title, html, [], true);
+
+  recordPublicationInLedger({
+    slot: "secondary_evening",
+    slotDate: todayStr,
+    resourceType: "PAGE",
+    blogId: blogId,
+    primaryPairId: eveningPost ? eveningPost.id : null,
+    title: title,
+    id: res.id,
+    url: res.url
+  });
+
+  return res;
+}
+
+/**
+ * ============================================================================
+ * 9. BACKWARD COMPATIBILITY RUNNER ALIASES
+ * ============================================================================
+ */
+function publishPrimary_1_Post(slotName) {
+  if (slotName === "afternoon") return publishPrimarySlot2_AfternoonPost();
+  if (slotName === "evening") return publishPrimarySlot3_EveningPost();
+  return publishPrimarySlot1_MorningPost();
+}
+
+function publishPrimary_2_Page(slotName) {
+  return publishSecondarySlot2_AfternoonPage();
+}
+
+function publishSecondary_1_Post(slotName) {
+  if (slotName === "morning") return publishSecondarySlot1_MorningPage();
+  if (slotName === "afternoon") return publishSecondarySlot2_AfternoonPage();
+  return publishSecondarySlot3_EveningPage();
+}
+
+function publishSecondary_2_Page(slotName) {
+  return publishSecondarySlot3_EveningPage();
+}
+
+function executePrimaryYouTubePost(slotName) {
+  if (slotName === "evening") return publishPrimarySlot3_EveningPost();
+  if (slotName === "afternoon") return publishPrimarySlot2_AfternoonPost();
+  return publishPrimarySlot1_MorningPost();
+}
+
+function executeSecondaryBloggerPage(slotName) {
+  if (slotName === "evening") return publishSecondarySlot3_EveningPage();
+  if (slotName === "afternoon") return publishSecondarySlot2_AfternoonPage();
+  return publishSecondarySlot1_MorningPage();
+}
+
+function deleteOldIftttPosts() {
+  Logger.log("ℹ️ [CLEANUP NOTICE] Blogger posts have already been cleared manually by user (0 posts, 0 pages).");
+  Logger.log("✨ Cleanup is skipped to protect clean starting state and prevent accidental deletion.");
+  return 0;
+}

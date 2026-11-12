@@ -1,0 +1,286 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all access unless explicitly granted below
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email == "deluxeholidaysfromlahore@gmail.com" && request.auth.token.email_verified == true) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation blueprints
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'displayName', 'role', 'createdAt']) &&
+        data.keys().hasOnly(['uid', 'email', 'displayName', 'photoURL', 'role', 'xp', 'streak', 'createdAt', 'updatedAt']) &&
+        data.uid is string && data.uid.size() <= 128 &&
+        data.email is string && data.email.size() <= 256 &&
+        data.displayName is string && data.displayName.size() <= 128 &&
+        data.role in ['user', 'admin', 'kid'];
+    }
+
+    function isValidProfile(data) {
+      return data.keys().hasAll(['uid', 'displayName']) &&
+        data.keys().hasOnly(['uid', 'displayName', 'bio', 'avatar', 'preferredLanguage', 'ageGroup', 'badges', 'updatedAt']) &&
+        data.uid is string && data.uid.size() <= 128 &&
+        data.displayName is string && data.displayName.size() <= 128;
+    }
+
+    function isValidContentItem(data) {
+      return data.keys().hasAll(['id', 'title', 'category']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.title is string && data.title.size() <= 256 &&
+        data.category is string && data.category.size() <= 64;
+    }
+
+    function isValidUserScopedItem(data) {
+      return data.keys().hasAll(['id', 'userId']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId == request.auth.uid;
+    }
+
+    function isValidParentControl(data) {
+      return data.keys().hasAll(['id', 'parentId', 'dailyScreenTimeLimit']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.parentId is string && data.parentId == request.auth.uid &&
+        data.dailyScreenTimeLimit is number;
+    }
+
+    function isValidAdminRecord(data) {
+      return data.keys().hasAll(['id', 'key']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.key is string && data.key.size() <= 128;
+    }
+
+    function isValidBloggerItem(data) {
+      return data.keys().hasAll(['id', 'type', 'title', 'status']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.type in ['post', 'page'] &&
+        data.title is string && data.title.size() <= 256 &&
+        data.status in ['draft', 'published', 'scheduled'];
+    }
+
+    // 1. Users collection (Private accounts)
+    match /users/{userId} {
+      allow get: if isValidId(userId) && (isOwner(userId) || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isValidId(userId) && isOwner(userId) &&
+        isValidUser(incoming()) && incoming().uid == request.auth.uid &&
+        incoming().role == 'user'; // cannot self-elevate to admin
+      allow update: if isValidId(userId) && (
+        isAdmin() ||
+        (isOwner(userId) && isValidUser(incoming()) && incoming().uid == existing().uid &&
+         incoming().role == existing().role &&
+         incoming().createdAt == existing().createdAt)
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 2. Profiles collection (Public info)
+    match /profiles/{userId} {
+      allow read: if isValidId(userId);
+      allow create: if isValidId(userId) && isOwner(userId) &&
+        isValidProfile(incoming()) && incoming().uid == request.auth.uid;
+      allow update: if isValidId(userId) && (
+        isAdmin() ||
+        (isOwner(userId) && isValidProfile(incoming()) && incoming().uid == existing().uid)
+      );
+      allow delete: if isValidId(userId) && (isOwner(userId) || isAdmin());
+    }
+
+    // 3. Public Content Collections
+    // (content, lessons, quizzes, games, practice, poetry, stories, videos, shorts, daily, collections, featuredContent, dailyContent)
+    match /content/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /lessons/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /quizzes/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /games/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /practice/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /poetry/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /stories/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /videos/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /shorts/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /daily/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /collections/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /featuredContent/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+    match /dailyContent/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidContentItem(incoming());
+    }
+
+    // 4. User-Scoped Personal Data Collections
+    // (favorites, watchHistory, learningHistory, progress, streaks, badges, notifications, settings, kidsProfiles)
+    match /favorites/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /watchHistory/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /learningHistory/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /progress/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /streaks/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /badges/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /notifications/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /settings/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+    match /kidsProfiles/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidUserScopedItem(incoming()) && incoming().userId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+    }
+
+    // 5. Parent Controls
+    match /parentControls/{id} {
+      allow get: if isValidId(id) && isSignedIn() && (existing().parentId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.parentId == request.auth.uid || isAdmin());
+      allow create, update: if isValidId(id) && isSignedIn() && isValidParentControl(incoming()) && incoming().parentId == request.auth.uid;
+      allow delete: if isValidId(id) && isSignedIn() && (existing().parentId == request.auth.uid || isAdmin());
+    }
+
+    // 6. Admin Collections
+    match /adminUsers/{id} {
+      allow read: if isAdmin();
+      allow write: if isAdmin() && isValidAdminRecord(incoming());
+    }
+    match /adminSettings/{id} {
+      allow read: if true; // Public system settings (maintenance banner, app version)
+      allow write: if isAdmin() && isValidAdminRecord(incoming());
+    }
+    match /admins/{id} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // 7. Google Blogger Syndication Collections (Posts & Pages)
+    match /bloggerPosts/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidBloggerItem(incoming());
+    }
+    match /bloggerPages/{id} {
+      allow read: if isValidId(id);
+      allow create, update, delete: if isValidId(id) && isAdmin() && isValidBloggerItem(incoming());
+    }
+
+    // 8. Marketing & Content Master System (Features, Calendar, Shorts, History)
+    match /marketingFeatures/{id} {
+      allow read: if isValidId(id);
+      allow write: if isValidId(id) && (isAdmin() || request.auth != null);
+    }
+    match /marketingCalendar/{id} {
+      allow read: if isValidId(id);
+      allow write: if isValidId(id) && (isAdmin() || request.auth != null);
+    }
+    match /marketingShorts/{id} {
+      allow read: if isValidId(id);
+      allow write: if isValidId(id) && (isAdmin() || request.auth != null);
+    }
+    match /marketingHistory/{id} {
+      allow read: if isValidId(id);
+      allow write: if isValidId(id) && (isAdmin() || request.auth != null);
+    }
+
+    // 9. Kids Video Generation Pipeline (Auto-generated MP4s, MP3s, Scripts & Status)
+    match /kids_video_pipeline/{id} {
+      allow read: if isValidId(id);
+      allow write: if isValidId(id);
+    }
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "msg-13-init",
+    "chatId": "13",
+    "sender": "ai",
+    "text": "Welcome! I am your Light & Laughter AI Learning Companion (Chat #13). Ask me anything in Urdu or English about literature, science, or learning concepts. I am also linked directly with Blogger Studio (Chat #15) and synchronized with Google Drive folder \"Ai Studio - Kids Mode Data Save\" (1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4).",
+    "urdu": "خوش آمدید! میں آپ کا ہوشمند تعلیمی معاون (چیٹ نمبر 13) ہوں۔ یہ چیٹ بلاگر اسٹوڈیو (چیٹ 15) اور گوگل ڈرائیو کے ساتھ مربوط ہے۔",
+    "time": "09:00 AM",
+    "timestamp": 1791618338418,
+    "workflow": "general"
+  },
+  {
+    "id": "msg-13-service-account-sync",
+    "chatId": "13",
+    "sender": "ai",
+    "text": "✅ Google Drive Backend Auto-Sync Configured (Solution 1 Verified):\nService Account `drive-sync-bot@enter-the-world-web-app.iam.gserviceaccount.com` has been successfully granted Editor rights on Google Drive folder 'Ai Studio - Kids Mode Data Save' (ID: 1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4). All 24h rotating shorts and archive lessons are now permanently synchronized between project 'quick-hook-lc9s2' and 'enter-the-world-web-app'.",
+    "urdu": "گوگل ڈرائیو سروس اکاؤنٹ کی تصدیق ہو گئی ہے! تمام شارٹس اور ڈیٹا اب ڈرائیو کے ساتھ جڑ چکا ہے۔",
+    "time": "01:15 PM",
+    "timestamp": 1791618900000,
+    "workflow": "drive_sync"
+  }
+]

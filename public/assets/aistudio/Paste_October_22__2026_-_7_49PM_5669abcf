@@ -1,0 +1,530 @@
+# STRICT MASTER INSTRUCTION — COMPLETE AUDIT, REPAIR, TESTING & PRODUCTION VERIFICATION
+## CHAT 15 — GOOGLE BLOGGER CONTENT & AUTO POSTING — 2026
+
+Google AI Studio, ab is project par fragmented fixes, partial implementations aur assumptions ki bunyaad par kaam karna band karein. Aapko meri poori previous conversation, requirements, existing project code, Apps Script functions, configurations, execution logs, errors aur implementation claims ko ek saath audit karke system ko properly complete karna hai.
+
+Yeh sirf code compilation ka task nahin hai. Yeh ek complete, persistent, automated Blogger marketing and publishing system hai. Isliye code ka maujood hona, build successful hona, API connection green hona ya ek post publish ho jana system ke complete hone ka proof nahin hai.
+
+**Sab se pehle audit karein. Audit ke baad phases banayein. Har phase mein relevant incomplete, broken ya incorrect functionality ko properly fix karein, chahe pehle usay complete report kiya gaya ho. Irrelevant work ko documented reason ke saath skip karein. Har phase ko actual evidence aur execution logs se verify karein.**
+
+---
+
+# NON-NEGOTIABLE RULES
+
+1. **Koi nayi Apps Script `.gs` file create nahin karni.** Sirf existing Apps Script files ko inspect, correct aur maintain karein.
+2. Audit complete hone se pehle existing code, Blogger content, pages, posts ya triggers mein destructive changes nahin karne.
+3. Purane cleanup functions automatically run nahin karne. Maine dono Blogger blogs ko manually clear kar diya hai; mera reported starting state har blog par 0 Posts, 0 Pages aur 0 Trash hai. Read-only inspection se current state verify karein.
+4. Kisi existing working feature ko bina technical justification ke remove, replace ya rewrite nahin karna.
+5. Purane incomplete implementation ko sirf isliye correct nahin maan lena ke AI Studio ne pehle “complete” report kiya tha. Code, dependencies, execution logs aur real results ko independently verify karein.
+6. Jahan API, backend, authentication, blog identity, duplicate check ya content source verify nahin ho raha, wahan blind fallback se publish na karein.
+7. Production publishing triggers ko audit aur required tests pass hone tak disabled rakhein.
+8. API keys, access tokens, OAuth secrets, passwords aur admin PINs ko logs ya reports mein expose nahin karna.
+9. Kisi phase ko actual verification ke baghair `COMPLETE` declare nahin karna.
+10. Audit se lekar final verification tak ek traceable report maintain karein: kya change hua, kyun hua, kis file/function mein hua, aur uska evidence kya hai.
+
+Purani conversation mein har requirement aur implementation version ko samajhna zaroori hai. Latest approved content plan neeche diya gaya hai. Purane conflicting schedules ko silently mix ya restore na karein.
+
+---
+
+# PHASE 0 — COMPLETE HISTORICAL & TECHNICAL AUDIT
+
+## A. Puri previous chat aur project history audit karein
+
+Previous CHAT 15 ki complete conversation ko available project files, prompts, AI Studio responses, code versions, errors, run logs aur final instructions ke saath review karein.
+
+Sirf recent messages dekh kar conclusion na nikaalein. Yeh identify karein:
+
+- Original requirement kya thi.
+- Baad mein kya change hua.
+- Kaun se implementation claims kiye gaye.
+- Kaun se functions waqai execute huay.
+- Kaun se results actual logs se prove hote hain.
+- Kaun se functions sirf likhe gaye hain magar test nahin huay.
+- Kaun se errors fix report huay magar dobara verify nahin kiye gaye.
+- Kaun se requirements abhi missing hain.
+- Kaun se purane workflows latest approved design se conflict karte hain.
+
+Audit report mein `AI Studio claim`, `verified by code/log`, `user-reported status` aur `unverified/pending` ko alag rakhein.
+
+## B. Existing Apps Script files ka audit
+
+Project ki har existing `.gs` file, `appsscript.json` aur related configuration inspect karein.
+
+Special attention:
+
+- `Code.gs`
+- `Master Controller.gs` ya uska actual encoded filename
+- `Templates.gs`
+- `PromotionEngine.gs`
+- `YouTubeAutomationGuide.gs`
+- Existing Kids YouTube uploader/synchronization code, agar project mein mojood ho
+- Existing Blogger, marketing, scheduler aur backend service files
+
+File names ko assume na karein; pehle actual project inventory nikaalein.
+
+Har function ke liye report karein:
+
+- Actual responsibility.
+- Callers aur dependencies.
+- Required permissions/scopes.
+- Data source aur output.
+- Error handling.
+- Related trigger, agar koi hai.
+- Current working/broken/unverified status.
+- Fix ki zaroorat aur uska reason.
+
+Global scope mein duplicate `CONFIG`, conflicting constants, duplicate function names, stale blog IDs, incompatible function signatures aur old code versions identify karein.
+
+`Code.gs` aur `Master Controller.gs` ke responsibilities ko clear karein. Ek function ko do jagah conflicting logic ke saath maintain na karein.
+
+**Koi nayi `.gs` file nahin banani.**
+
+## C. Existing triggers aur destructive functions
+
+Audit ke dauran triggers inventory karein, lekin unhein delete ya activate na karein.
+
+Specially `removeAllTriggers()` ko inspect karein. Agar yeh project ke tamam triggers delete karta hai to ise blindly run nahin karna. Automation ko sirf apne managed triggers create, replace ya remove karne chahiye; unrelated project triggers ko nahin.
+
+`deleteOldIftttPosts` ya doosre cleanup functions ko ab dobara run na karein. Blogs clear kiye ja chuke hain; ab priority proper publishing aur duplicate prevention hai.
+
+## D. Google Cloud, API aur backend audit
+
+Existing Google Cloud configuration, Apps Script project linkage, OAuth scopes, enabled APIs, Firestore/backend configuration aur relevant endpoints verify karein.
+
+Audit mein yeh historical errors specifically resolve hone chahiye:
+
+- `Unexpected token '<'` — API JSON ke bajaye HTML return kar rahi thi.
+- `403 ACCESS_TOKEN_SCOPE_INSUFFICIENT`.
+- Blogger API `403` — permissions ya Cloud project mismatch.
+- `serviceusage.services.enable` permission issue.
+- `Specified permissions are not sufficient` — trigger access/`script.scriptapp` scope issue.
+- `SyntaxError: Identifier 'CONFIG' has already been declared`.
+- Blogger API `404` — wrong blog ID ya endpoint/resource mismatch.
+- `Quota limits exceeded` — YouTube API.
+- Raw HTML ko `.gs` file mein paste karne se syntax error.
+
+Har error ko sirf catch karke log karna fix nahin hai. Root cause resolve karein.
+
+Backend endpoints ke historical versions bhi verify karein, jin mein `/api/marketing/next-post-for-blogger`, `/api/marketing/get-next-post` aur `/api/kids-video/record-youtube-upload` jaise endpoints discuss huay thay. Jo endpoint actual project mein exist nahin karta ya expected JSON schema return nahin karta, usay working assume na karein.
+
+Response ka HTTP status, content type aur JSON structure validate karein. HTML error page ko content samajh kar publish karna strictly prohibited hai.
+
+## E. Correct Blogger identities verify karein
+
+Expected configuration:
+
+**Primary Blog**
+
+- Domain: `entertheworldoflightandlaughter.blogspot.com`
+- Blog ID: `5550406854147347257`
+
+**Secondary Kids Blog**
+
+- Domain: `lightlaughterkids.blogspot.com`
+- Blog ID: `3870971020533851761`
+
+**YouTube channel**
+
+- `@EntertheWorldofLight`
+- Channel ID: `UCvCzFP5EPsV4Vp6l6GGuvyg`
+
+Previous code versions mein incorrect/stale IDs bhi use huay thay, including `8297279896157109138` aur `3517409249071051761`. Inhein current IDs ke taur par use na karein.
+
+API se dono blogs ki identity confirm karein. Dono blogs par current Posts, Pages aur relevant existing records ki read-only inventory lein. User ke clean restart ko preserve karein; koi old content delete na karein.
+
+---
+
+# PHASE 1 — FINAL APPROVED CONTENT ARCHITECTURE
+
+Yeh current approved daily content structure hai. Isay actual code, selection engine, scheduler, publishing functions aur logs mein implement karna hai.
+
+## A. Primary Marketing — “Hum kya kar rahe hain?”
+
+Maqsad: Apni services, Web App, courses, features, tools, tutorials, use cases aur YouTube channel ko directly aur professionally explain/promote karna.
+
+Har din 3 distinct **Blogger Posts** publish hone hain.
+
+### Primary Blog 1 — Subah
+
+AI automatically ek relevant, valuable aur unique topic select kare.
+
+Topic existing Web App ke actual features, services, courses, tools, learning resources, tutorials ya use cases se related ho. Content sirf promotional slogans par based na ho; reader ko feature ka actual benefit aur usage samajh aaye.
+
+### Primary Blog 2 — Dopahar
+
+AI khud ek naya aur meaningfully different topic select kare.
+
+Subah wala topic, usi article ka rewritten version ya pehle se recently promoted subject dobara use na ho. Actual app feature ki priority aur historical promotion record ko consider kare.
+
+### Primary Blog 3 — Shaam
+
+Yeh slot mandatory YouTube Short deep-dive Blogger Post ke liye hai.
+
+Is post mein selected actual YouTube Short ki:
+
+- Correct title.
+- Relevant description.
+- Correct thumbnail.
+- Actual Shorts URL.
+- Correct embedded video.
+- Video-specific detailed article.
+- Topic ki useful explanation, examples aur context.
+- Relevant Web App link aur official YouTube CTA.
+
+sab shamil hon.
+
+Article usi video ke actual topic se match hona chahiye. Ek generic article ke andar sirf video embed kar dena is requirement ko complete nahin karta.
+
+Previous approved chronological selection requirement ko preserve karein: eligible, unprocessed channel Shorts ko oldest-to-newest order mein select karein. Sirf latest 15 videos ko sort karke poore channel ki chronological sequence ka claim na karein. Reliable uploads inventory/pagination, processed-video ledger aur actual video identity verify honi chahiye.
+
+Agar selected video unavailable, invalid ya already processed ho, reason record karke next eligible video handle karein. Agar video inventory/API request fail ho to fabricated fallback ID ke saath publish na karein.
+
+## B. Secondary Marketing — “Hum public ko kya value de rahe hain?”
+
+Maqsad: Pehle public ko useful guides, tips, practical solutions aur how-to content dena. Phir naturally relevant Primary Blog, Web App ya YouTube channel ki taraf guide karna.
+
+Har din 3 distinct **permanent Blogger Static Pages** publish honi hain. Yeh Blog Posts nahin hongi.
+
+### Secondary Page 1 — Subah
+
+Primary Blog 1 se relevant topic par additional public-value content.
+
+Page ko Primary Post ki duplicate copy nahin banana. Reader ko practical guidance, examples, solutions ya extra value milni chahiye.
+
+### Secondary Page 2 — Dopahar
+
+Primary Blog 2 se relevant, lekin apni alag informational value aur unique presentation ke saath.
+
+Subah ke topic ko dobara use na karein.
+
+### Secondary Page 3 — Shaam
+
+Primary Blog 3 ke actual YouTube Short/topic se relevant additional value provide kare.
+
+Primary Blog 3 ki article copy bana kar Page publish na karein. Short ke subject ko practical, useful aur complementary content mein expand karein.
+
+## C. Permanent Static Pages ka correct implementation
+
+Yeh non-negotiable hai:
+
+- Primary ke teen daily outputs Blogger **Posts** honge.
+- Secondary ke teen daily outputs Blogger **Pages** honge.
+- Secondary Pages ke liye Blogger Pages API/resource use ho; Posts resource ko substitute na karein.
+- Har genuinely new topic ke liye apni independent, permanently published Page identity, Page ID aur canonical URL ho.
+- Agle din ki Page banate waqt pichle din ki Page ko sirf slot reuse karne ke liye overwrite na karein.
+- Same content/topic ki duplicate Page milne par blind duplicate create na karein; existing identity aur history inspect karke skip ya documented update policy follow karein.
+- Published Pages ko automatically delete ya unpublish nahin karna.
+- Pages ki permanent history aur exact IDs ko persistent record mein maintain karna.
+- Navigation menu mein tamam daily Pages ko indiscriminately add karke design kharab na karein. Published Pages ko relevant internal links aur munasib navigation/index se accessible rakhein.
+
+Official API distinction verify karne ke liye:
+- Blogger Posts insert: https://developers.google.com/blogger/docs/3.0/reference/posts/insert
+- Blogger Pages insert: https://developers.google.com/blogger/docs/3.0/reference/pages/insert
+- Blogger Pages resource: https://developers.google.com/blogger/docs/3.0/reference/pages
+
+## D. Har Secondary Page, uski corresponding Primary Post ke baad
+
+Daily pairing:
+
+| Primary publication | Corresponding Secondary Page |
+|---|---|
+| Primary Blog 1 — Subah | Secondary Page 1 — approximately 1–2 hours later |
+| Primary Blog 2 — Dopahar | Secondary Page 2 — approximately 1–2 hours later |
+| Primary Blog 3 — Shaam | Secondary Page 3 — approximately 1–2 hours later |
+
+Delay sirf planned schedule se nahin, relevant Primary Post ke **actual successful publication time** se calculate ho.
+
+Agar corresponding Primary Post fail ho jaye, uski Secondary Page ko bina Primary ke publish na karein. Retry/recovery ke baad successful Primary publication se 60–120 minutes ka gap maintain karke Secondary Page schedule ho.
+
+Har pair ke beech mapping persistent record mein save ho: Primary Post ID/URL, related Secondary Page ID/URL, topic identity, target time aur actual publication times.
+
+---
+
+# PHASE 2 — AUTONOMOUS TOPIC SELECTION & DUPLICATE PREVENTION
+
+## A. Topics AI khud select kare
+
+Har din topics manually provide karne ki zaroorat na ho. System automatically eligible topics select kare aur daily schedule ke mutabiq publishing workflow chalaye.
+
+AI ko sirf random titles generate nahin karne. Topic selection mein yeh factors hon:
+
+- Existing app ke actual functions aur feature catalog.
+- Services, courses, tools, learning resources aur tutorials.
+- Public ke practical problems aur useful solutions.
+- Kids learning, Urdu/English, stories, activities aur relevant educational subjects.
+- Topic ki historical promotion frequency.
+- Topic recently publish hua hai ya nahin.
+- Primary vs Secondary ka purpose.
+- Selected YouTube Short ka actual subject, jahan applicable ho.
+
+Primary Marketing direct app/service value explain karega; Secondary Marketing pehle reader ko independent value dega aur phir relevant CTA naturally include karega.
+
+## B. Topic history permanent rakhein
+
+Persistent topic history/ledger zaroori hai, taake restart, manual run, failed run ya trigger recreation se rotation reset na ho.
+
+Har content record mein kam az kam yeh save ho:
+
+- Unique content/topic ID.
+- Normalized topic identity aur category.
+- Slot aur destination blog.
+- Resource type: `POST` ya `PAGE`.
+- Related app feature, agar applicable ho.
+- Selected YouTube Video ID, agar applicable ho.
+- Content identity/hash.
+- Existing/published Blogger object ID aur URL.
+- Scheduled, started, published timestamps.
+- Status, error aur retry history.
+- Last-used topic date aur cooldown/rotation eligibility.
+
+Same day ke 6 outputs mein meaningfully duplicate topics allowed nahin hain. Topic sirf title badal kar repeat na ho. Previous days ki history se bhi recently used topics avoid hon.
+
+Cooldown/rotation policy configurable ho. Naya ya pehle kabhi promote na hua relevant topic preference le. Kids content ki priority maintain ho, magar har article ko Kids topic mein force na kiya jaye.
+
+Agar unique, useful content ke liye valid topic ya source available na ho to duplicate/thin content publish karne ke bajaye retry aur explicit failure report karein.
+
+## C. Double posting ko fail-safe tareeqe se rokna
+
+Blogger Posts aur Pages alag resource types hain; har relevant destination ko separately check karna hoga.
+
+Publish karne se pehle:
+
+1. Correct blog identity verify karein.
+2. Existing Blogger Posts/Pages aur persistent ledger se canonical content identity check karein.
+3. YouTube-based content ke liye actual Video ID/URL match karein.
+4. Topic ID/hash aur normalized title/content ko secondary checks ke taur par use karein.
+5. Check karein ke same automation item pehle se published, in-progress ya queued to nahin.
+6. Concurrent manual/automatic execution ko locking/idempotency se prevent karein.
+
+**Agar duplicate pre-check fail ho, blog/API request 403/404 de, wrong identity mile, backend HTML return kare, ya result uncertain ho, to publishing rok dein.**
+
+Error ko ignore karke new content publish karna prohibited hai.
+
+Agar Blogger publication succeed ho jaye magar ledger save fail ho, to recovery logic pehle Blogger par existing published item locate kare aur uska returned ID/URL ledger mein recover kare. Dobara publish na kare.
+
+User ne blogs manually clear kiye hain. Iska matlab yeh nahin ke deduplication ki zaroorat khatam ho gayi. Ab permanent cross-run duplicate protection aur sahi topic rotation implement karna hai.
+
+---
+
+# PHASE 3 — DYNAMIC SCHEDULER & EXECUTION CONTROL
+
+## A. Fixed minute par posting nahin honi chahiye
+
+Daily posting ka target waqt regularly change ho. System `Asia/Karachi` timezone use kare.
+
+Morning, afternoon aur evening ke liye configurable windows define karein. Exact minute har din same na ho. Windows aur selected times configuration/ledger mein visible hon, na ke code mein scattered hardcoded values.
+
+Secondary Page ko corresponding Primary Post ke actual successful publication ke 60–120 minutes baad schedule karein. Is dependency ko random scheduling ke chakkar mein violate na karein.
+
+Planned time aur actual trigger execution time alag record hon.
+
+Apps Script time-based triggers exact-to-the-minute guarantee nahin karte. `nearMinute()` ke behavior ko official documentation se verify karein aur scheduling design realistic rakhein:
+https://developers.google.com/apps-script/reference/script/clock-trigger-builder
+
+## B. Trigger safety
+
+- Existing triggers ki inventory pehle lein.
+- Audit/test ke dauran production scheduler activate na karein.
+- `removeAllTriggers()` se unrelated triggers delete na karein.
+- Apne automation ke triggers ko identifiable/managed tareeqe se create, update aur remove karein.
+- Duplicate triggers banne se rokein.
+- Har job ko slot identity, run identity aur idempotency key se protect karein.
+- Failed run ka controlled retry ho.
+- Trigger ki successful creation ko successful Blogger publication na samjhein.
+
+Required code changes existing Apps Script files ke andar hi honge.
+
+---
+
+# PHASE 4 — PRIMARY & SECONDARY DESIGN, BRANDING, FOOTER
+
+Har Primary Post aur Secondary Static Page par consistent, professionally designed structure ho.
+
+## A. Visual requirements
+
+- Actual brand identity aur logo.
+- User-provided App Showcase Tablet image as the hero image.
+- Responsive, mobile/desktop-friendly layout.
+- Readable English typography.
+- Urdu content ke liye suitable Nastaliq font aur proper RTL formatting.
+- Relevant feature cards, images aur clear CTA.
+- Correct Web App links aur official YouTube channel links.
+- Social-sharing links aur official WhatsApp Channel card.
+- Content ke hisaab se relevant embed/media.
+- Consistent footer.
+
+App Showcase hero image aur YouTube Short ki thumbnail do alag assets hain. App Showcase image ko randomly YouTube thumbnail se replace na karein. Primary Blog 3 ke video title, thumbnail, URL aur embedded player ko actual selected Short se match karna mandatory hai.
+
+Historical feature-card concepts mein Urdu Tracing, Classical Poetry, Kids Fables aur Mind Gym shamil thay. Inhein tabhi include karein jab current app mein relevant feature waqai available ho; fake ya broken links/cards nahin honay chahiye.
+
+## B. Reciprocal footer links — compulsory
+
+Har Primary Post mein Secondary Kids Blog ka correct link ho.
+
+Har Secondary Static Page mein Primary Blog ka correct link ho.
+
+Footer ka layout, branding aur structure consistent rahe. Relevant destination ke links dynamic content ke mutabiq verify hon. Reciprocal link ka sirf source code mein present hona kaafi nahin—live page par clickable aur correct hona chahiye.
+
+Official WhatsApp Channel:
+https://whatsapp.com/channel/0029VasZV4a60eBd8TwfTg1f
+
+Raw personal phone numbers footer mein use nahin karne.
+
+## C. Content quality aur SEO
+
+Har article/page topic-specific, accurate aur useful ho. Same text ko title badal kar multiple pages mein publish na karein.
+
+Hidden/off-screen keyword stuffing, invisible link blocks, fabricated metadata, fake ratings/ranking claims, keyword spam aur instant indexing/approval ki unsupported guarantees use nahin karni.
+
+SEO ka goal useful content, correct titles/URLs, clean internal linking, accessible design aur valid structured data hona chahiye.
+
+Google Search policy reference:
+https://developers.google.com/search/docs/essentials/spam-policies
+
+---
+
+# PHASE 5 — HISTORICAL FEATURES JO AUDIT MEIN PRESERVE KARNE HAIN
+
+Current approved daily schedule ko silently purane schedule se replace na karein. Lekin old project functionality ko bhi bina review kiye discard na karein.
+
+Previous implementation mein yeh additional systems discuss huay thay:
+
+- Existing app features ka master catalog, feature IDs aur promotion history.
+- Marketing rotation/leaderboard/analytics.
+- Google Analytics 4 aur UTM tracking.
+- YouTube metadata aur channel inventory.
+- Kids Mode ki generated MP4 videos ka Drive → YouTube upload workflow.
+- Actual returned YouTube Video ID ko Web App ke backend mein save karna.
+- Relevant uploaded Kids Mode video ka matching Blogger content.
+- Firestore collections, including historical `bloggerPages`, `bloggerPosts` aur `marketingFeatures`.
+- Blogger-related Admin Panel/Promotion workspace.
+- Search Console/sitemap-related utilities.
+
+In systems ka audit karein. Jo feature current project ka valid, relevant hissa hai, use properly maintain/test karein. Jo genuinely unnecessary, superseded ya duplicate hai, usay documented reason ke saath skip karein.
+
+Kids Mode MP4 upload pipeline ko general promotional Shorts ke saath mix na karein. Agar Drive-to-YouTube workflow current project mein required hai, to usay separate, clearly mapped workflow ke taur par verify karein—actual YouTube upload response, correct Video ID aur backend record ke evidence ke baghair complete na kahein.
+
+Original project ne GA4 Measurement ID `G-FM5BG1GPS6` aur Apps Script timezone `Asia/Karachi` ka zikr kiya tha. Live values verify karein, aur current configuration ko historical assumptions par blindly overwrite na karein.
+
+---
+
+# PHASE 6 — ACTUAL TESTING & LIVE VERIFICATION
+
+Code likhne ke baad sirf `Build Successful`, TypeScript pass ya Apps Script save hone ko acceptance na samjhein.
+
+## A. Static and functional checks
+
+- Har existing function ka syntax aur reference verify ho.
+- Duplicate global declarations/functions na hon.
+- Correct blog IDs aur resource endpoints hon.
+- Posts aur Pages ke operations separate hon.
+- OAuth scopes aur API permissions sufficient hon.
+- Backend JSON schema correct ho.
+- Duplicate checking fail-closed ho.
+- Ledger persistent ho.
+- Topic rotation same-day aur multi-day history se prove ho.
+- Trigger ownership aur dependency handling correct ho.
+
+## B. Controlled live publishing test
+
+Production triggers abhi OFF rahenge.
+
+Real, useful content use karke controlled test karein:
+
+1. Primary Blog 1 ka actual Post publish karein.
+2. Uski corresponding Secondary Page ko actual Primary publication ke 60–120 minutes baad publish karne ka dependency test karein.
+3. Primary Blog 2 aur Secondary Page 2 ke topic-selection/type mapping ko verify karein.
+4. Primary Blog 3 ka actual YouTube Short-based detailed article test karein, including Video ID, thumbnail, title, Shorts URL aur video embed.
+5. Secondary Page 3 ko usi Short/topic ka complementary value-first Static Page prove karein.
+6. Har output ki returned Blogger ID, URL, resource type, topic history aur timestamps record karein.
+7. Live browser-rendered result inspect karein: logo, App Showcase image, thumbnail, footer, reciprocal link, CTA, mobile layout aur Urdu/English typography.
+
+Dummy placeholder, fabricated Video ID ya generic fallback content publish karke test pass declare na karein.
+
+Jahan safe ho, API failure, duplicate item, concurrent run aur incomplete ledger-save conditions ka non-destructive/dry-run test bhi karein.
+
+## C. Test acceptance criteria
+
+System tabhi successful mana jayega jab:
+
+- Primary ke outputs actual Blogger Posts hon.
+- Secondary ke outputs actual permanent Blogger Static Pages hon.
+- Saare 6 daily slot definitions correctly mapped hon.
+- 3 Secondary Pages apne corresponding Primary Posts ke successful publication se 1–2 ghante baad schedule/publish hon.
+- Same day aur previous history ke mutabiq duplicate topics na hon.
+- Primary Blog 3 actual eligible YouTube Short se match kare.
+- Live URLs aur IDs persist hon.
+- Duplicate retry se second copy na bane.
+- Wrong blog ya API failure par publishing stop ho.
+- Design aur reciprocal links live output mein correct hon.
+- Execution logs se actual result independently confirm ho.
+
+---
+
+# PHASE 7 — CONTROLLED PRODUCTION ACTIVATION
+
+Jab audit, fixes aur live acceptance tests pass ho jayen:
+
+1. Phase-wise final status report banayein.
+2. Sirf is automation ke required production triggers install/enable karein.
+3. Confirm karein ke duplicate triggers create nahin huay.
+4. Actual scheduled runs monitor karein.
+5. Har successful publication par Blog ID, resource type, topic, item ID, URL aur actual timestamp record karein.
+6. Failed slots ke liye error, recovery action aur next attempt record karein.
+7. First production cycle ko final verification ke saath report karein.
+
+Triggers ko sirf “installed successfully” log ki bunyaad par fully operational declare na karein. Actual scheduled executions aur publication records se operation prove karein.
+
+---
+
+# PHASE 8 — FINAL DELIVERY REPORT
+
+Kaam complete karne ke baad concise lekin evidence-based report dein.
+
+Report mein yeh sections lazmi hon:
+
+**1. Audit Findings**
+- Files aur functions audited.
+- Historical claims vs verified results.
+- Confirmed errors aur root causes.
+- Conflicts aur unka resolution.
+
+**2. Phase Completion**
+Har phase ke saamne:
+- `COMPLETE & VERIFIED`
+- `IMPLEMENTED — NOT YET VERIFIED`
+- `INCOMPLETE`
+- `SKIPPED — REASON DOCUMENTED`
+
+**3. Changed Files**
+Sirf existing modified files ka naam, relevant functions aur change ki wajah. New `.gs` file ki count zero honi chahiye.
+
+**4. Tests & Evidence**
+Actual execution logs, return IDs/URLs, content type, timing, duplicate tests aur live verification results.
+
+**5. Publishing Status**
+Primary Posts, Secondary Static Pages, actual completed pairs, pending/failed slots aur trigger status.
+
+**6. Remaining Risks**
+Jo bhi abhi unverified ya incomplete ho, clear likhein. Guess ko fact bana kar present na karein.
+
+**7. Final Operational Status**
+`READY`, `PARTIALLY READY` ya `NOT READY` ka decision evidence ke saath dein.
+
+---
+
+# FINAL DIRECTIVE
+
+Meri requirement yeh nahin ke aap har baar aik chhota fix kar ke success report kar dein. Meri requirement ek properly audited, stable, maintainable aur reliable end-to-end system hai.
+
+**Ab kaam ka sahi order yeh hai:**
+
+**Phase 0: Complete Audit → Phase 1: Architecture & Configuration Corrections → Phase 2: Topic Rotation & Duplicate Safety → Phase 3: Scheduling & Publishing Workflow → Phase 4: Design & Reciprocal Links → Phase 5: Testing → Phase 6: Live Verification → Phase 7: Trigger Activation → Phase 8: Final Evidence Report.**
+
+Agar audit mein koi existing item pehle se sahi aur verified hai, to usay unnecessary rewrite na karein. Agar complete claim kiya gaya item broken nikle, to use bhi fix karein. Agar koi item irrelevant hai, to reason ke saath skip karein. Purana cleanup ya destructive action bina zaroorat repeat na karein.
+
+Audit ke baad har phase ko systematically execute karein. Agar actual project access, permission ya koi missing dependency implementation rok rahi ho, to exact blocker aur evidence dein—fabricated success report nahin.
+
+**Sab se important priorities: correct Primary/Secondary destination, har din 3 Primary Posts + 3 permanent Secondary Static Pages, six unique topic slots, approximately 1–2 hour paired delay, variable daily timings, real YouTube Short matching, persistent duplicate prevention, shared footer with reciprocal blog links, no new Apps Script files, aur verified production behavior.**
+
+In requirements ko optional suggestions nahin, final acceptance criteria samjhein.

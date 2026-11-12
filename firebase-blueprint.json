@@ -1,0 +1,265 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account and authentication record",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 1024 },
+        "role": { "type": "string", "enum": ["user", "admin", "kid"], "maxLength": 32 },
+        "xp": { "type": "number" },
+        "streak": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "displayName", "role", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public and extended user profile details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "bio": { "type": "string", "maxLength": 500 },
+        "avatar": { "type": "string", "maxLength": 1024 },
+        "preferredLanguage": { "type": "string", "enum": ["en", "ur", "both"], "maxLength": 16 },
+        "ageGroup": { "type": "string", "enum": ["kids", "teens", "adults", "all"], "maxLength": 16 },
+        "badges": { "type": "array" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName"]
+    },
+    "ContentItem": {
+      "title": "ContentItem",
+      "description": "Educational or entertaining content item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "titleUrdu": { "type": "string", "maxLength": 256 },
+        "description": { "type": "string", "maxLength": 2048 },
+        "category": { "type": "string", "maxLength": 64 },
+        "type": { "type": "string", "maxLength": 32 },
+        "targetAudience": { "type": "string", "maxLength": 32 },
+        "difficulty": { "type": "string", "maxLength": 32 },
+        "mediaUrl": { "type": "string", "maxLength": 1024 },
+        "youtubeId": { "type": "string", "maxLength": 64 },
+        "textEnglish": { "type": "string", "maxLength": 20000 },
+        "textUrdu": { "type": "string", "maxLength": 20000 },
+        "isFeatured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "category"]
+    },
+    "UserRecord": {
+      "title": "UserRecord",
+      "description": "Generic user-scoped personal record (favorites, progress, history, streaks)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "itemId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "value": { "type": "number" },
+        "status": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId"]
+    },
+    "ParentControl": {
+      "title": "ParentControl",
+      "description": "Parental guardrails and controls for Kids mode",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "childId": { "type": "string", "maxLength": 128 },
+        "dailyScreenTimeLimit": { "type": "number" },
+        "pinCode": { "type": "string", "maxLength": 8 },
+        "allowedCategories": { "type": "array" }
+      },
+      "required": ["id", "parentId", "dailyScreenTimeLimit"]
+    },
+    "AdminData": {
+      "title": "AdminData",
+      "description": "Administrative settings and configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "key": { "type": "string", "maxLength": 128 },
+        "value": { "type": "string", "maxLength": 4096 },
+        "updatedBy": { "type": "string", "maxLength": 128 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "key"]
+    },
+    "BloggerItem": {
+      "title": "BloggerItem",
+      "description": "Google Blogger Post or Static Page record synced with App and YouTube Shorts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["post", "page"], "maxLength": 16 },
+        "title": { "type": "string", "maxLength": 256 },
+        "titleUrdu": { "type": "string", "maxLength": 256 },
+        "slug": { "type": "string", "maxLength": 128 },
+        "category": { "type": "string", "maxLength": 64 },
+        "labels": { "type": "array" },
+        "youtubeShortId": { "type": "string", "maxLength": 64 },
+        "relatedContentId": { "type": "string", "maxLength": 128 },
+        "contentHtml": { "type": "string", "maxLength": 50000 },
+        "summary": { "type": "string", "maxLength": 1024 },
+        "status": { "type": "string", "enum": ["draft", "published", "scheduled"], "maxLength": 32 },
+        "bloggerUrl": { "type": "string", "maxLength": 512 },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "type", "title", "status"]
+    },
+    "KidsVideoPipelineItem": {
+      "title": "KidsVideoPipelineItem",
+      "description": "Kids animated educational video generation job and completed asset record",
+      "type": "object",
+      "properties": {
+        "contentId": { "type": "string", "maxLength": 128 },
+        "category": { "type": "string", "maxLength": 64 },
+        "topic": { "type": "string", "maxLength": 256 },
+        "topicSlug": { "type": "string", "maxLength": 128 },
+        "targetAge": { "type": "string", "maxLength": 32 },
+        "status": { "type": "string", "enum": ["queued", "generating_script", "generating_audio", "rendering_video", "completed", "failed", "youtube_uploaded", "blog_published"], "maxLength": 32 },
+        "videoUrl": { "type": "string", "maxLength": 1024 },
+        "audioUrl": { "type": "string", "maxLength": 1024 },
+        "thumbnailUrl": { "type": "string", "maxLength": 1024 },
+        "creationDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["contentId", "category", "topic", "topicSlug", "status", "creationDate"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User account authentication documents"
+    },
+    "/profiles/{userId}": {
+      "schema": "UserProfile",
+      "description": "Public learner profiles"
+    },
+    "/content/{contentId}": {
+      "schema": "ContentItem",
+      "description": "Main content catalog"
+    },
+    "/lessons/{lessonId}": {
+      "schema": "ContentItem",
+      "description": "Educational lessons and modules"
+    },
+    "/quizzes/{quizId}": {
+      "schema": "ContentItem",
+      "description": "Interactive multiple choice quizzes"
+    },
+    "/games/{gameId}": {
+      "schema": "ContentItem",
+      "description": "Educational games and puzzles"
+    },
+    "/practice/{practiceId}": {
+      "schema": "ContentItem",
+      "description": "Writing, spelling, and vocabulary practice modules"
+    },
+    "/poetry/{poetryId}": {
+      "schema": "ContentItem",
+      "description": "Classical and modern bilingual Urdu poetry"
+    },
+    "/stories/{storyId}": {
+      "schema": "ContentItem",
+      "description": "Fables and moral stories"
+    },
+    "/videos/{videoId}": {
+      "schema": "ContentItem",
+      "description": "Curated video catalog"
+    },
+    "/shorts/{shortId}": {
+      "schema": "ContentItem",
+      "description": "Curated vertical shorts catalog"
+    },
+    "/daily/{dailyId}": {
+      "schema": "ContentItem",
+      "description": "Daily highlights and learning activities"
+    },
+    "/collections/{collectionId}": {
+      "schema": "ContentItem",
+      "description": "Curated thematic collections"
+    },
+    "/featuredContent/{featuredId}": {
+      "schema": "ContentItem",
+      "description": "Featured home highlights"
+    },
+    "/dailyContent/{dailyContentId}": {
+      "schema": "ContentItem",
+      "description": "Daily scheduled drops"
+    },
+    "/favorites/{favoriteId}": {
+      "schema": "UserRecord",
+      "description": "User favorite items"
+    },
+    "/watchHistory/{historyId}": {
+      "schema": "UserRecord",
+      "description": "User watch logs"
+    },
+    "/learningHistory/{historyId}": {
+      "schema": "UserRecord",
+      "description": "User completed learning items"
+    },
+    "/progress/{progressId}": {
+      "schema": "UserRecord",
+      "description": "User course and quiz progress records"
+    },
+    "/streaks/{streakId}": {
+      "schema": "UserRecord",
+      "description": "Daily streak activity records"
+    },
+    "/badges/{badgeId}": {
+      "schema": "UserRecord",
+      "description": "Unlocked learner badges"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "UserRecord",
+      "description": "User notifications"
+    },
+    "/settings/{settingId}": {
+      "schema": "UserRecord",
+      "description": "User personalized settings"
+    },
+    "/kidsProfiles/{kidsProfileId}": {
+      "schema": "UserRecord",
+      "description": "Children learning profiles"
+    },
+    "/parentControls/{controlId}": {
+      "schema": "ParentControl",
+      "description": "Parental guardrails and access locks"
+    },
+    "/adminUsers/{adminUserId}": {
+      "schema": "AdminData",
+      "description": "System admin user records"
+    },
+    "/adminSettings/{adminSettingId}": {
+      "schema": "AdminData",
+      "description": "Global application configuration"
+    },
+    "/bloggerPosts/{postId}": {
+      "schema": "BloggerItem",
+      "description": "Syndicated Google Blogger blog posts linked to YouTube Shorts and App content"
+    },
+    "/bloggerPages/{pageId}": {
+      "schema": "BloggerItem",
+      "description": "Google Blogger static landing and directory pages linked to App curricula"
+    },
+    "/kids_video_pipeline/{pipelineId}": {
+      "schema": "KidsVideoPipelineItem",
+      "description": "Kids automated educational video generation pipeline records and completed media assets"
+    }
+  }
+}

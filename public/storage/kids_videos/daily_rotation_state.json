@@ -1,0 +1,276 @@
+{
+  "currentCycle": 1,
+  "cycleTitle": "Day 1: A (Apple) • الف (انار) • Number 1 • Sparrow Tale",
+  "categoryTheme": "Day 1: Letter A, Harf Alif & Counting Starter",
+  "activeSpotlightSlugs": [
+    "short_a_apple",
+    "short_urdu_alif",
+    "short_num_1_sun",
+    "story_bird_part1"
+  ],
+  "activeItems": [
+    {
+      "contentId": "KID-SHORT-001-A",
+      "category": "Alphabet",
+      "topic": "A for Apple (3D Drawing Short)",
+      "topicSlug": "short_a_apple",
+      "targetAge": "2-6 years",
+      "language": "en",
+      "durationSeconds": 5.5,
+      "script": {
+        "hook": "Hmm... A for Apple!",
+        "body": "Baby in coral-orange shirt sits near plush bunny, thinks with thought cloud, then proudly shows completed Apple drawing!",
+        "phonics": "A is for Apple",
+        "outro": "A for Apple! Sweet red apple!"
+      },
+      "voiceText": "Hmm... A for Apple! A for Apple! Sweet red apple!",
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "title": "Baby Thinking: A for Apple",
+          "visualType": "3d_pixar_thought_bubble",
+          "duration": 2.7,
+          "subtitles": "Hmm... A for Apple!",
+          "displayWord": "APPLE",
+          "displayUrdu": "سیب (Apple)"
+        },
+        {
+          "sceneNumber": 2,
+          "title": "Proud Smile: Holding Apple Drawing",
+          "visualType": "3d_pixar_proud_smile",
+          "duration": 2.8,
+          "subtitles": "A for Apple! Sweet red apple! ✨",
+          "displayWord": "APPLE",
+          "displayUrdu": "سیب"
+        }
+      ],
+      "status": "completed",
+      "videoUrl": "/storage/kids_videos/short_a_apple.mp4",
+      "audioUrl": "/storage/kids_videos/short_a_apple.mp3",
+      "thumbnailUrl": "/storage/kids_videos/short_a_apple_thumb.jpg",
+      "copyrightAudit": {
+        "status": "verified_100_percent_safe",
+        "visualOriginality": "100% Proprietary AI CGI",
+        "audioOriginality": "Zero Copyrighted Music (Pure Generated Narration)",
+        "coppaCompliant": true,
+        "youtube2026Ready": true,
+        "checkedAt": "2026-10-06T15:03:00.000Z"
+      },
+      "creationDate": "2026-10-06T12:42:00.000Z",
+      "completedAt": "2026-10-06T12:42:00.000Z",
+      "youtubeSeoTitle": "A for Apple (3D Drawing Short) 🍎 | Learn ABC Phonics for Kids #Shorts #Phonics #LearnABC",
+      "youtubeSeoDescription": "🌟 Welcome to Enter the World of Light & Laughter!\n🎬 Today's Lesson: A for Apple (3D Drawing Short) (Alphabet)\n\n✨ Watch our cute 3D baby boy learn, draw, and explore in this fun, interactive 5.5-second Short!\n\n📖 Lesson Highlights:\n• Category: Alphabet\n• Voice Narration: \"Hmm... A for Apple! A for Apple! Sweet red apple!\"\n• Duration: 5.5 Seconds (1080x1920 Full HD Vertical)\n• Character: 3D Pixar Style Branded Mascot\n\n👶 Educational Benefits:\n• Multi-sensory visual and auditory phonics retention\n• Early speech development and vocabulary building\n• Safe, positive, screen-time for toddlers and preschoolers (Ages 2-8)\n\n🔔 Subscribe to our official channel for daily 3D animated phonics, Urdu Qaida, stories, and educational rhymes!\n🔗 Official Portal: https://ais-pre-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app\n\n🏷️ Viral SEO Keywords & Hashtags:\n#Shorts #YouTubeShorts #PhonicsSong #LearnABC #AlphabetSong #ToddlerLearning #KidsAnimation #Preschool\n\n✅ 100% Original AI CGI & Narration • Made for Kids (COPPA Compliant)",
+      "topicId": "KID-SHORT-001-A",
+      "videoSrc": "/storage/kids_videos/short_a_apple.mp4",
+      "audioSrc": "/storage/kids_videos/short_a_apple.mp3",
+      "narrationSrc": "/storage/kids_videos/short_a_apple.mp3",
+      "title": "A for Apple (3D Drawing Short)",
+      "contentType": "Alphabet",
+      "verificationStatus": "verified",
+      "shortUrdu": "اے - سیب",
+      "urduTitle": "سیب (Apple)",
+      "urduMeaning": "سیب"
+    },
+    {
+      "contentId": "KID-SHORT-URDU-1",
+      "category": "Urdu Letters",
+      "topic": "Alif se Anaar (ا - انار)",
+      "topicSlug": "short_urdu_alif",
+      "targetAge": "2-7 years",
+      "language": "ur",
+      "durationSeconds": 5.5,
+      "script": {
+        "hook": "Hmm... Alif se Anaar!",
+        "body": "Baby in white & emerald kurta sits on traditional rug with wooden Takhti slate, then displays 'ا - انار' calligraphy with shiny red pomegranate!",
+        "phonics": "الف سے انار",
+        "outro": "Alif se Anaar! Meetha meetha laal anaar!"
+      },
+      "voiceText": "Hmm... Alif se Anaar! Alif se Anaar! Meetha meetha laal anaar!",
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "title": "Urdu Takhti: Alif Thought Bubble",
+          "visualType": "3d_pixar_urdu_takhti",
+          "duration": 2.7,
+          "subtitles": "Hmm... Alif se Anaar!",
+          "displayWord": "الف",
+          "displayUrdu": "الف (Alif)"
+        },
+        {
+          "sceneNumber": 2,
+          "title": "Displaying Takhti: Alif se Anaar",
+          "visualType": "3d_pixar_proud_smile",
+          "duration": 2.8,
+          "subtitles": "Alif se Anaar! Meetha meetha laal anaar! 🍎",
+          "displayWord": "انار",
+          "displayUrdu": "انار (Pomegranate)"
+        }
+      ],
+      "status": "completed",
+      "videoUrl": "/storage/kids_videos/short_urdu_alif.mp4",
+      "audioUrl": "/storage/kids_videos/short_urdu_alif.mp3",
+      "thumbnailUrl": "/storage/kids_videos/short_urdu_alif_thumb.jpg",
+      "copyrightAudit": {
+        "status": "verified_100_percent_safe",
+        "visualOriginality": "100% Proprietary AI CGI",
+        "audioOriginality": "Zero Copyrighted Music (Pure Generated Narration)",
+        "coppaCompliant": true,
+        "youtube2026Ready": true,
+        "checkedAt": "2026-10-06T15:03:00.000Z"
+      },
+      "creationDate": "2026-10-06T15:03:00.000Z",
+      "completedAt": "2026-10-06T15:03:00.000Z",
+      "youtubeSeoTitle": "الف سے انار (Alif se Anaar) 🍎 | Learn Urdu Haroof for Kids #Shorts #UrduQaida",
+      "youtubeSeoDescription": "🌟 Welcome to Enter the World of Light & Laughter!\n🎬 Today's Lesson: Alif se Anaar (ا - انار) (Urdu Letters)\n\n✨ Watch our cute 3D baby boy learn, draw, and explore in this fun, interactive 5.5-second Short!\n\n📖 Lesson Highlights:\n• Category: Urdu Letters\n• Voice Narration: \"Hmm... Alif se Anaar! Alif se Anaar! Meetha meetha laal anaar!\"\n• Duration: 5.5 Seconds (1080x1920 Full HD Vertical)\n• Character: 3D Pixar Style Branded Mascot\n\n👶 Educational Benefits:\n• Multi-sensory visual and auditory phonics retention\n• Early speech development and vocabulary building\n• Safe, positive, screen-time for toddlers and preschoolers (Ages 2-8)\n\n🔔 Subscribe to our official channel for daily 3D animated phonics, Urdu Qaida, stories, and educational rhymes!\n🔗 Official Portal: https://ais-pre-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app\n\n🏷️ Viral SEO Keywords & Hashtags:\n#Shorts #UrduQaida #UrduHaroof #LearnUrdu #AlifSeAnaar #KidsUrdu #EnterTheWorldOfLightAndLaughter\n\n✅ 100% Original AI CGI & Narration • Made for Kids (COPPA Compliant)",
+      "topicId": "KID-SHORT-URDU-1",
+      "videoSrc": "/storage/kids_videos/short_urdu_alif.mp4",
+      "audioSrc": "/storage/kids_videos/short_urdu_alif.mp3",
+      "narrationSrc": "/storage/kids_videos/short_urdu_alif.mp3",
+      "title": "Alif se Anaar (ا - انار)",
+      "contentType": "Urdu Letters",
+      "verificationStatus": "verified",
+      "shortUrdu": "الف - انار",
+      "urduTitle": "الف سے انار (Pomegranate)",
+      "urduMeaning": "انار"
+    },
+    {
+      "contentId": "KID-SHORT-NUM-1",
+      "category": "Numbers",
+      "topic": "Number 1 - One Bright Sun (3D Counting)",
+      "topicSlug": "short_num_1_sun",
+      "targetAge": "2-6 years",
+      "language": "en",
+      "durationSeconds": 5.5,
+      "script": {
+        "hook": "Show me one finger! Number 1!",
+        "body": "Baby in pastel lavender shirt sitting on wooden chair by rainbow abacus, holds up 1 finger, then displays 1 and Sun drawing!",
+        "phonics": "Number 1",
+        "outro": "1 for One! One bright shining sun!"
+      },
+      "voiceText": "Show me one finger! Number 1! 1 for One! One bright shining sun!",
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "title": "Counting 1 with Rainbow Abacus",
+          "visualType": "3d_pixar_counting_setup",
+          "duration": 2.7,
+          "subtitles": "Show me one finger! Number 1!",
+          "displayWord": "ONE",
+          "displayUrdu": "ایک (One)"
+        },
+        {
+          "sceneNumber": 2,
+          "title": "Displaying 1 - Sun Drawing",
+          "visualType": "3d_pixar_proud_smile",
+          "duration": 2.8,
+          "subtitles": "1 for One! One bright shining sun! ☀️",
+          "displayWord": "ONE",
+          "displayUrdu": "ایک"
+        }
+      ],
+      "status": "completed",
+      "videoUrl": "/storage/kids_videos/short_num_1_sun.mp4",
+      "audioUrl": "/storage/kids_videos/short_num_1_sun.mp3",
+      "thumbnailUrl": "/storage/kids_videos/short_num_1_sun_thumb.jpg",
+      "copyrightAudit": {
+        "status": "verified_100_percent_safe",
+        "visualOriginality": "100% Proprietary AI CGI",
+        "audioOriginality": "Zero Copyrighted Music (Pure Generated Narration)",
+        "coppaCompliant": true,
+        "youtube2026Ready": true,
+        "checkedAt": "2026-10-06T15:03:00.000Z"
+      },
+      "creationDate": "2026-10-06T12:42:00.000Z",
+      "completedAt": "2026-10-06T12:42:00.000Z",
+      "youtubeSeoTitle": "Number 1 - One Bright Sun (3D Counting) 🔢 | Learn Counting 1 to 10 for Toddlers #Shorts #LearnNumbers",
+      "youtubeSeoDescription": "🌟 Welcome to Enter the World of Light & Laughter!\n🎬 Today's Lesson: Number 1 - One Bright Sun (3D Counting) (Numbers)\n\n✨ Watch our cute 3D baby boy learn, draw, and explore in this fun, interactive 5.5-second Short!\n\n📖 Lesson Highlights:\n• Category: Numbers\n• Voice Narration: \"Show me one finger! Number 1! 1 for One! One bright shining sun!\"\n• Duration: 5.5 Seconds (1080x1920 Full HD Vertical)\n• Character: 3D Pixar Style Branded Mascot\n\n👶 Educational Benefits:\n• Multi-sensory visual and auditory phonics retention\n• Early speech development and vocabulary building\n• Safe, positive, screen-time for toddlers and preschoolers (Ages 2-8)\n\n🔔 Subscribe to our official channel for daily 3D animated phonics, Urdu Qaida, stories, and educational rhymes!\n🔗 Official Portal: https://ais-pre-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app\n\n🏷️ Viral SEO Keywords & Hashtags:\n#Shorts #YouTubeShorts #CountingForKids #LearnNumbers #Number1 #PreschoolMath #ToddlerFun\n\n✅ 100% Original AI CGI & Narration • Made for Kids (COPPA Compliant)",
+      "topicId": "KID-SHORT-NUM-1",
+      "videoSrc": "/storage/kids_videos/short_num_1_sun.mp4",
+      "audioSrc": "/storage/kids_videos/short_num_1_sun.mp3",
+      "narrationSrc": "/storage/kids_videos/short_num_1_sun.mp3",
+      "title": "Number 1 - One Bright Sun (3D Counting)",
+      "contentType": "Numbers",
+      "verificationStatus": "verified",
+      "shortUrdu": "۱ - ایک سورج",
+      "urduTitle": "نمبر ۱ - ایک سورج (One Sun)",
+      "urduMeaning": "ایک"
+    },
+    {
+      "contentId": "KID-STORY-001-P1",
+      "category": "Kids Stories",
+      "topic": "The Kind Little Bird (Part 1 - The Sweet Song)",
+      "topicSlug": "story_bird_part1",
+      "targetAge": "2-8 years",
+      "language": "en",
+      "durationSeconds": 5.5,
+      "script": {
+        "hook": "Story Time! A little blue bird sang a sweet song in the green tree.",
+        "body": "Baby in cozy peach pajamas sits in warm reading nook with glowing lamp, reading an illustrated open book with clear readable story text!",
+        "phonics": "Kindness & Nature",
+        "outro": "To be continued in Part 2!"
+      },
+      "voiceText": "Story Time! A little blue bird sang a sweet song in the green tree.",
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "title": "Baby Reading Open Storybook",
+          "visualType": "3d_pixar_storybook_reading",
+          "duration": 5.5,
+          "subtitles": "Story Time! A little blue bird sang a sweet song in the green tree.",
+          "displayWord": "THE LITTLE BIRD",
+          "displayUrdu": "ننھی چڑیا کا گیت"
+        }
+      ],
+      "status": "completed",
+      "videoUrl": "/storage/kids_videos/story_bird_part1.mp4",
+      "audioUrl": "/storage/kids_videos/story_bird_part1.mp3",
+      "thumbnailUrl": "/storage/kids_videos/story_bird_part1_thumb.jpg",
+      "copyrightAudit": {
+        "status": "verified_100_percent_safe",
+        "visualOriginality": "100% Proprietary AI CGI",
+        "audioOriginality": "Zero Copyrighted Music (Pure Generated Narration)",
+        "coppaCompliant": true,
+        "youtube2026Ready": true,
+        "checkedAt": "2026-10-06T15:03:00.000Z"
+      },
+      "creationDate": "2026-10-06T13:38:00.000Z",
+      "completedAt": "2026-10-06T13:38:00.000Z",
+      "youtubeSeoTitle": "The Kind Little Bird (Part 1 - The Sweet Song) 🐦 | Moral Bedtime Story for Kids #Shorts #KidsStories",
+      "youtubeSeoDescription": "🌟 Welcome to Enter the World of Light & Laughter!\n🎬 Today's Lesson: The Kind Little Bird (Part 1 - The Sweet Song) (Kids Stories)\n\n✨ Watch our cute 3D baby boy learn, draw, and explore in this fun, interactive 5.5-second Short!\n\n📖 Lesson Highlights:\n• Category: Kids Stories\n• Voice Narration: \"Story Time! A little blue bird sang a sweet song in the green tree.\"\n• Duration: 5.5 Seconds (1080x1920 Full HD Vertical)\n• Character: 3D Pixar Style Branded Mascot\n\n👶 Educational Benefits:\n• Multi-sensory visual and auditory phonics retention\n• Early speech development and vocabulary building\n• Safe, positive, screen-time for toddlers and preschoolers (Ages 2-8)\n\n🔔 Subscribe to our official channel for daily 3D animated phonics, Urdu Qaida, stories, and educational rhymes!\n🔗 Official Portal: https://ais-pre-qw4kgkghab5s5tnujz2mi3-542015737009.asia-east1.run.app\n\n🏷️ Viral SEO Keywords & Hashtags:\n#Shorts #BedtimeStories #MoralStories #KidsAnimation #ShortStories #Fairytales #Storytime\n\n✅ 100% Original AI CGI & Narration • Made for Kids (COPPA Compliant)",
+      "topicId": "KID-STORY-001-P1",
+      "videoSrc": "/storage/kids_videos/story_bird_part1.mp4",
+      "audioSrc": "/storage/kids_videos/story_bird_part1.mp3",
+      "narrationSrc": "/storage/kids_videos/story_bird_part1.mp3",
+      "title": "The Kind Little Bird (Part 1 - The Sweet Song)",
+      "contentType": "Kids Stories",
+      "verificationStatus": "verified",
+      "shortUrdu": "ننھی چڑیا - ۱",
+      "urduTitle": "ننھی چڑیا کا میٹھا گیت (حصہ ۱)",
+      "urduMeaning": "چڑیا کا گیت"
+    }
+  ],
+  "archivedItemsCount": 24,
+  "totalShortsAvailable": 28,
+  "lastRotatedAt": "2026-11-11T08:49:04.079Z",
+  "nextRotationDueAt": "2026-11-12T08:49:04.079Z",
+  "hoursRemaining": 22.8,
+  "googleCloudLinking": {
+    "primaryProject": "quick-hook-lc9s2",
+    "apiProject": "enter-the-world-web-app",
+    "serviceAccountEmail": "drive-sync-bot@enter-the-world-web-app.iam.gserviceaccount.com",
+    "webClientId": "886208799724-u0vmh04v159p52j5873jtvveld5labbm.apps.googleusercontent.com",
+    "appsScriptClientId": "886208799724-j34q9po6ms87og6ocper2fmrn4vg51k9.apps.googleusercontent.com",
+    "youtubeApiKeyConfigured": true,
+    "driveFolderId": "1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4?usp=sharing",
+    "isLinkedConfigured": true,
+    "reasonWhyDriveWasNotAutoSaving": "Pehle Drive API 'enter-the-world-web-app' mein thi jabke Auth token 'quick-hook-lc9s2' se ja raha tha. Cross-project linking aur Google Apps Script background trigger se yeh masla hal hota hai."
+  },
+  "googleDriveSyncStatus": {
+    "folderId": "1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4",
+    "folderUrl": "https://drive.google.com/drive/folders/1xF20AGja1DPmxS1NV1sXWOt84LLi3wN4?usp=sharing",
+    "lastSyncedAt": "2026-10-06T15:06:41.482Z",
+    "syncedFilesCount": 12,
+    "pendingUploads": 16
+  }
+}
